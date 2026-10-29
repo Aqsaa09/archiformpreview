@@ -306,12 +306,15 @@ html:not(.story) .reelclip{display:none}
 
 @media (max-width:820px){
   .hl-intro .lbl,.hl-intro .h2,.hl-intro .body,.dt-head .lbl,.dt-head .h2,.dt-head .body{grid-column:1/-1}
-  .pane{left:var(--gut);right:var(--gutr);width:auto;top:auto;bottom:calc(28px + env(safe-area-inset-bottom,0px));justify-content:flex-end;gap:8px}
-  .pane h3{font-size:clamp(40px,12vw,56px)}
-  .pane .it{font-size:19px}
-  .pane svg.ic{width:32px;height:32px}
-  .pane li{font-size:15px;padding-block:7px}
-  .hl-view::after,.dim{background:linear-gradient(180deg,rgba(40,30,20,.12) 0%,rgba(40,30,20,.5) 40%,rgba(40,30,20,.88) 100%)}
+  /* Phones: a compact caption over the lower third, so most of each film stays clear and bright */
+  .pane{left:var(--gut);right:var(--gutr);width:auto;top:auto;bottom:calc(24px + env(safe-area-inset-bottom,0px));justify-content:flex-end;gap:6px;text-shadow:0 1px 14px rgba(30,22,14,.55)}
+  .pane h3{font-size:clamp(34px,10vw,44px);line-height:.95}
+  .pane .it{font-size:17px;line-height:1.25;opacity:.92}
+  .pane svg.ic{width:26px;height:26px}
+  .pane ul{margin-top:4px}
+  .pane li{font-size:14px;line-height:1.35;padding-block:6px;gap:10px}
+  .pane li::before{width:6px;height:8px;margin-top:5px}
+  .hl-view::after,.dim{background:linear-gradient(180deg,rgba(40,30,20,0) 0%,rgba(40,30,20,0) 42%,rgba(40,30,20,.42) 60%,rgba(40,30,20,.78) 82%,rgba(40,30,20,.86) 100%)}
   .hl-index{display:none}
   .hl-note{display:none}
   .fd .ph{grid-column:2/span 10}

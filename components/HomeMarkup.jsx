@@ -12,7 +12,7 @@ export default function HomeMarkup() {
       <main id="home">
         <section className="stage" id="stage" aria-label="Healthy living, by design">
           <div className="vis" id="heroVis">
-            <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
+            <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide-v2.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
             <div className="view" id="view">
               <div className="scene" id="scene">
                 <img className="skybg" id="skybg" src="/m/sky-dusk.jpg" alt="" width="1200" height="675" />

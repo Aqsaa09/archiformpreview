@@ -175,31 +175,47 @@ export default function HomeMarkup() {
           </div>
         </section>
 
-        <section className="villa" aria-label="Inside the Seaside Villa">
-          <div className="villa-head">
-            <p className="lbl rule">Inside the Seaside Villa</p>
-            <p className="body">A bedroom suite built around a custom toile headboard, linen layers and soft evening light. Designed for slow mornings and restful nights.</p>
-          </div>
-          <div className="track" id="villaTrack">
-            <figure><div className="ph"><img src="/m/bed.jpg" alt="Upholstered toile headboard with linen cushions and a striped bolster" loading="lazy" /></div><figcaption>Primary bedroom</figcaption></figure>
-            <figure><div className="ph"><img src="/m/nightstand-sun.jpg" alt="Afternoon sun falling across the bedside wall" loading="lazy" /></div><figcaption>Afternoon light</figcaption></figure>
-            <figure><div className="ph"><img src="/m/nightstand.jpg" alt="Taupe bedside chest with sculpted handles and a round mirror" loading="lazy" /></div><figcaption>Bedside detail</figcaption></figure>
-            <figure><div className="ph"><img src="/m/bed-evening.jpg" alt="The bedroom at dusk, lit by a folding book lamp" loading="lazy" /></div><figcaption>Evening</figcaption></figure>
+        <section className="home-process" id="homeProcess" aria-labelledby="processTitle">
+          <div className="process-layout">
+            <div className="process-media" aria-hidden="true">
+              <div className="process-visual">
+                <div className="process-frame"><img src="/m/pm.jpg" alt="" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/fabrics.jpg" alt="" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/workshop.jpg" alt="" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/bed.jpg" alt="" loading="lazy" /></div>
+              </div>
+            </div>
+            <div className="process-copy">
+              <div className="process-heading">
+                <h2 className="h2" id="processTitle">From first visit to final finish.</h2>
+              </div>
+              <div className="process-window">
+                <ol className="process-steps">
+                  <li><span className="lbl">01</span><h3 className="h2">Consultation</h3><p className="body">We visit and listen.</p></li>
+                  <li><span className="lbl">02</span><h3 className="h2">Concept and materials</h3><p className="body">Light and airflow first, then finishes.</p></li>
+                  <li><span className="lbl">03</span><h3 className="h2">Joinery and finishes</h3><p className="body">Thoughtful details, carefully coordinated.</p></li>
+                  <li><span className="lbl">04</span><h3 className="h2">Furnishing and styling</h3><p className="body">The finishing touches that make it yours.</p></li>
+                </ol>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="fd" id="fdTeaser" aria-labelledby="fdName">
-          <div className="ph"><img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM, leaning against a white wall" loading="lazy" /></div>
-          <div className="tx">
-            <p className="lbl rule">THE PERSON BEHIND THE PERSPECTIVE</p>
-            <h2 className="disp" id="fdName">Designed for people. Inspired by wellbeing.</h2>
-            <p className="body">For ARCHIFORM's founder, interior design is more than a creative profession. It is a way to bring together two passions: caring for people and creating beautiful spaces.</p>
-            <p className="body">With a professional background in healthcare and training in interior design, she approaches every project with a thoughtful understanding of how our surroundings can influence the way we live and feel.</p>
-            <p className="body">Her philosophy is simple: a home should be a place of comfort, beauty and balance, designed around the people who call it their own.</p>
-            <p className="it">“I believe the true beauty of a space is not only in what you see, but in how comfortably and naturally you can live within it.”</p>
-            <p className="lbl">ROULA JBOUR — FOUNDER, ARCHIFORM</p>
-            <p className="words"><span>Design</span><span>People</span><span>Wellbeing</span><span>Balance</span></p>
-            <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET THE FOUNDER <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
+        <section className="press" id="press" aria-labelledby="pressTitle">
+          <p className="press-mark" aria-hidden="true">ARCHIFORM</p>
+          <div className="press-in">
+            <div className="press-tx">
+              <p className="lbl rule">AS FEATURED IN SHE MEANS BUSINESS</p>
+              <h2 className="h2" id="pressTitle">Roula Jbour on homes that support <em>healthier living.</em></h2>
+              <p className="body">With a background in healthcare and training in interior design, Roula brings together caring for people and creating beautiful spaces.</p>
+              <p className="it q">“I believe the true beauty of a space is not only in what you see, but in how comfortably and naturally you can live within it.”</p>
+              <p className="lbl">ROULA JBOUR — FOUNDER, ARCHIFORM</p>
+              <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET ROULA <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
+            </div>
+            <a className="press-clip" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">
+              <span className="pg"><img src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business" width="1125" height="806" loading="lazy" /></span>
+              <span className="lbl">She Means Business · 30 October 2026</span>
+            </a>
           </div>
         </section>
 

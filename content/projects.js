@@ -1,5 +1,5 @@
 /**
- * Portfolio projects. The first one is shown as the featured project.
+ * Portfolio projects, in the order they appear in the grid.
  * category is the portfolio filter tab the project sits under.
  * Each image: { src, alt, wide } – wide images span the full width on the project page.
  */

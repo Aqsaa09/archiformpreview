@@ -3,7 +3,7 @@ import { site } from '@/content/site';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer id="siteFoot" className="foot" style={{ color: 'var(--fg)' }}>
+    <footer id="siteFoot" className="foot">
       <span>
         © {year} {site.name} · {site.address.city}
         <br />{site.tagline}

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Faq from './Faq';
+import PageCta from '@/components/PageCta';
 import { services } from '@/content/services';
 
 export const metadata = {
@@ -10,22 +11,28 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="page" id="services">
-      <div className="pg-ttl">
-        <p className="lbl rule">WHAT WE DO</p>
-        <h1 className="disp">Every detail considered. Every space thoughtfully created.</h1>
-        <p className="body">Creating a home you love should be an inspiring experience.</p>
-        <p className="body">At ARCHIFORM, we offer a considered approach to interior design and residential renovations, combining creative vision, technical coordination and an understanding of everyday living.</p>
-        <p className="body">Whether you're refreshing a single space or undertaking a complete home transformation, we guide you through each stage with care, clarity and attention to detail.</p>
-      </div>
-      <div>
-        {services.map((s) => (
-          <div className="svc" key={s.name}>
-            <h2>{s.name}<span className="it">{s.tagline}</span></h2>
-            <p>{s.text}</p>
-            <div className="ph"><img src={s.image} alt={s.alt} loading="lazy" /></div>
-          </div>
-        ))}
+    <>
+    <main className="page sv-page" id="services">
+      <div className="sv-wrap">
+        {/* "Interior design" set letter by letter down both margins */}
+        <div className="vrail l" aria-hidden="true"><span>Interior design</span></div>
+        <div className="vrail r" aria-hidden="true"><span>Interior design</span></div>
+        <div className="pg-ttl sv-ttl">
+          <p className="lbl">WHAT WE DO</p>
+          <h1 className="disp">Every detail considered. Every space thoughtfully created.</h1>
+          <p className="body">Creating a home you love should be an inspiring experience.</p>
+          <p className="body">At ARCHIFORM, we offer a considered approach to interior design and residential renovations, combining creative vision, technical coordination and an understanding of everyday living.</p>
+          <p className="body">Whether you're refreshing a single space or undertaking a complete home transformation, we guide you through each stage with care, clarity and attention to detail.</p>
+        </div>
+        <div>
+          {services.map((s) => (
+            <div className="svc" key={s.name}>
+              <h2>{s.name}<span className="it">{s.tagline}</span></h2>
+              <p>{s.text}</p>
+              <div className="ph"><img src={s.image} alt={s.alt} loading="lazy" /></div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="page-cta">
         <Link className="btn" href="/contact">DISCUSS YOUR PROJECT →</Link>
@@ -61,5 +68,7 @@ export default function ServicesPage() {
         </div>
       </section>
     </main>
+    <PageCta />
+    </>
   );
 }

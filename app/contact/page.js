@@ -10,16 +10,13 @@ export const metadata = {
 export default function ContactPage() {
   const domain = site.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
   return (
-    <main className="page" id="contact">
-      <div className="pg-ttl">
-        <p className="lbl rule">LET'S CREATE YOUR SPACE</p>
+    <main className="page ct-page" id="contact">
+      <div className="pg-ttl ct-ttl">
+        <p className="lbl">LET'S CREATE YOUR SPACE</p>
         <h1 className="disp">A beautiful home begins with a conversation.</h1>
-        <p className="body">Whether you're planning a complete villa renovation, refreshing your interiors or simply exploring what's possible, we'd love to hear your story.</p>
-        <p className="body">Tell us about the space you have and the home you imagine.</p>
-        <p className="body">We'll listen, explore your ideas and help you take the first steps toward an interior that feels beautiful, balanced and uniquely yours.</p>
       </div>
       <div className="ct">
-        <div className="l">
+        <div className="info">
           <div><span className="lbl">ARCHIFORM</span><span>Interior Design &amp; Project Management</span><span>Dubai, United Arab Emirates</span></div>
           <div><span className="lbl">Email</span><a className="sel" href={`mailto:${site.email}`} style={{ textDecoration: 'none' }}>{site.email}</a></div>
           {site.phone ? (
@@ -38,6 +35,11 @@ export default function ContactPage() {
             <span>{site.address.city}, UAE</span>
             <span>{site.hours}</span>
           </div>
+        </div>
+        <div className="l">
+          <p className="body">Whether you're planning a complete villa renovation, refreshing your interiors or simply exploring what's possible, we'd love to hear your story.</p>
+          <p className="body">Tell us about the space you have and the home you imagine.</p>
+          <p className="body">We'll listen, explore your ideas and help you take the first steps toward an interior that feels beautiful, balanced and uniquely yours.</p>
         </div>
         <div className="r">
           <ContactForm />

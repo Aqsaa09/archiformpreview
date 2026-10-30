@@ -1,14 +1,16 @@
 import Link from 'next/link';
+import PageCta from '@/components/PageCta';
 
+/* About Us: the founder beside her portrait, the approach beside the vase still life, the studio on olive, then the invitation */
 export default function FounderContent() {
   return (
-    <main className="page" id="founder">
-      <div className="f-hero">
+    <main id="founder">
+      <section className="ab-hero">
         <div className="tx">
+          <h1 className="lbl">About Us</h1>
+          <h2 className="nm">Roula Jbour</h2>
           <p className="lbl rule">Founder &amp; interior designer</p>
-          <h1 className="disp">About Us</h1>
-          <h2 className="h2">Roula Jbour</h2>
-          <p className="it" style={{fontSize: 'clamp(26px,2.6vw,36px)'}}>Designing spaces that care for the people within them.</p>
+          <p className="it tag">Designing spaces that care for the people within them.</p>
           <p className="body">Before I discovered my passion for interior design, my professional journey began in healthcare.</p>
           <p className="body">Working in the medical field gave me a deeper appreciation for wellbeing, and for the many factors that influence how we feel in our everyday lives.</p>
           <p className="body">Over time, I became increasingly aware that our surroundings are part of that story too.</p>
@@ -20,26 +22,15 @@ export default function FounderContent() {
           <p className="body">I want every project to reflect its owners, honour their routines and bring a lasting sense of ease and belonging.</p>
           <p className="body">Because a home should never feel like a showroom.</p>
           <p className="body">It should feel like you.</p>
-          <p className="it">- Roula Jbour<br />Founder &amp; Interior Designer, ARCHIFORM</p>
-          <p className="words f-words" style={{display: 'flex', gap: '10px 24px', flexWrap: 'wrap', fontStyle: 'italic', fontSize: '22px'}}><span>Design</span><span>People</span><span>Wellbeing</span><span>Balance</span></p>
+          <p className="it sig">- Roula Jbour<br />Founder &amp; Interior Designer, ARCHIFORM</p>
         </div>
-        <div className="ph"><img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM" /></div>
-      </div>
-        <section className="hl-intro" id="about-archiform" aria-labelledby="aboutTitle">
-          <p className="lbl rule">ABOUT ARCHIFORM</p>
-          <h2 className="h2" id="aboutTitle">A more thoughtful way to <em>create home.</em></h2>
-          <p className="body">We spend so much of our lives within four walls. They witness our quiet mornings, our family gatherings, our everyday routines and our most meaningful moments.</p>
-          <p className="body">Yet, when it comes to creating beautiful homes, we sometimes focus more on how a space looks than how it makes us feel.</p>
-          <p className="body">At ARCHIFORM, we believe the two should never be separate.</p>
-          <p className="body">Founded on the belief that our surroundings play an important role in everyday wellbeing, ARCHIFORM brings a different perspective to residential interior design.</p>
-          <p className="body">We look beyond aesthetics to consider the details that shape daily life, from comfort and functionality to lighting, ventilation and material choices.</p>
-          <p className="body">Our designs embrace quiet elegance, natural textures, balanced layouts and refined details. But beneath every beautiful finish lies something equally important: the intention to create a home that supports the life within it.</p>
-          <p className="body">Based in Dubai, ARCHIFORM specialises in interior design, residential renovations and project management, bringing creativity and considered execution together in every project.</p>
-          <p className="body">We don't believe in designing spaces simply to be admired. We believe in creating homes that are truly lived in, loved and felt.</p>
-          <p className="body">True luxury is living beautifully, every day.</p>
-        </section>
+        <div className="ph">
+          <img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM" />
+          <p className="words"><span>Design</span><span>People</span><span>Wellbeing</span><span>Balance</span></p>
+        </div>
+      </section>
 
-      <div className="approach" id="philosophy">
+      <section className="ab-approach" id="philosophy">
         <div className="qp"><img src="/m/vase.jpg" alt="Olive branches in a stone vase" loading="lazy" /><p>“A home should feel like you.”</p></div>
         <div className="tx">
           <p className="lbl rule">ARCHIFORM Approach</p>
@@ -47,7 +38,7 @@ export default function FounderContent() {
           <p className="body">Wellbeing also lives in the spaces where we spend our days. Our founder's background in healthcare informs a design philosophy that considers comfort, everyday functionality and the indoor environment alongside timeless aesthetics.</p>
           <p className="body">We consider lighting, ventilation, cooling, moisture prevention and material suitability, alongside intuitive layouts that support activity, connection, privacy and rest.</p>
           <p className="body">Because healthy living isn't about adding another feature to your home. It's about approaching the entire design with a greater understanding of the people who live there.</p>
-          <Link className="go" href="#design-principles" style={{alignSelf: 'flex-start'}}>DISCOVER OUR APPROACH →</Link>
+          <Link className="go" href="#design-principles">DISCOVER OUR APPROACH →</Link>
           <p className="body">Our philosophy is built around four essential principles:</p>
           <div className="pillars" id="design-principles">
             <div><svg viewBox="0 0 70 104" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><use href="#sprig"/></svg><span className="lbl">01. Wellbeing by Design</span><span className="it">A beautiful home should also feel good to live in. We consider lighting, airflow, indoor comfort and material selections as part of a more holistic approach to interiors.</span></div>
@@ -57,8 +48,27 @@ export default function FounderContent() {
           </div>
           <p className="body">The result is a home that feels balanced, refined and unmistakably personal.</p>
         </div>
-      </div>
-      <div className="page-cta"><p className="h2" style={{fontStyle: 'italic'}}>Let’s create a space that feels like you.</p><Link className="btn" href="/contact">Get in touch <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link></div>
+      </section>
+
+      <section className="ab-studio" id="about-archiform" aria-labelledby="aboutTitle">
+        <p className="lbl rule">ABOUT ARCHIFORM</p>
+        <div className="r">
+          <h2 className="h2" id="aboutTitle">A more thoughtful way to <em>create home.</em></h2>
+          <div className="cols">
+            <p className="body">We spend so much of our lives within four walls. They witness our quiet mornings, our family gatherings, our everyday routines and our most meaningful moments.</p>
+            <p className="body">Yet, when it comes to creating beautiful homes, we sometimes focus more on how a space looks than how it makes us feel.</p>
+            <p className="body">At ARCHIFORM, we believe the two should never be separate.</p>
+            <p className="body">Founded on the belief that our surroundings play an important role in everyday wellbeing, ARCHIFORM brings a different perspective to residential interior design.</p>
+            <p className="body">We look beyond aesthetics to consider the details that shape daily life, from comfort and functionality to lighting, ventilation and material choices.</p>
+            <p className="body">Our designs embrace quiet elegance, natural textures, balanced layouts and refined details. But beneath every beautiful finish lies something equally important: the intention to create a home that supports the life within it.</p>
+            <p className="body">Based in Dubai, ARCHIFORM specialises in interior design, residential renovations and project management, bringing creativity and considered execution together in every project.</p>
+            <p className="body">We don't believe in designing spaces simply to be admired. We believe in creating homes that are truly lived in, loved and felt.</p>
+            <p className="body">True luxury is living beautifully, every day.</p>
+          </div>
+        </div>
+      </section>
+
+      <PageCta />
     </main>
   );
 }

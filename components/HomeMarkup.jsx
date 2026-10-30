@@ -80,6 +80,8 @@ export default function HomeMarkup() {
             <ul className="hv lbl" id="hv" aria-label="What we design for"><li>Thoughtful Interiors.</li><li>Healthy Living.</li><li>Timeless Spaces.</li></ul>
             <div className="hcta" id="hcta"><Link className="p" href="/portfolio">EXPLORE OUR WORK →</Link><Link className="c" href="/contact" aria-label="Book a design consultation"><svg width="20" height="24" viewBox="0 0 40 48" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M5 47V19A15 15 0 0 1 35 19V47"/><use href="#sprig" x="11" y="14" width="20" height="30" strokeWidth="1.2"/></svg></Link></div>
 
+            <div className="scroll-cue" id="cue" aria-hidden="true"><span>Scroll to enter</span><i /></div>
+
             <div className="say" id="sayH">
               <p className="lbl">Healthy living, by design</p>
               <p className="disp">What you feel the moment you walk in.</p>
@@ -109,14 +111,6 @@ export default function HomeMarkup() {
               </div>
           </div>
           <ol className="hl-index" id="hlIndex" aria-hidden="true"><li className="on">Natural Light</li><li>Comfort &amp; Airflow</li><li>Considered Materials</li><li>Functional Living</li></ol>
-        </section>
-
-        <section className="hl-intro hl-overview" aria-label="Our approach to healthy living">
-          <p className="body">A home can look extraordinary and still fall short of what truly matters: comfort, functionality and wellbeing.</p>
-          <p className="body">At ARCHIFORM, we believe thoughtful design considers both the visible and the invisible.</p>
-          <p className="body">Beyond beautiful textures, refined finishes and carefully curated furniture, we think about how natural light moves through a room, how air circulates, how materials interact with your environment and how a space supports your everyday routine.</p>
-          <p className="body">Our approach brings aesthetics and practical wellbeing considerations together, creating interiors that feel balanced, welcoming and easy to live in.</p>
-          <p className="body">Because the healthiest spaces are often the ones where comfort comes naturally.</p>
         </section>
 
         <section className="dt" id="dt" aria-labelledby="dtTitle">

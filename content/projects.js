@@ -1,10 +1,12 @@
 /**
  * Portfolio projects. The first one is shown as the featured project.
+ * category is the portfolio filter tab the project sits under.
  * Each image: { src, alt, wide } – wide images span the full width on the project page.
  */
 export const projects = [
   {
     slug: 'seaside-villa',
+    category: 'Bedrooms',
     name: 'Lakeside Villa',
     sub: 'Residential Renovation & Interior Styling',
     type: 'Villa renovation',
@@ -22,6 +24,7 @@ export const projects = [
   },
   {
     slug: 'bespoke-joinery',
+    category: 'Details',
     name: 'Bespoke Joinery',
     sub: 'Furniture and joinery designed in the studio and made to measure',
     type: 'Furniture & joinery',
@@ -40,6 +43,7 @@ export const projects = [
   },
   {
     slug: 'stone-bathrooms',
+    category: 'Bathrooms',
     name: 'Stone Bathrooms',
     sub: 'Warm, spa-like bathrooms in limestone-look stone and oak',
     type: 'Residential renovation',
@@ -55,6 +59,7 @@ export const projects = [
   },
   {
     slug: 'kitchen-entrance',
+    category: 'Dining & Kitchen',
     name: 'Kitchen & Entrance',
     sub: 'Chequered marble, cream cabinetry and solid oak',
     type: 'Residential renovation',
@@ -70,6 +75,7 @@ export const projects = [
   },
   {
     slug: 'dining-room',
+    category: 'Dining & Kitchen',
     name: 'Dining Room',
     sub: 'A soft, tonal room for long dinners',
     type: 'Residential',
@@ -82,6 +88,7 @@ export const projects = [
   },
   {
     slug: 'garden-terrace',
+    category: 'Outdoor',
     name: 'Garden Terrace',
     sub: 'An outdoor room under a lit pergola',
     type: 'Outdoor living',

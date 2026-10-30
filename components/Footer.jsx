@@ -9,7 +9,7 @@ export default function Footer() {
         <br />{site.tagline}
       </span>
       <span className="c">
-        <img src="/m/mark.png" alt="" width="460" height="380" />
+        <img src="/m/mark.webp" alt="" width="192" height="159" />
       </span>
       <span>
         {site.instagram ? (

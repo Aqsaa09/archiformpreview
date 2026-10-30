@@ -63,8 +63,8 @@ export default function Header() {
             ))}
           </nav>
           <Link className="brand" href="/" aria-label={`${site.name}, home`}>
-            <img className="dk" src="/m/logo-dark.png" alt={site.name} width="801" height="542" />
-            <img className="lt" src="/m/logo-light.png" alt="" width="801" height="542" />
+            <img className="dk" src="/m/logo-dark.webp" alt={site.name} width="520" height="352" />
+            <img className="lt" src="/m/logo-light.webp" alt="" width="520" height="352" />
           </Link>
           <nav className="r" aria-label="Secondary">
             {RIGHT.map((l) => (

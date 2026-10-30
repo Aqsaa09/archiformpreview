@@ -5,7 +5,7 @@ export default function HomeMarkup() {
   return (
     <>
       <div className="loader" id="loader" aria-hidden="true">
-        <img className="ld-logo" id="ldLogo" src="/m/logo-dark.png" alt="" width="801" height="542" />
+        <img className="ld-logo" id="ldLogo" src="/m/logo-dark.webp" alt="" width="520" height="352" />
         <div className="meta"><span>Dubai · 25.20° N, 55.27° E</span><span id="ldPct">000</span></div>
       </div>
       <div id="vp" aria-hidden="true"></div>
@@ -53,11 +53,11 @@ export default function HomeMarkup() {
               <div className="reelclip" id="reelclip">
                 <div className="reel" id="reel">
                 <video data-clip="0" muted playsInline preload="none" aria-hidden="true"></video>
-                <video data-clip="1" src="/v/h-walk-v2.mp4" poster="/v/h-walk-v2.jpg" muted playsInline preload="auto" aria-label="Walking into a calm open-plan living room with tall windows and plants"></video>
-                <video data-clip="2" data-src="/v/h-light-v2.mp4" poster="/v/h-light-v2.jpg" muted loop playsInline preload="none" aria-label="A child dancing through squares of sunlight on a wooden floor"></video>
-                <video data-clip="3" data-src="/v/h-air-v2.mp4" poster="/v/h-air-v2.jpg" muted loop playsInline preload="none" aria-label="Sheer curtains lifting in the breeze at an open balcony door while a child rocks in a chair"></video>
-                <video data-clip="4" data-src="/v/h-green-v2.mp4" poster="/v/h-green-v2.jpg" muted loop playsInline preload="none" aria-label="A breeze moving sheer curtains beside indoor planting in a soft, neutral living room"></video>
-                <video data-clip="5" data-src="/v/h-flow-v2.mp4" poster="/v/h-flow-v2.jpg" muted playsInline preload="none" aria-label="A living room where the blinds come down and warm evening lights come on around a conversation seating group"></video>
+                <video data-clip="1" data-src="/v/h-walk-v2.mp4" data-msrc="/v/h-walk-m.mp4" poster="/v/h-walk-v2.jpg" data-mposter="/v/h-walk-m.jpg" muted playsInline preload="auto" aria-label="Walking into a calm open-plan living room with tall windows and plants"></video>
+                <video data-clip="2" data-src="/v/h-light-v2.mp4" data-msrc="/v/h-light-m.mp4" poster="/v/h-light-v2.jpg" data-mposter="/v/h-light-m.jpg" muted loop playsInline preload="none" aria-label="A child dancing through squares of sunlight on a wooden floor"></video>
+                <video data-clip="3" data-src="/v/h-air-v2.mp4" data-msrc="/v/h-air-m.mp4" poster="/v/h-air-v2.jpg" data-mposter="/v/h-air-m.jpg" muted loop playsInline preload="none" aria-label="Sheer curtains lifting in the breeze at an open balcony door while a child rocks in a chair"></video>
+                <video data-clip="4" data-src="/v/h-green-v2.mp4" data-msrc="/v/h-green-m.mp4" poster="/v/h-green-v2.jpg" data-mposter="/v/h-green-m.jpg" muted loop playsInline preload="none" aria-label="A breeze moving sheer curtains beside indoor planting in a soft, neutral living room"></video>
+                <video data-clip="5" data-src="/v/h-flow-v2.mp4" data-msrc="/v/h-flow-m.mp4" poster="/v/h-flow-v2.jpg" data-mposter="/v/h-flow-m.jpg" muted playsInline preload="none" aria-label="A living room where the blinds come down and warm evening lights come on around a conversation seating group"></video>
                 </div>
                 <div className="tiltfade" id="tiltfade"></div>
               </div>
@@ -179,9 +179,9 @@ export default function HomeMarkup() {
           <div className="process-layout">
             <div className="process-media" aria-hidden="true">
               <div className="process-visual">
-                <div className="process-frame"><img src="/m/pm.jpg" alt="" loading="lazy" /></div>
-                <div className="process-frame"><img src="/m/fabrics.jpg" alt="" loading="lazy" /></div>
-                <div className="process-frame"><img src="/m/workshop.jpg" alt="" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/process-visit.webp" alt="" width="860" height="860" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/process-materials.webp" alt="" width="860" height="860" loading="lazy" /></div>
+                <div className="process-frame"><img src="/m/process-joinery.webp" alt="" width="860" height="1012" loading="lazy" /></div>
                 <div className="process-frame"><img src="/m/bed.jpg" alt="" loading="lazy" /></div>
               </div>
             </div>
@@ -213,7 +213,7 @@ export default function HomeMarkup() {
               <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET ROULA <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
             </div>
             <a className="press-clip" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">
-              <span className="pg"><img src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business" width="1125" height="806" loading="lazy" /></span>
+              <span className="pg"><img src="/m/she-means-business-card.webp" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business" width="900" height="645" loading="lazy" /></span>
               <span className="lbl">She Means Business · 30 October 2026</span>
             </a>
           </div>

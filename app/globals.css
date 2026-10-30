@@ -17,7 +17,7 @@ img{max-width:100%}
   color-scheme:light;
 }
 /* About Us, Services, Contact and Portfolio sit on warm cream instead of linen */
-:root:has(#founder,#services,#contact,#portfolio){--bg:var(--cream)}
+:root:has(#founder,#services,#contact,#portfolio,#project){--bg:var(--cream)}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto}

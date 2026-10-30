@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Arrow from '@/components/Arrow';
 import PageCta from '@/components/PageCta';
 
@@ -52,9 +53,9 @@ export default function JournalPage() {
 
           <figure className="jr-clip">
             <a href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the article page at full size">
-              <img src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width="1125" height="806" />
+              <Image src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width={1125} height={806} sizes="(max-width: 820px) 100vw, 88vw" />
             </a>
-            <figcaption className="lbl">She Means Business · Page 14 · Friday, 30 October 2026 <span className="jr-swipe">Swipe to read the page</span> <span>Open full size <Arrow /></span></figcaption>
+            <figcaption className="lbl">She Means Business · Page 14 · Friday, 30 October 2026 <a className="jr-full" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">Open full size <Arrow /></a></figcaption>
           </figure>
 
           <div className="jr-body">

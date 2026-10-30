@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { site } from '@/content/site';
 
 const LEFT = [
-  { href: '/founder', label: 'Founder' },
+  { href: '/founder', label: 'About Us' },
   { href: '/portfolio', label: 'Portfolio' },
 ];
 const RIGHT = [

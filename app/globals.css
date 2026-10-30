@@ -249,6 +249,8 @@ html:not(.story) .reelclip{display:none}
 .hl-intro .lbl{grid-column:1/span 3;padding-top:14px}
 .hl-intro .h2{grid-column:4/span 7}
 .hl-intro .body{grid-column:4/span 5}
+.hl-overview{padding-block:clamp(32px,4vw,56px) clamp(20px,3vw,40px);text-align:center}
+.hl-overview .body{grid-column:1/-1;max-width:none;font-size:21px}
 .hl{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden}
 .hl-view{position:absolute;inset:0}
 .hl-view video{position:absolute;object-fit:cover}
@@ -392,6 +394,10 @@ html:not(.story) .track{flex-wrap:wrap}
 .svc p{grid-column:5/span 4;font-size:19px}
 .svc .ph{grid-column:9/span 4;aspect-ratio:4/3;overflow:hidden;max-width:100%}
 .svc .ph img{width:100%;height:100%;object-fit:cover}
+.service-insights{margin-top:clamp(56px,7vw,110px)}
+.service-insights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:36px 32px;margin-top:32px}
+.service-insights-grid article{border-top:1px solid var(--rule);padding-top:24px;display:flex;flex-direction:column;gap:16px}
+.service-insights-grid .h2{font-size:clamp(26px,2.3vw,34px)}
 .faq{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;margin-top:clamp(56px,7vw,110px)}
 .faq .l{grid-column:1/span 4;display:flex;flex-direction:column;gap:16px}
 .faq .list{grid-column:5/span 8}

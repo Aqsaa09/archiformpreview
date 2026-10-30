@@ -62,9 +62,9 @@ export default function ContactForm() {
         <div className="field"><label htmlFor="f-email">Email</label><input id="f-email" name="email" type="email" autoComplete="email" required maxLength={200} /></div>
       </div>
       <div className="two">
-        <div className="field"><label htmlFor="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} /></div>
+        <div className="field"><label htmlFor="f-phone">Phone Number</label><input id="f-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} /></div>
         <div className="field">
-          <label htmlFor="f-type">Project type</label>
+          <label htmlFor="f-type">Property</label>
           <select id="f-type" name="type" defaultValue={TYPES[0]}>
             {TYPES.map((t) => <option key={t}>{t}</option>)}
           </select>
@@ -75,7 +75,7 @@ export default function ContactForm() {
       <div className="hp" aria-hidden="true"><label htmlFor="f-company">Company</label><input id="f-company" name="company" tabIndex={-1} autoComplete="off" /></div>
       {status === 'error' ? <p className="err" role="alert">{error}</p> : null}
       <button className="btn" type="submit" disabled={status === 'sending'} style={{ alignSelf: 'flex-start' }}>
-        {status === 'sending' ? 'Sending…' : 'Send enquiry'} <Arrow />
+        {status === 'sending' ? 'Sending…' : 'BOOK AN INITIAL CONSULTATION'} <Arrow />
       </button>
     </form>
   );

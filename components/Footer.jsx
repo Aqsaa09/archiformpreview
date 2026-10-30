@@ -6,6 +6,7 @@ export default function Footer() {
     <footer id="siteFoot" className="foot" style={{ color: 'var(--fg)' }}>
       <span>
         © {year} {site.name} · {site.address.city}
+        <br />{site.tagline}
       </span>
       <span className="c">
         <img src="/m/mark.png" alt="" width="460" height="380" />

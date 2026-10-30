@@ -12,12 +12,15 @@ export default function ContactPage() {
   return (
     <main className="page" id="contact">
       <div className="pg-ttl">
-        <p className="lbl rule">{site.address.city}, {site.address.country}</p>
-        <h1 className="disp">Contact</h1>
-        <p className="it" style={{ fontSize: 'clamp(24px,2.4vw,32px)' }}>Every project begins with a conversation.</p>
+        <p className="lbl rule">LET'S CREATE YOUR SPACE</p>
+        <h1 className="disp">A beautiful home begins with a conversation.</h1>
+        <p className="body">Whether you're planning a complete villa renovation, refreshing your interiors or simply exploring what's possible, we'd love to hear your story.</p>
+        <p className="body">Tell us about the space you have and the home you imagine.</p>
+        <p className="body">We'll listen, explore your ideas and help you take the first steps toward an interior that feels beautiful, balanced and uniquely yours.</p>
       </div>
       <div className="ct">
         <div className="l">
+          <div><span className="lbl">ARCHIFORM</span><span>Interior Design &amp; Project Management</span><span>Dubai, United Arab Emirates</span></div>
           <div><span className="lbl">Email</span><a className="sel" href={`mailto:${site.email}`} style={{ textDecoration: 'none' }}>{site.email}</a></div>
           {site.phone ? (
             <div><span className="lbl">Phone</span><a href={`tel:${site.phone.replace(/\s/g, '')}`} style={{ textDecoration: 'none' }}>{site.phone}</a></div>
@@ -40,6 +43,7 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </div>
+      <div className="page-cta"><p className="h2">Let's create a space that feels like you.</p></div>
     </main>
   );
 }

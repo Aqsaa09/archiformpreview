@@ -5,14 +5,14 @@
 export const projects = [
   {
     slug: 'seaside-villa',
-    name: 'Seaside Villa',
-    sub: 'Interior renovation & styling',
+    name: 'Lakeside Villa',
+    sub: 'Residential Renovation & Interior Styling',
     type: 'Villa renovation',
     location: 'Dubai, UAE',
     did: 'Interior Design, Project Management, Joinery Design, Styling',
     cover: '/m/bed.jpg',
-    intro: 'A complete renovation of a private villa, shaped around light, sea air and slow evenings.',
-    text: 'A custom upholstered headboard in a botanical toile anchors the primary bedroom, layered with linen cushions, a waffle-knit throw and soft, low lighting. Taupe bedside chests with sculpted handles and a simple round mirror keep the walls calm and uncluttered.',
+    intro: 'A serene retreat shaped by warmth, comfort and quiet elegance.',
+    text: 'For this private villa, our vision was to create interiors that feel effortlessly connected, combining soft neutral tones, natural textures and timeless details. From bespoke joinery to carefully considered furnishing and styling, the design brings together sophistication and everyday comfort, creating a home that feels calm, personal and beautifully lived in.',
     images: [
       { src: '/m/bed.jpg', alt: 'Upholstered toile headboard with linen cushions and a striped bolster' },
       { src: '/m/nightstand.jpg', alt: 'Taupe bedside chest with sculpted handles and a round mirror' },

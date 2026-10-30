@@ -81,7 +81,6 @@ export default function HomeMarkup() {
             <div className="hcta" id="hcta"><Link className="p" href="/portfolio">EXPLORE OUR WORK →</Link><Link className="c" href="/contact" aria-label="Book a design consultation"><svg width="20" height="24" viewBox="0 0 40 48" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M5 47V19A15 15 0 0 1 35 19V47"/><use href="#sprig" x="11" y="14" width="20" height="30" strokeWidth="1.2"/></svg></Link></div>
 
             <div className="scroll-cue" id="cue" aria-hidden="true"><span>Scroll to enter</span><i /></div>
-            <div className="scroll-cue logo-cue" id="logoCue" aria-hidden="true"><span>Scroll to explore</span><i /></div>
 
             <div className="say" id="sayH">
               <p className="lbl">Healthy living, by design</p>

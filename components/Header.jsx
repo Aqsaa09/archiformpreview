@@ -8,9 +8,10 @@ import { site } from '@/content/site';
 const LEFT = [
   { href: '/founder', label: 'About Us' },
   { href: '/portfolio', label: 'Portfolio' },
+  { href: '/services', label: 'Services' },
 ];
 const RIGHT = [
-  { href: '/services', label: 'Services' },
+  { href: '/journal', label: 'Journal' },
   { href: '/contact', label: 'Contact' },
 ];
 

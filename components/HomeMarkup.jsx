@@ -59,7 +59,6 @@ export default function HomeMarkup() {
                 <video data-clip="4" data-src="/v/h-green-v2.mp4" data-msrc="/v/h-green-m.mp4" poster="/v/h-green-v2.jpg" data-mposter="/v/h-green-m.jpg" muted loop playsInline preload="none" aria-label="A breeze moving sheer curtains beside indoor planting in a soft, neutral living room"></video>
                 <video data-clip="5" data-src="/v/h-flow-v2.mp4" data-msrc="/v/h-flow-m.mp4" poster="/v/h-flow-v2.jpg" data-mposter="/v/h-flow-m.jpg" muted playsInline preload="none" aria-label="A living room where the blinds come down and warm evening lights come on around a conversation seating group"></video>
                 </div>
-                <div className="tiltfade" id="tiltfade"></div>
               </div>
               <svg className="inshade" aria-hidden="true"><defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter></defs><path id="shPath" fill="none" stroke="rgba(52,40,28,.4)" strokeWidth="34" filter="url(#sh)"/></svg>
             </div>
@@ -70,8 +69,8 @@ export default function HomeMarkup() {
             </div>
 
             <h1 className="sr" style={{position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0 0 0 0)'}}>Beautiful spaces. Better living.</h1>
-            <p className="hh a" id="hhA" aria-hidden="true">Beautiful<br /><em>spaces.</em></p>
-            <p className="hh b" id="hhB" aria-hidden="true">Better<br />living.</p>
+            <p className="hh a" id="hhA" aria-hidden="true">Beautiful<br />{' '}<em>spaces.</em></p>
+            <p className="hh b" id="hhB" aria-hidden="true">Better<br />{' '}living.</p>
             <div className="hb" id="hb">
               <h2>INTERIORS DESIGNED AROUND YOU</h2>
               <hr />
@@ -131,22 +130,13 @@ export default function HomeMarkup() {
           </div>
         </section>
 
-        <section className="hl-intro" aria-labelledby="fxTitle">
-          <p className="lbl rule">Featured project</p>
-          <h2 className="h2" id="fxTitle">Where the sea breeze is <em>part of the house.</em></h2>
-          <p className="body">Step inside a Dubai villa we designed around light, air and the view.</p>
+        <section className="hl-intro featured-intro" aria-labelledby="fxTitle">
+          <p className="lbl rule" id="fxTitle">Featured project</p>
         </section>
 
         <section className="stage stage2" id="fstage" aria-label="Seaside Villa, featured project">
           <div className="vis">
-            <div className="room" id="room"><video id="vRoom" data-src="/v/bedroom-v2.mp4" poster="/v/bedroom-v2.jpg" muted playsInline preload="none" aria-label="She walks in through the sheer curtains from the balcony and sits on the bed, smiling"></video></div>
-            <div className="view" id="fview">
-              <video className="v-back" id="vBack" data-src="/v/ocean-back-v2.mp4" poster="/v/ocean-back-v2.jpg" muted playsInline preload="none" aria-label="A woman at a balcony rail facing the sea, her hair moving in the breeze"></video>
-              <video className="v-turn" id="vTurn" data-src="/v/ocean-turn-v2.mp4" poster="/v/ocean-turn-v2.jpg" muted playsInline preload="none" aria-label="A woman in white, eyes closed, standing in the sea breeze"></video>
-              <svg className="inshade" aria-hidden="true"><path id="fshPath" fill="none" stroke="rgba(52,40,28,.5)" strokeWidth="34" filter="url(#sh)"/></svg>
-              <div className="wipe" id="wipe"></div>
-            </div>
-            <svg className="frame" id="frame" aria-hidden="true"><path id="frPath" fill="none" stroke="#F1E9E1" strokeWidth="9"/><path id="frLine" fill="none" stroke="rgba(92,74,50,.35)" strokeWidth="1"/></svg>
+            <div className="fvid" id="fvid"><video id="vFeat" data-src="/v/feature-blended.mp4" data-msrc="/v/feature-blended-m.mp4" poster="/v/feature-blended.jpg" muted playsInline preload="none" aria-label="A woman at a balcony rail facing the sea turns around, then sits on the bed in a calm, light-filled bedroom"></video><div className="fshade" id="fshade"></div></div>
             <div className="say" id="sayA" aria-hidden="true">
               <p className="lbl">Fresh air</p>
               <p className="disp">It begins with the air you breathe.</p>
@@ -183,6 +173,7 @@ export default function HomeMarkup() {
                 <div className="process-frame"><img src="/m/process-materials.webp" alt="" width="860" height="860" loading="lazy" /></div>
                 <div className="process-frame"><img src="/m/process-joinery.webp" alt="" width="860" height="1012" loading="lazy" /></div>
                 <div className="process-frame"><img src="/m/bed.jpg" alt="" loading="lazy" /></div>
+                <div className="process-founder"><img className="process-founder-portrait" src="/m/roula.jpg" alt="" loading="lazy" /></div>
               </div>
             </div>
             <div className="process-copy">
@@ -201,23 +192,19 @@ export default function HomeMarkup() {
           </div>
         </section>
 
-        <section className="press" id="press" aria-labelledby="pressTitle">
-          <p className="press-mark" aria-hidden="true">ARCHIFORM</p>
-          <div className="press-in">
-            <div className="press-tx">
-              <p className="lbl rule">AS FEATURED IN SHE MEANS BUSINESS</p>
-              <h2 className="h2" id="pressTitle">Roula Jbour on homes that support <em>healthier living.</em></h2>
-              <p className="body">With a background in healthcare and training in interior design, Roula brings together caring for people and creating beautiful spaces.</p>
-              <p className="it q">“I believe the true beauty of a space is not only in what you see, but in how comfortably and naturally you can live within it.”</p>
-              <p className="lbl">ROULA JBOUR — FOUNDER, ARCHIFORM</p>
-              <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET ROULA <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
-            </div>
-            <a className="press-clip" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">
-              <span className="pg"><img src="/m/she-means-business-card.webp" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business" width="900" height="645" loading="lazy" /></span>
-              <span className="lbl">She Means Business · 30 October 2026</span>
-            </a>
+        <section className="fd" id="fdTeaser" aria-labelledby="fdName">
+          <div className="ph"><img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM, leaning against a white wall" loading="lazy" /></div>
+          <div className="tx">
+            <p className="lbl rule">THE PERSON BEHIND THE PERSPECTIVE</p>
+            <h2 className="disp" id="fdName">Meet Roula.</h2>
+            <p className="body">With a background in healthcare and training in interior design, Roula Jbour brings together two passions: caring for people and creating beautiful spaces.</p>
+            <p className="it">“I believe the true beauty of a space is not only in what you see, but in how comfortably and naturally you can live within it.”</p>
+            <p className="lbl">ROULA JBOUR — FOUNDER, ARCHIFORM</p>
+            <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET THE FOUNDER <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
           </div>
         </section>
+
+        <div className="wordmark-band" id="wordmark" aria-hidden="true"><p className="wordmark">ARCHIFORM</p></div>
 
         <section id="closeSec" aria-labelledby="closeTitle">
           <div className="close">

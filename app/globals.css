@@ -17,7 +17,7 @@ img{max-width:100%}
   color-scheme:light;
 }
 /* About Us, Services, Contact and Portfolio sit on warm cream instead of linen */
-:root:has(#founder,#services,#contact,#portfolio,#project){--bg:var(--cream)}
+:root:has(#founder,#services,#contact,#portfolio,#project,#journal){--bg:var(--cream)}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
@@ -100,9 +100,10 @@ ul{list-style:none}
 .wall::after{display:none;content:"";position:absolute;inset:0;opacity:.35;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='7'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .47 0 0 0 0 .38 0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>")}
 @keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3.5deg)}}
-.room{position:absolute;inset:0;opacity:0}
-.room video{width:100%;height:100%;object-fit:cover;object-position:50% 10%;will-change:transform}
-.room::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(236,227,226,.96) 0%, rgba(236,227,226,.86) 34%, rgba(236,227,226,.25) 60%, rgba(236,227,226,0) 80%)}
+/* Featured film: full screen throughout; in the bedroom a linen shade comes up on the left for the project text */
+.fvid{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--linen)}
+.fvid video{display:block;width:100%;height:100%;object-fit:cover;will-change:transform}
+.fshade{position:absolute;inset:0;z-index:1;opacity:0;pointer-events:none;background:linear-gradient(90deg, rgba(236,227,226,.98) 0%, rgba(236,227,226,.9) 34%, rgba(236,227,226,.3) 58%, rgba(236,227,226,0) 76%)}
 .view{position:absolute;inset:0}
 .view video{position:absolute;object-fit:cover}
 .reelclip{position:absolute;inset:0;opacity:0;will-change:transform}
@@ -110,7 +111,6 @@ ul{list-style:none}
 .reel video{inset:0;width:100%;height:100%;opacity:0;will-change:opacity;backface-visibility:hidden}
 .reel video[data-clip="1"]{opacity:1}
 /* Softens the top edge of the room film as the camera tilts up into the sunset */
-.tiltfade{position:absolute;left:0;right:0;top:-26%;height:66%;opacity:0;pointer-events:none;background:linear-gradient(180deg,rgba(248,224,206,0) 0%,rgba(248,224,206,.96) 36%,rgba(246,214,190,.92) 44%,rgba(241,196,160,0) 100%)}
 /* Sky beyond the gate, the villa and how it works */
 .scene{position:absolute;inset:0;overflow:hidden;background:#E9C9B6}
 .scene .skybg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 65%;will-change:transform}
@@ -157,7 +157,8 @@ ul{list-style:none}
 .hol .h2{font-size:clamp(30px,3vw,46px);max-width:none}
 .hol .body{font-size:17px;max-width:36em}
 @media (max-width:820px){
-  .land{--u:84vw;--hor:56%;--gy:85%}
+  .land{--u:84vw;--hor:56%;--gy:91%}
+  .hol{top:calc(var(--hhTop,110px) + 14px + clamp(0px,(100svh - 700px) * .6,120px))}
   .land .pl{--x:-.5!important}.land .pr{--x:.52!important}
   .land .hc{--w:.96!important}
   .hcard{gap:5px;padding:6px 4px 8px;border-radius:10px}.hcard .ic{border-radius:7px}
@@ -166,13 +167,7 @@ ul{list-style:none}
 }
 html:not(.story) .scene .dusk{opacity:1}
 html:not(.story) .reelclip{display:none}
-.view .v-back{object-position:50% 58%}
-.view .v-turn{object-position:46% 32%;opacity:0}
 .view .inshade{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.stage2 .view::after{content:"";position:absolute;inset:0 0 auto;height:160px;background:linear-gradient(180deg,rgba(236,227,226,.55),rgba(236,227,226,0));pointer-events:none}
-.frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.wipe{position:absolute;inset:-10% -60%;pointer-events:none;opacity:0;transform:translateX(-80%);
-  background:linear-gradient(100deg, rgba(255,251,246,0) 20%, rgba(255,251,246,.85) 38%, rgba(255,251,246,.96) 50%, rgba(255,251,246,.85) 62%, rgba(255,251,246,0) 80%);filter:blur(24px)}
 
 .vis{position:absolute;inset:0;overflow:hidden}
 .stage2{background:var(--linen)}
@@ -201,8 +196,8 @@ html:not(.story) .reelclip{display:none}
 .hcta a.p{padding:0 30px}
 .hcta a.c{width:52px}
 .hcta a:hover{background:var(--olive);color:var(--paper)}
-/* Scroll cue under the gate: a line with a bead running down it. --cueTop is set from the door geometry */
-.scroll-cue{position:absolute;left:0;right:0;top:var(--cueTop,auto);bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none;text-shadow:0 1px 14px rgba(251,246,239,.8)}
+/* Scroll cue just under the logo: a line with a bead running down it. --cueTop is set from the logo height */
+.scroll-cue{position:absolute;left:0;right:0;top:calc(var(--cueTop,110px) + env(safe-area-inset-top,0px));bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none;text-shadow:0 1px 14px rgba(251,246,239,.8)}
 .scroll-cue span{font-family:var(--label);font-size:10px;font-weight:500;letter-spacing:.32em;margin-right:-.32em;text-transform:uppercase;line-height:1}
 .scroll-cue i{position:relative;display:block;width:1px;height:26px;overflow:hidden;background:rgba(92,74,50,.25)}
 .scroll-cue i::after{content:"";position:absolute;left:0;top:0;width:1px;height:10px;background:currentColor;animation:cue 1.9s cubic-bezier(.65,0,.35,1) infinite}
@@ -226,14 +221,14 @@ html:not(.story) .scroll-cue{display:none}
 
 @media (max-width:1100px){
   #featQ{display:none}
-  .hh{font-size:clamp(38px,10vw,64px)}
-  .hh.a{left:var(--gut);top:var(--hhTop,104px)}
-  .hh.b{right:var(--gutr);top:auto;bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  .fshade{background:linear-gradient(180deg, rgba(236,227,226,0) 0%, rgba(236,227,226,.2) 38%, rgba(236,227,226,.94) 58%, rgba(236,227,226,.98) 100%)}
+  .hh{left:0;right:0;font-size:clamp(34px,8.6vw,56px);line-height:1;text-align:center}
+  .hh br{display:none}
+  .hh.a{left:0;top:calc(var(--hhATop,140px) + env(safe-area-inset-top,0px))}
+  .hh.b{right:0;top:auto;bottom:calc(104px + env(safe-area-inset-bottom,0px));text-align:center}
   .hb,.hv{display:none}
   .hcta{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
   .hcta a.p{padding:0 22px}
-  .room video{object-position:100% 0}
-  .room::after{background:linear-gradient(180deg, rgba(236,227,226,0) 0%, rgba(236,227,226,.2) 38%, rgba(236,227,226,.94) 58%, rgba(236,227,226,.98) 100%)}
   .feat{left:var(--gut);right:var(--gutr);width:auto;top:auto;padding-top:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));gap:12px;align-items:center;text-align:center}
   .feat .lbl.rule{align-items:center}
   .feat h2{font-size:clamp(42px,12vw,58px)}
@@ -258,6 +253,8 @@ html:not(.story) .scroll-cue{display:none}
 .hl-intro .lbl{grid-column:1/span 3;padding-top:14px}
 .hl-intro .h2{grid-column:4/span 7}
 .hl-intro .body{grid-column:4/span 5}
+.hl-intro.featured-intro{padding-block:clamp(24px,3vw,48px) 24px}
+.featured-intro .lbl{grid-column:1/-1;padding-top:0}
 .hl{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden}
 .hl-view{position:absolute;inset:0}
 .hl-view video{position:absolute;object-fit:cover}
@@ -295,12 +292,14 @@ html:not(.story) .scroll-cue{display:none}
 .card li{font-family:var(--label);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--rule);border-radius:999px;line-height:1.3}
 
 /* ---------- Process: an arched image beside an editorial timeline ---------- */
-/* --archW: the arch keeps a 3:4 shape that always fits the screen, held mid-screen while pinned */
+/* --archW: the arch sits in the same column, at the same size, as Roula's portrait below, and is held mid-screen while pinned, so it can pass straight into her portrait */
 #home{--archW:min(100%,calc((100svh - 220px) * .75))}
 .home-process{display:flex;align-items:center;min-height:100vh;min-height:100svh;padding:clamp(48px,6vw,96px) max(var(--side),var(--gutr)) clamp(48px,6vw,96px) max(var(--side),var(--gut))}
 .process-layout{flex:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center}
 .process-media{grid-column:2/span 4;justify-self:center;position:relative;width:var(--archW);aspect-ratio:3/4}
 .process-visual{position:absolute;inset:0;width:100%;height:100%;border-radius:999px 999px 0 0;overflow:hidden;transform-origin:top left}
+.process-founder{position:absolute;inset:0;opacity:0;visibility:hidden}
+.process-founder-portrait{width:100%;height:112%;object-fit:cover;object-position:50% 20%}
 .process-frame{position:absolute;inset:0;opacity:0;visibility:hidden}
 .process-frame:first-child{opacity:1;visibility:visible}
 .process-frame img{width:100%;height:100%;object-fit:cover}
@@ -323,30 +322,46 @@ html:not(.story) .scroll-cue{display:none}
   .process-media{width:100%;aspect-ratio:4/5;max-height:65svh}
   .process-heading .h2{font-size:clamp(34px,7vw,48px)}
   .process-steps li{padding-block:20px}
+  .process-heading .h2{font-size:clamp(19px,5.4vw,30px);white-space:nowrap}
+  /* story: the section is held on screen, the image above, and the steps take turns in one slot */
+  .story .home-process{display:flex;align-items:center;min-height:100vh;min-height:100svh;padding-block:calc(76px + env(safe-area-inset-top,0px)) 32px}
+  .story .process-media{justify-self:center;width:min(100%,calc(44svh * .8));max-height:none;aspect-ratio:4/5}
+  /* her portrait matches the phone arch so it can take over from it */
+  .story .fd .ph{grid-column:1/-1;width:min(100%,calc(44svh * .8));aspect-ratio:4/5}
+  .story .process-layout{gap:24px}
+  .story .process-heading{margin-bottom:16px}
+  .story .process-window{overflow:hidden}
+  .story .process-steps{display:grid;padding:0;border-left:0}
+  .story .process-steps li{grid-area:1/1;padding:0}
+  .story .process-steps li::before{display:none}
+}
+/* Touch screens: no blurred glass behind the hero buttons, which re-blurs the moving gate every frame */
+@media (pointer:coarse){
+  .hcta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(236,227,226,.55)}
 }
 
-/* ---------- Press: the She Means Business interview ---------- */
-/* The studio name lies faint and wide behind the top of the section, letters stretched, edge to edge, fading into the backdrop and drifting slower than the page; the excerpts at left, the clipping at right */
-.press{position:relative;overflow:hidden;padding:clamp(120px,13vw,220px) max(var(--side),var(--gutr)) clamp(72px,9vw,140px) max(var(--side),var(--gut))}
-.press-mark{--ls:.14;position:absolute;z-index:0;top:clamp(8px,1.5vw,28px);left:50%;transform:translateX(-50%) scaleX(1.35);font-family:var(--display);font-weight:300;font-size:7.6vw;line-height:1;letter-spacing:calc(var(--ls) * 1em);text-indent:calc(var(--ls) * 1em);white-space:nowrap;opacity:.13;pointer-events:none;user-select:none;
-  -webkit-mask-image:linear-gradient(180deg,#000 35%,transparent 100%);mask-image:linear-gradient(180deg,#000 35%,transparent 100%)}
-.press-in{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 24px;align-items:center}
-.press-clip{grid-column:8/span 4;display:flex;flex-direction:column;gap:16px;text-decoration:none}
-.press-clip .pg{display:block;background:var(--paper);padding:10px;box-shadow:0 30px 60px -30px rgba(30,22,14,.55);transform:rotate(1.5deg);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.press-clip:hover .pg{transform:rotate(0) translateY(-4px)}
-.press-clip img{width:100%;height:auto}
-.press-clip .lbl{opacity:.8}
-.press-tx{grid-column:2/span 5;display:flex;flex-direction:column;gap:22px}
-.press-tx .h2{font-size:clamp(28px,2.8vw,42px);line-height:1.12}
-.press-tx .q{padding-top:22px;border-top:1px solid var(--rule)}
+/* ---------- Founder teaser ---------- */
+.fd{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;padding-block:clamp(72px,10vw,150px);padding-left:max(var(--side),var(--gut));padding-right:max(var(--side),var(--gutr))}
+.fd .ph{grid-column:2/span 4;justify-self:center;width:var(--archW);border-radius:999px 999px 0 0;overflow:hidden;aspect-ratio:3/4;max-width:100%}
+.fd .ph img{width:100%;height:112%;object-fit:cover;object-position:50% 20%}
+.fd .tx{grid-column:7/span 5;display:flex;flex-direction:column;gap:22px}
+.fd .tx .disp{font-size:clamp(40px,4.4vw,64px);font-weight:400}
 @media (max-width:820px){
-  .press{padding-top:clamp(72px,16vw,120px)}
-  .press-clip,.press-tx{grid-column:1/-1}
-  .press-clip{max-width:520px}
+  .fd .ph{grid-column:2/span 10;width:100%}
+  .fd .tx{grid-column:1/-1}
+}
+
+/* ---------- The studio name between the founder and the close ---------- */
+/* Faint and wide, letters stretched, fading downward into the backdrop; its tracking opens as it scrolls in and it drifts slower than the page */
+.wordmark-band{position:relative;overflow:hidden;padding-block:clamp(24px,4vw,64px) 0}
+.wordmark{--ls:.14;display:block;margin:0;text-align:center;transform:scaleX(1.07);font-family:var(--display);font-weight:300;font-size:9.6vw;line-height:1;letter-spacing:calc(var(--ls) * 1em);text-indent:calc(var(--ls) * 1em);white-space:nowrap;opacity:.2;pointer-events:none;user-select:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 35%,transparent 100%);mask-image:linear-gradient(180deg,#000 35%,transparent 100%)}
+@media (max-width:820px){
+  .wordmark{font-size:12vw;opacity:.24}
 }
 
 /* ---------- Close + footer (the footer is walnut on every page, matching the home page close) ---------- */
-.close{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end;padding-block:clamp(80px,11vw,170px) clamp(56px,7vw,100px);padding-left:max(var(--side),var(--gut));padding-right:max(var(--side),var(--gutr))}
+.close{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end;padding-block:clamp(48px,6vw,96px) clamp(56px,7vw,100px);padding-left:max(var(--side),var(--gut));padding-right:max(var(--side),var(--gutr))}
 .close .a{grid-column:1/span 7;display:flex;flex-direction:column;gap:26px}
 .close .a .disp{font-style:italic;font-weight:300}
 .close .b{grid-column:9/span 4;display:flex;flex-direction:column;gap:22px}
@@ -375,11 +390,10 @@ html:not(.story) .scroll-cue{display:none}
 }
 
 /* Static fallback (reduced motion or scripts unavailable): every chapter reads as a normal page */
-html:not(.story) .say,html:not(.story) .wipe,html:not(.story) .dim{display:none}
+html:not(.story) .say,html:not(.story) .dim{display:none}
 html:not(.story) .stage:not(.stage2){height:auto;min-height:0;overflow:visible;background:var(--linen)}
 html:not(.story) .stage:not(.stage2) .vis{position:relative;height:100vh;height:100svh;min-height:560px}
 html:not(.story) .stage .hl-panels{position:relative}
-html:not(.story) .room{opacity:1}
 html:not(.story) .hl{height:auto;min-height:0}
 html:not(.story) .hl-view{position:relative;height:70vh}
 html:not(.story) .hl-view::after{display:none}
@@ -517,6 +531,40 @@ form{display:flex;flex-direction:column;gap:26px}
 @media (max-width:600px){
   .pf-grid{grid-template-columns:minmax(0,1fr);gap:48px}
   .pf-grid a:nth-child(n){margin-top:0}
+}
+
+/* ---------- Journal: the press feature ---------- */
+/* The clipping runs the full width of the page in a paper mount; the interview is set beneath it in one reading column */
+.jr-ttl{max-width:1100px;gap:22px}
+.jr-ttl .disp{font-weight:400;font-size:clamp(44px,5.2vw,88px);line-height:1}
+.jr-ttl .body{font-family:var(--label);font-weight:300;font-size:18px;line-height:1.75;max-width:36em}
+.jr-art{padding-top:clamp(32px,4vw,56px);border-top:1px solid var(--rule)}
+.jr-meta{display:flex;flex-wrap:wrap;gap:10px 32px;margin-bottom:20px;opacity:.85}
+.jr-art>.h2{max-width:20em;font-size:clamp(30px,3.4vw,52px);line-height:1.1;margin-bottom:clamp(32px,4vw,56px)}
+.jr-clip{margin:0 0 clamp(56px,7vw,110px)}
+.jr-clip a{display:block;padding:clamp(8px,1.2vw,18px);background:var(--paper);box-shadow:0 40px 80px -40px rgba(62,49,34,.45);cursor:zoom-in}
+.jr-clip img{width:100%;height:auto}
+.jr-clip figcaption{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-top:18px;opacity:.8}
+.jr-clip figcaption span{display:inline-flex;align-items:center;gap:12px}
+.jr-body{max-width:40em;margin-inline:auto}
+.jr-lede{font-style:italic;font-weight:400;font-size:clamp(22px,2vw,28px);line-height:1.45;color:var(--olive);margin-bottom:clamp(40px,5vw,64px)}
+.jr-qa{padding-top:clamp(32px,4vw,48px);margin-bottom:clamp(32px,4vw,48px);border-top:1px solid var(--rule)}
+.jr-q{font-family:var(--label);font-size:13px;font-weight:500;letter-spacing:.14em;line-height:1.75;text-transform:uppercase;margin-bottom:20px}
+.jr-a{font-size:20px;line-height:1.75;margin-bottom:1em}
+.jr-qa:first-of-type .jr-a:first-of-type::first-letter{float:left;font-size:4.4em;line-height:.8;padding:.06em .1em 0 0;color:var(--olive)}
+.jr-pull{margin:clamp(40px,5vw,64px) calc(-1 * clamp(0px,8vw,140px)) 0;padding-block:clamp(28px,3vw,44px);border-block:1px solid var(--rule);font-style:italic;font-weight:300;font-size:clamp(28px,3vw,44px);line-height:1.2;text-align:center}
+.jr-end{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px;border-top:1px solid var(--rule)}
+.jr-swipe{display:none!important}
+/* Phones: the page runs edge to edge at a size that can be read, panned sideways */
+@media (max-width:820px){
+  .jr-clip{margin-left:calc(-1 * max(var(--side),var(--gut)));margin-right:calc(-1 * max(var(--side),var(--gutr)))}
+  .jr-clip a{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;box-shadow:none}
+  .jr-clip a::-webkit-scrollbar{display:none}
+  .jr-clip img{width:900px;max-width:none}
+  .jr-clip figcaption{padding-inline:max(var(--side),var(--gut)) max(var(--side),var(--gutr))}
+  .jr-swipe{display:inline-flex!important}
+  .jr-a{font-size:18px}
+  .jr-pull{margin-inline:0}
 }
 
 /* ---------- Closing invitation (About Us, Services, Portfolio): a compact walnut band that runs into the footer ---------- */

@@ -3,7 +3,7 @@ import { projects } from '@/content/projects';
 
 export default function sitemap() {
   const now = new Date();
-  const pages = ['', '/founder', '/portfolio', '/services', '/contact'].map((p) => ({
+  const pages = ['', '/founder', '/portfolio', '/services', '/journal', '/contact'].map((p) => ({
     url: `${site.url}${p}`,
     lastModified: now,
     changeFrequency: 'monthly',

@@ -21,6 +21,11 @@ img{max-width:100%}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto;background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--display);font-weight:500;font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* Keep mobile scrolling on the document and prevent blank overscroll below the footer. */
+@media (max-width:1100px){
+  html:has(#home){overscroll-behavior-y:none}
+  body:has(#home){overflow-x:clip}
+}
 img,video{display:block;max-width:100%}
 a{color:inherit}
 h1,h2,h3,p,ul,dl,dd,figure{margin:0;padding:0}
@@ -196,8 +201,8 @@ html:not(.story) .reelclip{display:none}
 .hcta a.p{padding:0 30px}
 .hcta a.c{width:52px}
 .hcta a:hover{background:var(--olive);color:var(--paper)}
-/* Scroll cue just under the logo: a line with a bead running down it. --cueTop is set from the logo height */
-.scroll-cue{position:absolute;left:0;right:0;top:calc(var(--cueTop,110px) + env(safe-area-inset-top,0px));bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none;text-shadow:0 1px 14px rgba(251,246,239,.8)}
+/* Scroll cue below the gate; --cueTop follows the door's lower edge. */
+.scroll-cue{position:absolute;left:0;right:0;top:var(--cueTop,80%);bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none;text-shadow:0 1px 14px rgba(251,246,239,.8)}
 .scroll-cue span{font-family:var(--label);font-size:10px;font-weight:500;letter-spacing:.32em;margin-right:-.32em;text-transform:uppercase;line-height:1}
 .scroll-cue i{position:relative;display:block;width:1px;height:26px;overflow:hidden;background:rgba(92,74,50,.25)}
 .scroll-cue i::after{content:"";position:absolute;left:0;top:0;width:1px;height:10px;background:currentColor;animation:cue 1.9s cubic-bezier(.65,0,.35,1) infinite}

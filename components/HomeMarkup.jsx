@@ -14,7 +14,6 @@ export default function HomeMarkup() {
     <>
       <div className="loader" id="loader" aria-hidden="true">
         <img className="ld-logo" id="ldLogo" src="/m/logo-dark.webp" alt="" width="520" height="352" />
-        <p className="ld-cue" id="ldCue">Scroll to explore</p>
         <div className="meta"><span>Dubai · 25.20° N, 55.27° E</span><span id="ldPct">000</span></div>
       </div>
       <div id="vp" aria-hidden="true"></div>

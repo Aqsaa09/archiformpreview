@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { roomFilms, featureFilm, disclosureFor } from '@/content/media';
+import { roomFilms, featureFilm } from '@/content/media';
 import { getProject } from '@/content/projects';
 
 const featured = getProject('seaside-villa');
@@ -84,7 +84,6 @@ export default function HomeMarkup() {
               <p>A Dubai interior design studio for villas and apartments. We design homes that look beautiful and feel good to live in.</p>
             </div>
             <ul className="hv lbl" id="hv" aria-label="What we design for"><li>Thoughtful Interiors.</li><li>Healthy Living.</li><li>Timeless Spaces.</li></ul>
-            <div className="hcta" id="hcta"><Link className="p" href="/portfolio">EXPLORE OUR WORK →</Link><Link className="c" href="/contact" aria-label="Book a design consultation"><svg width="20" height="24" viewBox="0 0 40 48" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M5 47V19A15 15 0 0 1 35 19V47"/><use href="#sprig" x="11" y="14" width="20" height="30" strokeWidth="1.2"/></svg></Link></div>
 
             <div className="scroll-cue" id="cue" aria-hidden="true"><span>Scroll to enter</span><i /></div>
 
@@ -117,11 +116,6 @@ export default function HomeMarkup() {
               </div>
           </div>
           <ol className="hl-index" id="hlIndex" aria-hidden="true"><li className="on">Natural Light</li><li>Comfort &amp; Airflow</li><li>Considered Materials</li><li>Functional Living</li></ol>
-          {/* The room films loop while you stay on them: say what they are, and let people stop them */}
-          <div className="film-note" id="reelNote">
-            <span>{disclosureFor(roomFilms)}</span>
-            <button type="button" id="reelPause" aria-label="Pause films">Pause</button>
-          </div>
         </section>
 
         <section className="dt" id="dt" aria-labelledby="dtTitle">
@@ -148,7 +142,7 @@ export default function HomeMarkup() {
 
         <section className="stage stage2" id="fstage" aria-label={`${featured.name}, featured project`}>
           <div className="vis">
-            <div className="fvid" id="fvid"><video id="vFeat" data-src={featureFilm.src} data-msrc={featureFilm.msrc} data-poster={featureFilm.poster} muted playsInline preload="none" aria-label={featureFilm.label}></video><div className="fshade" id="fshade"></div><p className="film-note" id="featNote"><span>{disclosureFor([featureFilm])}</span></p></div>
+            <div className="fvid" id="fvid"><video id="vFeat" data-src={featureFilm.src} data-msrc={featureFilm.msrc} data-poster={featureFilm.poster} muted playsInline preload="none" aria-label={featureFilm.label}></video><div className="fshade" id="fshade"></div></div>
             <div className="say" id="sayA" aria-hidden="true">
               <p className="lbl">Fresh air</p>
               <p className="disp">It begins with the air you breathe.</p>
@@ -228,7 +222,7 @@ export default function HomeMarkup() {
               <p className="body">Not just beautiful in photographs. Not simply impressive when guests arrive.</p>
               <p className="body">But genuinely comfortable, deeply personal and thoughtfully designed for the life happening within it.</p>
               <p className="body">Tell us what home means to you. Together, we'll bring that vision to life.</p>
-              <Link className="btn ghost" href="/contact" style={{alignSelf: 'flex-start'}}>LET'S TALK ABOUT YOUR SPACE <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
+              <Link className="go talk" href="/contact">LET'S TALK ABOUT YOUR SPACE <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
             </div>
           </div>
         </section>

@@ -204,25 +204,14 @@ html:not(.story) .reelclip{display:none}
 .hb hr{width:40px;border:0;border-top:1px solid currentColor;margin:0}
 .hb p{font-size:17px;line-height:1.5}
 .hv{position:absolute;right:var(--side);bottom:calc(clamp(80px,23vh,250px) + env(safe-area-inset-bottom,0px));width:min(26vw,420px);display:flex;justify-content:space-between;gap:10px;padding-top:18px;border-top:1px solid rgba(92,74,50,.45);color:var(--walnut);font-size:10px}
-.hcta{position:absolute;left:0;right:0;margin-inline:auto;width:max-content;bottom:calc(30px + env(safe-area-inset-bottom,0px));display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(92,74,50,.1);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 36px rgba(92,74,50,.18)}
-.hcta a{display:inline-flex;align-items:center;justify-content:center;height:52px;border-radius:999px;background:var(--walnut);color:var(--paper);text-decoration:none;font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;transition:background .3s,color .3s}
-.hcta a.p{padding:0 30px}
-.hcta a.c{width:52px}
-.hcta a:hover{background:var(--olive);color:var(--paper)}
 /* Scroll cue below the gate; --cueTop follows the door's lower edge. */
-.scroll-cue{position:absolute;left:0;right:0;top:var(--cueTop,80%);bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none;text-shadow:0 1px 14px rgba(251,246,239,.8)}
-.scroll-cue span{font-family:var(--label);font-size:10px;font-weight:500;letter-spacing:.32em;margin-right:-.32em;text-transform:uppercase;line-height:1}
-.scroll-cue i{position:relative;display:block;width:1px;height:26px;overflow:hidden;background:rgba(92,74,50,.25)}
+/* A walnut pill so the cue reads clearly against the pale stone below the gate */
+.scroll-cue{position:absolute;left:0;right:0;top:var(--cueTop,80%);bottom:auto;margin-inline:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--walnut);pointer-events:none}
+.scroll-cue span{padding:11px 18px 11px calc(18px + .32em);border-radius:999px;background:var(--walnut);color:var(--paper);box-shadow:0 10px 30px rgba(62,49,34,.28);font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;line-height:1}
+.scroll-cue i{position:relative;display:block;width:1px;height:26px;overflow:hidden;background:rgba(92,74,50,.3)}
 .scroll-cue i::after{content:"";position:absolute;left:0;top:0;width:1px;height:10px;background:currentColor;animation:cue 1.9s cubic-bezier(.65,0,.35,1) infinite}
 @keyframes cue{0%{transform:translateY(-100%)}100%{transform:translateY(260%)}}
 html:not(.story) .scroll-cue{display:none}
-/* What the films are (content/media.js), below the header at the top right; the room films' note carries the Pause control */
-.film-note{position:absolute;z-index:5;top:calc(var(--noteTop,128px) + env(safe-area-inset-top,0px));right:max(var(--side),var(--gutr));display:flex;align-items:center;gap:12px;margin:0;padding:5px 5px 5px 16px;border-radius:999px;background:rgba(40,30,20,.7);color:var(--paper);font-family:var(--label);font-size:10px;font-weight:500;letter-spacing:.2em;line-height:1.4;text-transform:uppercase}
-#featNote{padding:9px 16px}
-.film-note button{min-height:32px;padding:0 14px;border:1px solid rgba(244,238,234,.6);border-radius:999px;background:none;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
-.film-note button:hover{background:rgba(244,238,234,.16)}
-@media (max-width:820px){.film-note{--noteTop:100px}}
-html:not(.story) #reelNote{display:none}
 
 .say{position:absolute;inset:0;justify-content:center;text-align:center;color:var(--paper);display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:var(--side);text-shadow:0 2px 30px rgba(62,49,34,.35)}
 #sayH{isolation:isolate}
@@ -247,11 +236,9 @@ html:not(.story) #reelNote{display:none}
   .hh.a{left:var(--gut);right:auto;top:var(--hhATop,32%);width:max-content;text-align:left}
   .hh.b{right:var(--gutr);left:auto;top:var(--hhBTop,40%);bottom:auto;width:max-content;text-align:right}
   #cue{top:var(--doorCueTop,80%);gap:6px}
-  #cue span{font-size:10px;letter-spacing:.24em}
+  #cue span{padding:10px 14px 10px calc(14px + .24em);font-size:10px;letter-spacing:.24em}
   #cue i{height:16px}
   .hb,.hv{display:none}
-  .hcta{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
-  .hcta a.p{padding:0 22px}
   .feat{left:var(--gut);right:var(--gutr);width:auto;top:auto;padding-top:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));gap:12px;align-items:center;text-align:center}
   .feat .lbl.rule{align-items:center}
   .feat h2{font-size:clamp(42px,12vw,58px)}
@@ -358,10 +345,6 @@ html:not(.story) #reelNote{display:none}
   .story .process-steps li{grid-area:1/1;padding:0}
   .story .process-steps li::before{display:none}
 }
-/* Touch screens: no blurred glass behind the hero buttons, which re-blurs the moving gate every frame */
-@media (pointer:coarse){
-  .hcta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(236,227,226,.55)}
-}
 
 /* ---------- Founder teaser ---------- */
 .fd{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;padding-block:clamp(72px,10vw,150px);padding-left:max(var(--side),var(--gut));padding-right:max(var(--side),var(--gutr))}
@@ -388,6 +371,13 @@ html:not(.story) #reelNote{display:none}
 .close .a{grid-column:1/span 7;display:flex;flex-direction:column;gap:26px}
 .close .a .disp{font-style:italic;font-weight:300}
 .close .b{grid-column:9/span 4;display:flex;flex-direction:column;gap:22px}
+.close .talk{align-self:flex-start;margin-top:14px;font-size:12px;letter-spacing:.3em;border-bottom:1px solid currentColor;padding-block:12px 10px}
+@media (min-width:821px){
+  /* a little smaller, so the column starts level with "Let's create something meaningful" on the left */
+  .close .b{gap:10px}
+  .close .b .body{font-size:16px;line-height:1.5}
+  .close .b .talk{margin-top:4px}
+}
 .foot{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:28px calc(30px + env(safe-area-inset-bottom,0px));padding-left:max(var(--side),var(--gut));padding-right:max(var(--side),var(--gutr));border-top:1px solid rgba(244,238,234,.3);background:var(--walnut);color:var(--paper);font-family:var(--label);font-size:10px;letter-spacing:.26em;text-transform:uppercase}
 .foot .c{display:flex;justify-content:center}
 .foot .c img{width:64px;height:auto}

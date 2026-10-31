@@ -56,8 +56,8 @@ each photo's pixel size to `content/images.js`. The page `/portfolio/<slug>` and
 ### Real work, visualisations and AI
 - A portfolio image that is a render, AI image or design drawing gets `kind: 'visualisation'` in `content/projects.js`;
   the site then labels it "Design visualisation". Leave `kind` out only for photographs of completed work.
-- Every home page film is listed in `content/media.js` with its `origin` (`google-flow`, `pinterest`, `mixed`,
-  `unconfirmed`) and `rights`. The label shown over the films follows `origin`, e.g. "AI-generated visualisation".
+- Every home page film is listed in `content/media.js` with its `origin` (`ai`, `google-flow`, `pinterest`, `mixed`,
+  `unconfirmed`), `source` and `rights`.
 - Do not publish Pinterest downloads without the creator's licence.
 
 ### Images, video and caching

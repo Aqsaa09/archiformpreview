@@ -12,6 +12,7 @@ export const metadata = pageMeta({
 });
 
 /* The interview as printed in She Means Business, 30 October 2026, page 14 */
+const ARTICLE_URL = 'https://features.gulfnews.com/books/oknx/?maxwidthtosmallmode=0&maxheighttosmallmode=0';
 const qa = [
   {
     q: 'How did your background in healthcare inspire your transition into interior design, and what entrepreneurial vision drives ARCHIFORM?',
@@ -48,16 +49,15 @@ export default function JournalPage() {
         <article className="jr-art" aria-labelledby="jrTitle">
           <div className="jr-meta">
             <span className="lbl">She Means Business</span>
-            <span className="lbl">Interview</span>
             <span className="lbl">30 October 2026</span>
           </div>
           <h2 className="h2" id="jrTitle">Roula Jbour on homes that are beautiful, functional and <em>supportive of healthier living.</em></h2>
 
           <figure className="jr-clip">
-            <a href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the article page at full size">
+            <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer" aria-label="Read the article in She Means Business (opens in a new tab)">
               <Image src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width={1125} height={806} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" />
             </a>
-            <figcaption className="lbl">She Means Business · Page 14 · Friday, 30 October 2026 <a className="jr-full" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">Open full size <Arrow /></a></figcaption>
+            <figcaption className="lbl">She Means Business · Page 14 · Friday, 30 October 2026 <a className="jr-full" href={ARTICLE_URL} target="_blank" rel="noopener noreferrer">Read the article<span className="sr"> (opens in a new tab)</span> <Arrow /></a></figcaption>
           </figure>
 
           <div className="jr-body">
@@ -72,7 +72,7 @@ export default function JournalPage() {
               </section>
             ))}
             <div className="jr-end">
-              <p className="lbl">Originally published in She Means Business, 30 October 2026</p>
+              <p className="lbl">Originally published in <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer">She Means Business<span className="sr"> (opens in a new tab)</span></a>, 30 October 2026</p>
               <Link className="go" href="/founder">Meet Roula <Arrow /></Link>
             </div>
           </div>

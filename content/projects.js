@@ -10,7 +10,7 @@ export const projects = [
   {
     slug: 'seaside-villa',
     category: 'Bedrooms',
-    name: 'Lakeside Villa',
+    name: 'Seaside Villa',
     sub: 'Residential Renovation & Interior Styling',
     type: 'Villa renovation',
     location: 'Dubai, UAE',

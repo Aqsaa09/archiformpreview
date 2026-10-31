@@ -11,7 +11,7 @@
  * rights   'owned' | 'licensed' | 'unverified'
  *
  * src/poster are the landscape cuts (desktop, landscape tablets); msrc/mposter the portrait cuts (phones, portrait tablets).
- * Update origin and rights once confirmed: the disclosure shown on the page follows origin.
+ * DISCLOSURE / disclosureFor give the label for a film's origin; the page does not show it at present.
  */
 export const DISCLOSURE = {
   ai: 'AI-generated visualisation',

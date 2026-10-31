@@ -7,6 +7,7 @@
  *          'pinterest'    downloaded from Pinterest; the creator's licence is needed before publishing
  *          'mixed'        edited together from more than one of the above
  *          'unconfirmed'  source not yet recorded; treat as unlicensed until confirmed
+ * source   where the file came from, when not made by the studio (e.g. 'pinterest')
  * rights   'owned' | 'licensed' | 'unverified'
  *
  * src/poster are the landscape cuts (desktop, landscape tablets); msrc/mposter the portrait cuts (phones, portrait tablets).
@@ -20,38 +21,40 @@ export const DISCLOSURE = {
   unconfirmed: 'Illustrative film',
 };
 
-// Home page room films, in the order the scroll story shows them
+// Home page room films, in the order the scroll story shows them.
+// AI-generated films found on Pinterest, recorded by the studio (Oct 2026) as free to use. Keep each original pin's link
+// and the creator's stated terms on file: Pinterest itself does not grant reuse rights, the creator does.
 export const roomFilms = [
   {
     id: 'walk',
     src: '/v/h-walk-v2.mp4', poster: '/v/h-walk-v2.jpg', msrc: '/v/h-walk-m.mp4', mposter: '/v/h-walk-m.jpg',
     label: 'Walking into a calm open-plan living room with tall windows and plants',
-    origin: 'ai', rights: 'unverified',
+    origin: 'ai', source: 'pinterest', rights: 'licensed',
     notes: 'Scrubbed by scroll, so it needs a keyframe every few frames (currently every 4). Source files: videos folder/web-originals/h-walk.mp4.',
   },
   {
     id: 'light', loop: true,
     src: '/v/h-light-v2.mp4', poster: '/v/h-light-v2.jpg', msrc: '/v/h-light-m.mp4', mposter: '/v/h-light-m.jpg',
     label: 'A child dancing through squares of sunlight on a wooden floor',
-    origin: 'ai', rights: 'unverified',
+    origin: 'ai', source: 'pinterest', rights: 'licensed',
   },
   {
     id: 'air', loop: true,
     src: '/v/h-air-v2.mp4', poster: '/v/h-air-v2.jpg', msrc: '/v/h-air-m.mp4', mposter: '/v/h-air-m.jpg',
     label: 'Sheer curtains lifting in the breeze at an open balcony door while a child rocks in a chair',
-    origin: 'ai', rights: 'unverified',
+    origin: 'ai', source: 'pinterest', rights: 'licensed',
   },
   {
     id: 'green', loop: true,
     src: '/v/h-green-v2.mp4', poster: '/v/h-green-v2.jpg', msrc: '/v/h-green-m.mp4', mposter: '/v/h-green-m.jpg',
     label: 'A breeze moving sheer curtains beside indoor planting in a soft, neutral living room',
-    origin: 'ai', rights: 'unverified',
+    origin: 'ai', source: 'pinterest', rights: 'licensed',
   },
   {
     id: 'flow',
     src: '/v/h-flow-v2.mp4', poster: '/v/h-flow-v2.jpg', msrc: '/v/h-flow-m.mp4', mposter: '/v/h-flow-m.jpg',
     label: 'A living room where the blinds come down and warm evening lights come on around a conversation seating group',
-    origin: 'ai', rights: 'unverified',
+    origin: 'ai', source: 'pinterest', rights: 'licensed',
   },
 ];
 

@@ -86,6 +86,6 @@ public/              images (m/), videos (v/), og.jpg share image
 - [ ] Set the four environment variables in Vercel and send a test enquiry
 - [ ] Replace stock / AI imagery and the ocean clips with licensed or ARCHIFORM-owned media
 - [ ] Replace the AI-generated portfolio images with real project photos, removing `kind: 'visualisation'` from each one replaced
-- [ ] Confirm `rights` for the room films in `content/media.js` (the featured film is confirmed as the studio's own)
+- [ ] Save the original Pinterest link and the creator's free-to-use terms for each room film in `content/media.js`
 - [ ] Add your domain in Vercel and set `NEXT_PUBLIC_SITE_URL` to it
 - [ ] Submit `https://yourdomain/sitemap.xml` in Google Search Console

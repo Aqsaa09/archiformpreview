@@ -6,8 +6,10 @@ export const site = {
   name: 'ARCHIFORM Design Studio',
   shortName: 'ARCHIFORM',
   tagline: 'Thoughtful Interiors. Healthy Living.',
+  // Second half of the home page title, after the studio name
+  titleTail: 'Interior design in Dubai',
   description:
-    'A Dubai-based interior design studio where timeless aesthetics meet a thoughtful approach to healthy living.',
+    'Dubai interior design studio for villas and apartments. Interior design, renovation, bespoke joinery and project management, with healthy living built in.',
   // Your live domain. Vercel also lets you set NEXT_PUBLIC_SITE_URL instead.
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.archiform.com', // PLACEHOLDER
   email: 'hello@archiform.com', // PLACEHOLDER

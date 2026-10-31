@@ -1,11 +1,12 @@
 import ContactForm from '@/components/ContactForm';
 import { site } from '@/content/site';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMeta({
   title: 'Contact',
-  description: 'Start a project with ARCHIFORM. Interior design and renovations in Dubai, by appointment.',
-  alternates: { canonical: '/contact' },
-};
+  description: 'Book an initial consultation with ARCHIFORM, a Dubai interior design studio for villas and apartments. Tell us about your space and we will reply by email.',
+  path: '/contact',
+});
 
 export default function ContactPage() {
   return (

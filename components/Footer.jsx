@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { site } from '@/content/site';
 
 export default function Footer() {
@@ -9,7 +10,7 @@ export default function Footer() {
         <br />{site.tagline}
       </span>
       <span className="c">
-        <img src="/m/mark.webp" alt="" width="192" height="159" />
+        <Image src="/m/mark.webp" alt="" width={192} height={159} sizes="64px" />
       </span>
       <span>
         {site.instagram ? (

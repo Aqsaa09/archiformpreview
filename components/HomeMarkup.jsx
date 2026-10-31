@@ -1,4 +1,12 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import { roomFilms, featureFilm, disclosureFor } from '@/content/media';
+import { getProject } from '@/content/projects';
+
+const featured = getProject('seaside-villa');
+// Arched images beside the process steps and the founder teaser share one column: about 80vw on phones, a third of the page on desktop
+const ARCH_SIZES = '(max-width: 820px) 80vw, 34vw';
+const CARD_SIZES = '(max-width: 820px) 66vw, 360px';
 
 /* Markup for the home page scroll story. Element ids are used by lib/home-story.js. */
 export default function HomeMarkup() {
@@ -12,6 +20,7 @@ export default function HomeMarkup() {
       <div id="vp" aria-hidden="true"></div>
       <main id="home">
         <section className="stage" id="stage" aria-label="Interiors designed around you">
+          <h1 className="sr">Beautiful spaces. Better living. Interior design in Dubai by ARCHIFORM.</h1>
           <div className="vis" id="heroVis">
             <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide-v2.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
             <div className="view" id="view">
@@ -54,11 +63,9 @@ export default function HomeMarkup() {
               <div className="reelclip" id="reelclip">
                 <div className="reel" id="reel">
                 <video data-clip="0" muted playsInline preload="none" aria-hidden="true"></video>
-                <video data-clip="1" data-src="/v/h-walk-v2.mp4" data-msrc="/v/h-walk-m.mp4" poster="/v/h-walk-v2.jpg" data-mposter="/v/h-walk-m.jpg" muted playsInline preload="auto" aria-label="Walking into a calm open-plan living room with tall windows and plants"></video>
-                <video data-clip="2" data-src="/v/h-light-v2.mp4" data-msrc="/v/h-light-m.mp4" poster="/v/h-light-v2.jpg" data-mposter="/v/h-light-m.jpg" muted loop playsInline preload="none" aria-label="A child dancing through squares of sunlight on a wooden floor"></video>
-                <video data-clip="3" data-src="/v/h-air-v2.mp4" data-msrc="/v/h-air-m.mp4" poster="/v/h-air-v2.jpg" data-mposter="/v/h-air-m.jpg" muted loop playsInline preload="none" aria-label="Sheer curtains lifting in the breeze at an open balcony door while a child rocks in a chair"></video>
-                <video data-clip="4" data-src="/v/h-green-v2.mp4" data-msrc="/v/h-green-m.mp4" poster="/v/h-green-v2.jpg" data-mposter="/v/h-green-m.jpg" muted loop playsInline preload="none" aria-label="A breeze moving sheer curtains beside indoor planting in a soft, neutral living room"></video>
-                <video data-clip="5" data-src="/v/h-flow-v2.mp4" data-msrc="/v/h-flow-m.mp4" poster="/v/h-flow-v2.jpg" data-mposter="/v/h-flow-m.jpg" muted playsInline preload="none" aria-label="A living room where the blinds come down and warm evening lights come on around a conversation seating group"></video>
+                {roomFilms.map((f, i) => (
+                  <video key={f.id} data-clip={i + 1} data-src={f.src} data-msrc={f.msrc} data-poster={f.poster} data-mposter={f.mposter} muted loop={f.loop} playsInline preload={i ? 'none' : 'auto'} aria-label={f.label}></video>
+                ))}
                 </div>
               </div>
               <svg className="inshade" aria-hidden="true"><defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter></defs><path id="shPath" fill="none" stroke="rgba(52,40,28,.4)" strokeWidth="34" filter="url(#sh)"/></svg>
@@ -69,13 +76,12 @@ export default function HomeMarkup() {
               <div className="doors" id="doors"><div className="glow" id="dglow"></div><div className="leaf l" id="leafL"></div><div className="leaf r" id="leafR"></div></div>
             </div>
 
-            <h1 className="sr" style={{position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0 0 0 0)'}}>Beautiful spaces. Better living.</h1>
             <p className="hh a" id="hhA" aria-hidden="true">Beautiful<br />{' '}<em>spaces.</em></p>
             <p className="hh b" id="hhB" aria-hidden="true">Better<br />{' '}living.</p>
             <div className="hb" id="hb">
               <h2>INTERIORS DESIGNED AROUND YOU</h2>
               <hr />
-              <p>A beautiful home is more than a place to live. It is where you unwind, reconnect, recharge and feel most like yourself.</p>
+              <p>A Dubai interior design studio for villas and apartments. We design homes that look beautiful and feel good to live in.</p>
             </div>
             <ul className="hv lbl" id="hv" aria-label="What we design for"><li>Thoughtful Interiors.</li><li>Healthy Living.</li><li>Timeless Spaces.</li></ul>
             <div className="hcta" id="hcta"><Link className="p" href="/portfolio">EXPLORE OUR WORK →</Link><Link className="c" href="/contact" aria-label="Book a design consultation"><svg width="20" height="24" viewBox="0 0 40 48" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M5 47V19A15 15 0 0 1 35 19V47"/><use href="#sprig" x="11" y="14" width="20" height="30" strokeWidth="1.2"/></svg></Link></div>
@@ -111,6 +117,11 @@ export default function HomeMarkup() {
               </div>
           </div>
           <ol className="hl-index" id="hlIndex" aria-hidden="true"><li className="on">Natural Light</li><li>Comfort &amp; Airflow</li><li>Considered Materials</li><li>Functional Living</li></ol>
+          {/* The room films loop while you stay on them: say what they are, and let people stop them */}
+          <div className="film-note" id="reelNote">
+            <span>{disclosureFor(roomFilms)}</span>
+            <button type="button" id="reelPause" aria-label="Pause films">Pause</button>
+          </div>
         </section>
 
         <section className="dt" id="dt" aria-labelledby="dtTitle">
@@ -121,12 +132,12 @@ export default function HomeMarkup() {
               <p className="body">Beyond light, air and plants, these are the elements we check on every project. Most are invisible once the room is finished. You notice them in how you sleep, breathe and feel at the end of the day.</p>
             </div>
             <div className="cards" id="cards">
-              <article className="card"><div className="ph"><img src="/m/vase.jpg" alt="Olive branches in a stone vase on a travertine table" loading="lazy" /></div><h3>Natural materials</h3><p>Finishes you can live close to.</p><ul><li>Low-VOC paints</li><li>Timber, stone, lime plaster</li><li>Linen, cotton, wool</li></ul></article>
-              <article className="card"><div className="ph"><img src="/m/bath-2.jpg" alt="Stone bathroom with a walk-in shower and oak vanity" loading="lazy" style={{objectPosition: '30% 50%'}} /></div><h3>Clean air &amp; humidity</h3><p>AC runs most of the year here, so the air needs care.</p><ul><li>AC servicing &amp; filters</li><li>Moisture prevention</li><li>Dust-aware detailing</li></ul></article>
-              <article className="card"><div className="ph"><img src="/m/bed-evening.jpg" alt="Bedroom at dusk lit by a soft lamp" loading="lazy" /></div><h3>Layered light</h3><p>Light that follows the day.</p><ul><li>Bright task light by day</li><li>Warm, low light after sunset</li><li>Lamps &amp; dimmers</li></ul></article>
-              <article className="card"><div className="ph"><img src="/m/panels.jpg" alt="Upholstered wall panels behind a bed" loading="lazy" /></div><h3>Acoustic calm</h3><p>Quiet is a comfort too.</p><ul><li>Upholstered panels</li><li>Rugs &amp; full curtains</li><li>Soft-close joinery</li></ul></article>
-              <article className="card"><div className="ph"><img src="/m/dining.jpg" alt="Dining room with full-height linen curtains" loading="lazy" /></div><h3>Thermal comfort</h3><p>Cooler rooms with less effort.</p><ul><li>Curtains against afternoon heat</li><li>Shaded outdoor rooms</li><li>Cool stone underfoot</li></ul></article>
-              <article className="card"><div className="ph"><img src="/m/vanity.jpg" alt="Sculpted dressing wall with built-in shelves and a backlit mirror" loading="lazy" style={{objectPosition: '40% 50%'}} /></div><h3>Considered storage</h3><p>Less clutter, a calmer mind.</p><ul><li>Bespoke joinery</li><li>A place for everything</li><li>Surfaces easy to clean</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/vase.jpg" alt="Olive branches in a stone vase on a travertine table" width={584} height={892} sizes={CARD_SIZES} /></div><h3>Natural materials</h3><p>Finishes you can live close to.</p><ul><li>Low-VOC paints</li><li>Timber, stone, lime plaster</li><li>Linen, cotton, wool</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/bath-2.jpg" alt="Stone bathroom with a walk-in shower and oak vanity" width={1600} height={719} sizes={CARD_SIZES} style={{objectPosition: '30% 50%'}} /></div><h3>Clean air &amp; humidity</h3><p>AC runs most of the year here, so the air needs care.</p><ul><li>AC servicing &amp; filters</li><li>Moisture prevention</li><li>Dust-aware detailing</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/bed-evening.jpg" alt="Bedroom at dusk lit by a soft lamp" width={1066} height={1600} sizes={CARD_SIZES} /></div><h3>Layered light</h3><p>Light that follows the day.</p><ul><li>Bright task light by day</li><li>Warm, low light after sunset</li><li>Lamps &amp; dimmers</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/panels.jpg" alt="Upholstered wall panels behind a bed" width={1200} height={1600} sizes={CARD_SIZES} /></div><h3>Acoustic calm</h3><p>Quiet is a comfort too.</p><ul><li>Upholstered panels</li><li>Rugs &amp; full curtains</li><li>Soft-close joinery</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/dining.jpg" alt="Dining room with full-height linen curtains" width={1086} height={1448} sizes={CARD_SIZES} /></div><h3>Thermal comfort</h3><p>Cooler rooms with less effort.</p><ul><li>Curtains against afternoon heat</li><li>Shaded outdoor rooms</li><li>Cool stone underfoot</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/vanity.jpg" alt="Design visualisation of a sculpted dressing wall with built-in shelves and a backlit mirror" width={1448} height={1086} sizes={CARD_SIZES} style={{objectPosition: '40% 50%'}} /></div><h3>Considered storage</h3><p>Less clutter, a calmer mind.</p><ul><li>Bespoke joinery</li><li>A place for everything</li><li>Surfaces easy to clean</li></ul></article>
             </div>
           </div>
         </section>
@@ -135,9 +146,9 @@ export default function HomeMarkup() {
           <p className="lbl rule" id="fxTitle">Featured project</p>
         </section>
 
-        <section className="stage stage2" id="fstage" aria-label="Seaside Villa, featured project">
+        <section className="stage stage2" id="fstage" aria-label={`${featured.name}, featured project`}>
           <div className="vis">
-            <div className="fvid" id="fvid"><video id="vFeat" data-src="/v/feature-blended.mp4" data-msrc="/v/feature-blended-m.mp4" poster="/v/feature-blended.jpg" muted playsInline preload="none" aria-label="A woman at a balcony rail facing the sea turns around, then sits on the bed in a calm, light-filled bedroom"></video><div className="fshade" id="fshade"></div></div>
+            <div className="fvid" id="fvid"><video id="vFeat" data-src={featureFilm.src} data-msrc={featureFilm.msrc} data-poster={featureFilm.poster} muted playsInline preload="none" aria-label={featureFilm.label}></video><div className="fshade" id="fshade"></div><p className="film-note" id="featNote"><span>{disclosureFor([featureFilm])}</span></p></div>
             <div className="say" id="sayA" aria-hidden="true">
               <p className="lbl">Fresh air</p>
               <p className="disp">It begins with the air you breathe.</p>
@@ -149,17 +160,17 @@ export default function HomeMarkup() {
 
             <div className="feat" id="feat">
               <p className="lbl rule">Featured project</p>
-              <h2>Seaside Villa</h2>
+              <h2>{featured.name}</h2>
               <p className="sub">Interior renovation &amp; styling</p>
-              <p className="body">A complete renovation of a private villa where warm neutrals, natural textures and timeless design come together. Rooms open to light and the sea air, with bespoke joinery, refined finishes and a calm, layered feel for everyday living.</p>
+              <p className="body">A complete renovation of a private villa where warm neutrals, natural textures and timeless design come together. Rooms open to light and fresh air, with bespoke joinery, refined finishes and a calm, layered feel for everyday living.</p>
               <dl>
-                <div><dt>Location</dt><dd>Dubai, UAE</dd></div>
-                <div><dt>Type</dt><dd>Villa renovation</dd></div>
-                <div><dt>Services</dt><dd>Interior design, project management, joinery, styling</dd></div>
+                <div><dt>Location</dt><dd>{featured.location}</dd></div>
+                <div><dt>Type</dt><dd>{featured.type}</dd></div>
+                <div><dt>Services</dt><dd>{featured.did}</dd></div>
               </dl>
               <div className="acts">
                 <Link className="btn" href="/portfolio">View portfolio <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
-                <Link className="go" href="/portfolio/seaside-villa">The full project <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
+                <Link className="go" href={`/portfolio/${featured.slug}`}>View the project <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
               </div>
             </div>
             <p className="it feat-q" id="featQ" style={{position: 'absolute', right: 'var(--side)', bottom: 'calc(30px + env(safe-area-inset-bottom,0px))', color: 'var(--paper)', fontSize: 'clamp(22px,2vw,28px)', textShadow: '0 2px 20px rgba(62,49,34,.45)'}}>“A home should feel like you.”</p>
@@ -170,11 +181,11 @@ export default function HomeMarkup() {
           <div className="process-layout">
             <div className="process-media" aria-hidden="true">
               <div className="process-visual">
-                <div className="process-frame"><img src="/m/process-visit.webp" alt="" width="860" height="860" loading="lazy" /></div>
-                <div className="process-frame"><img src="/m/process-materials.webp" alt="" width="860" height="860" loading="lazy" /></div>
-                <div className="process-frame"><img src="/m/process-joinery.webp" alt="" width="860" height="1012" loading="lazy" /></div>
-                <div className="process-frame"><img src="/m/bed.jpg" alt="" loading="lazy" /></div>
-                <div className="process-founder"><img className="process-founder-portrait" src="/m/roula.jpg" alt="" loading="lazy" /></div>
+                <div className="process-frame"><Image src="/m/process-visit.webp" alt="" width={860} height={860} sizes={ARCH_SIZES} /></div>
+                <div className="process-frame"><Image src="/m/process-materials.webp" alt="" width={860} height={860} sizes={ARCH_SIZES} /></div>
+                <div className="process-frame"><Image src="/m/process-joinery.webp" alt="" width={860} height={1012} sizes={ARCH_SIZES} /></div>
+                <div className="process-frame"><Image src="/m/bed.jpg" alt="" width={852} height={1280} sizes={ARCH_SIZES} /></div>
+                <div className="process-founder"><Image className="process-founder-portrait" src="/m/roula.jpg" alt="" width={980} height={1600} sizes={ARCH_SIZES} /></div>
               </div>
             </div>
             <div className="process-copy">
@@ -194,7 +205,7 @@ export default function HomeMarkup() {
         </section>
 
         <section className="fd" id="fdTeaser" aria-labelledby="fdName">
-          <div className="ph"><img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM, leaning against a white wall" loading="lazy" /></div>
+          <div className="ph"><Image src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM, leaning against a white wall" width={980} height={1600} sizes={ARCH_SIZES} /></div>
           <div className="tx">
             <p className="lbl rule">THE PERSON BEHIND THE PERSPECTIVE</p>
             <h2 className="disp" id="fdName">Meet Roula.</h2>

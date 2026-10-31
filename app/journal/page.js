@@ -2,12 +2,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Arrow from '@/components/Arrow';
 import PageCta from '@/components/PageCta';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMeta({
   title: 'Journal',
   description: 'ARCHIFORM in the press: founder Roula Jbour in conversation with She Means Business on designing healthier homes in Dubai.',
-  alternates: { canonical: '/journal' },
-};
+  path: '/journal',
+  image: { url: '/m/she-means-business.jpg', width: 1125, height: 806, alt: 'Interview with Roula Jbour in She Means Business' },
+});
 
 /* The interview as printed in She Means Business, 30 October 2026, page 14 */
 const qa = [
@@ -53,7 +55,7 @@ export default function JournalPage() {
 
           <figure className="jr-clip">
             <a href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the article page at full size">
-              <Image src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width={1125} height={806} sizes="(max-width: 820px) 100vw, 88vw" />
+              <Image src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width={1125} height={806} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" />
             </a>
             <figcaption className="lbl">She Means Business · Page 14 · Friday, 30 October 2026 <a className="jr-full" href="/m/she-means-business.jpg" target="_blank" rel="noopener noreferrer">Open full size <Arrow /></a></figcaption>
           </figure>
@@ -76,7 +78,9 @@ export default function JournalPage() {
           </div>
         </article>
         <section className="jr-thoughts" aria-labelledby="thoughtsTitle">
+          <p className="lbl rule">Coming soon</p>
           <h2 className="h2" id="thoughtsTitle">Thoughts on thoughtful living</h2>
+          <p className="body">Articles we are preparing. Until they are published, we are happy to talk through any of these topics in a first consultation.</p>
           <div className="jr-thoughts-grid">
             <article>
               <p className="lbl">01</p>

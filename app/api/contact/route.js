@@ -14,6 +14,11 @@ export const runtime = 'nodejs';
 const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clip = (s, n) => String(s || '').trim().slice(0, n);
+// One line only: used in the email subject, where a line break could inject headers
+const oneLine = (s, n) => clip(s, n).replace(/[\r\n\t]+/g, ' ');
+const TYPES = ['Villa', 'Family home', 'Apartment', 'Renovation', 'Other'];
+// A person takes a few seconds to fill in the form; scripts post it at once
+const MIN_FILL_MS = 2500;
 
 // Light abuse protection: at most 5 enquiries per IP every 10 minutes (per server instance).
 const hits = new Map();
@@ -26,6 +31,14 @@ function limited(ip) {
 }
 
 export async function POST(req) {
+  // Only accept posts from the site's own pages (browsers always send Origin on a cross-site POST)
+  const origin = req.headers.get('origin');
+  if (origin) {
+    let sameHost = false;
+    try { sameHost = new URL(origin).host === req.headers.get('host'); } catch {}
+    if (!sameHost) return Response.json({ error: 'Please send your enquiry from the contact page.' }, { status: 403 });
+  }
+
   let body;
   try {
     body = await req.json();
@@ -33,16 +46,17 @@ export async function POST(req) {
     return Response.json({ error: 'Invalid request.' }, { status: 400 });
   }
 
-  // Honeypot filled in: pretend success so bots move on.
+  // Honeypot filled in, or the form sent faster than a person could type it: pretend success so bots move on.
   if (body.company) return Response.json({ ok: true });
+  if (typeof body.elapsed === 'number' && body.elapsed < MIN_FILL_MS) return Response.json({ ok: true });
 
-  const name = clip(body.name, 120);
-  const email = clip(body.email, 200);
-  const phone = clip(body.phone, 40);
-  const type = clip(body.type, 40);
+  const name = oneLine(body.name, 120);
+  const email = oneLine(body.email, 200);
+  const phone = oneLine(body.phone, 40);
+  const type = TYPES.includes(body.type) ? body.type : '';
   const message = clip(body.message, 4000);
   if (!name || !emailOk(email) || !message) {
-    return Response.json({ error: 'Add your name, a valid email and a few words about your project.' }, { status: 400 });
+    return Response.json({ error: 'Add your name, an email address in the format name@example.com and a few words about your project.' }, { status: 400 });
   }
 
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
@@ -51,7 +65,7 @@ export async function POST(req) {
   const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = process.env;
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) {
     console.error('Contact form: RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL is not set.');
-    return Response.json({ error: 'Our enquiry form isn’t connected yet.' }, { status: 503 });
+    return Response.json({ error: 'Our enquiry form isn’t connected yet, so your message wasn’t sent.' }, { status: 503 });
   }
 
   const rows = [['Name', name], ['Email', email], ['Phone', phone || '—'], ['Project type', type || '—']];
@@ -80,7 +94,7 @@ export async function POST(req) {
 
   if (!res.ok) {
     console.error('Resend error', res.status, await res.text().catch(() => ''));
-    return Response.json({ error: 'We couldn’t send your enquiry just now.' }, { status: 502 });
+    return Response.json({ error: 'We couldn’t send your enquiry just now. Please try again in a few minutes.' }, { status: 502 });
   }
   return Response.json({ ok: true });
 }

@@ -1,12 +1,13 @@
 import PageCta from '@/components/PageCta';
 import { projects } from '@/content/projects';
 import ProjectGrid from './ProjectGrid';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Portfolio',
-  description: 'Residential interiors and renovations across Dubai, each planned around light, air and the people who live there.',
-  alternates: { canonical: '/portfolio' },
-};
+export const metadata = pageMeta({
+  title: 'Interior Design Portfolio',
+  description: 'Villa and apartment interiors, renovations and bespoke joinery by ARCHIFORM in Dubai: bedrooms, bathrooms, kitchens, dining rooms and terraces.',
+  path: '/portfolio',
+});
 
 export default function PortfolioPage() {
   return (

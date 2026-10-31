@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import PageCta from '@/components/PageCta';
 
 /* About Us: the founder beside her portrait, the approach beside the vase still life, the studio on olive, then the invitation */
@@ -16,13 +17,13 @@ export default function FounderContent() {
           <p className="it sig">- Roula Jbour<br />Founder &amp; Interior Designer, ARCHIFORM</p>
         </div>
         <div className="ph">
-          <img src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM" />
+          <Image src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM" width={980} height={1600} sizes="(max-width: 900px) 100vw, 54vw" loading="eager" fetchPriority="high" />
           <p className="words"><span>Design</span><span>People</span><span>Wellbeing</span><span>Balance</span></p>
         </div>
       </section>
 
       <section className="ab-approach" id="philosophy">
-        <div className="qp"><img src="/m/vase.jpg" alt="Olive branches in a stone vase" loading="lazy" /><p>“A home should feel like you.”</p></div>
+        <div className="qp"><Image src="/m/vase.jpg" alt="Olive branches in a stone vase" width={584} height={892} sizes="(max-width: 900px) 100vw, 50vw" /><p>“A home should feel like you.”</p></div>
         <div className="tx">
           <p className="lbl rule">ARCHIFORM Approach</p>
           <h2 className="h2">What if your home could feel as good as it looks?</h2>

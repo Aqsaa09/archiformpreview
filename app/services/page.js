@@ -3,12 +3,13 @@ import Faq from './Faq';
 import ServiceList from './ServiceList';
 import PageCta from '@/components/PageCta';
 import { services } from '@/content/services';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Services',
-  description: 'Interior design, renovations, furnishing and project management in Dubai, with healthy-home thinking built into every stage.',
-  alternates: { canonical: '/services' },
-};
+export const metadata = pageMeta({
+  title: 'Interior Design Services in Dubai',
+  description: 'Interior design and space planning, villa and apartment renovation, bespoke joinery, furnishing and project management in Dubai, with healthy-home thinking at every stage.',
+  path: '/services',
+});
 
 export default function ServicesPage() {
   return (

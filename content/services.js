@@ -22,7 +22,7 @@ export const services = [
     tagline: "Details that make a space distinctly yours.",
     text: 'Custom details, refined materials and tailored solutions that make every space feel distinctly yours.',
     image: '/m/vanity.jpg',
-    alt: 'Bespoke dressing wall with built-in shelves and a backlit mirror',
+    alt: 'Design visualisation of a bespoke dressing wall with built-in shelves and a backlit mirror',
   },
   {
     name: "Furniture, Furnishing & Styling",

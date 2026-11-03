@@ -160,13 +160,30 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .land .pod i:first-child::after{content:"";position:absolute;left:0;right:0;top:calc(50% + (.18 - var(--pz)) * var(--u));height:calc(var(--u) * .27);background:
   repeating-linear-gradient(90deg,rgba(246,236,214,.85) 0 calc(var(--u) * .07),transparent 0 calc(var(--u) * .14)) 0 50% / 100% calc(var(--u) * .006) no-repeat,
   linear-gradient(180deg,#E6DACA 0 7%,#B4A694 7% 9%,#756B62 9% 91%,#B4A694 91% 93%,#E6DACA 93%)}
-/* Feature cards above the roofline, tilted back like glass tiles */
-.land .hc{display:flex;justify-content:space-between;gap:calc(var(--u) * .02);transform-style:preserve-3d}
-.hcard{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px 10px;border-radius:16px;transform-origin:50% 100%;transform:rotateX(16deg);
+/* Holistic diagram: markers ride in the house layer (scaled like its image); labels sit beside the house on desktop and in a
+   row above the roof on phones; the leader lines are drawn between them by lib/home-story.js */
+.land .hmk{position:absolute;inset:0;scale:1.45 1.3;transform-origin:50% 100%;pointer-events:none}
+.land .hmk i{position:absolute;width:0;height:0}
+.hdg{position:absolute;inset:0;pointer-events:none;color:var(--walnut)}
+.hdg-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hdg-lines line{stroke:rgba(62,49,34,.55);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:0}
+.hdg-lines circle{fill:#FBF7F1;stroke:var(--walnut);stroke-width:1.2}
+.hdg-pts{list-style:none;margin:0;padding:0}
+.hdg-pt{position:absolute;top:0;display:flex;align-items:center;gap:12px;width:clamp(150px,15vw,214px);padding:10px 14px 10px 10px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(251,247,241,.9),rgba(251,247,241,.66));border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 30px -18px rgba(62,49,34,.5),inset 0 1px 0 #fff}
+.hdg-pt.l{left:max(var(--side),var(--gut))}
+.hdg-pt.r{right:max(var(--side),var(--gutr))}
+.hdg-pt .ic{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(160deg,#8A8C64,#6B6A3F);color:var(--paper)}
+.hdg-pt svg{width:auto;height:22px;max-width:24px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.hdg-pt b{display:block;font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.16em;line-height:1.35;text-transform:uppercase;color:var(--ink)}
+.hdg-pt em{display:block;margin-top:3px;font-size:14px;line-height:1.3}
+/* Phones only: the feature cards above the roofline, tilted back like glass tiles (hidden on desktop, which has the diagram) */
+.land .hc{display:none;justify-content:space-between;gap:calc(var(--u) * .02);transform-style:preserve-3d}
+.hcard{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 4px 8px;border-radius:10px;transform-origin:50% 100%;transform:rotateX(16deg);
   background:linear-gradient(180deg,rgba(251,247,241,.9),rgba(251,247,241,.62));border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 30px -18px rgba(62,49,34,.55),inset 0 1px 0 #fff}
-.hcard .ic{display:grid;place-items:center;width:100%;aspect-ratio:2.1;border-radius:10px;background:linear-gradient(160deg,#8A8C64,#6B6A3F);color:var(--paper)}
+.hcard .ic{display:grid;place-items:center;width:100%;aspect-ratio:2.1;border-radius:7px;background:linear-gradient(160deg,#8A8C64,#6B6A3F);color:var(--paper)}
 .hcard svg{width:auto;height:62%;max-width:44%;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
-.hcard .nm{font-family:var(--label);font-size:clamp(8px,.72vw,11px);font-weight:500;letter-spacing:.16em;line-height:1.35;text-transform:uppercase;text-align:center;color:var(--ink)}
+.hcard .nm{font-family:var(--label);font-size:7px;font-weight:500;letter-spacing:.1em;line-height:1.35;text-transform:uppercase;text-align:center;color:var(--ink)}
 .hol{position:absolute;left:0;right:0;top:calc(var(--hhTop,110px) - 12px);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:var(--walnut);text-shadow:0 1px 18px rgba(255,241,230,.7);padding-inline:max(var(--side),var(--gut))}
 .hol .lbl{font-size:13px}
 .hol .h2{font-size:clamp(33px,3.3vw,51px);max-width:none}
@@ -174,10 +191,10 @@ html:not(:has(#home)){scroll-padding-top:140px}
 @media (max-width:820px){
   .land{--u:84vw;--hor:56%;--gy:91%}
   .hol{top:calc(var(--hhTop,110px) - 10px + clamp(0px,(100svh - 700px) * .6,120px))}
-  .land .hc{--w:.96!important}
-  .hcard{gap:5px;padding:6px 4px 8px;border-radius:10px}.hcard .ic{border-radius:7px}
-  .hcard .nm{font-size:7px;letter-spacing:.1em}
-  .hol .h2{font-size:clamp(30px,8.6vw,39px)}.hol .body{font-size:16px}
+  .hdg{display:none}
+  .land .hc{display:flex}
+  .hol .lbl{font-size:11px}
+  .hol .h2{font-size:clamp(28px,8vw,36px)}.hol .body{font-size:16px}
 }
 html:not(.story) .scene .dusk{opacity:1}
 html:not(.story) .reelclip{display:none}

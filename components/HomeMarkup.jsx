@@ -42,10 +42,11 @@ export default function HomeMarkup() {
                       <div className="ly glow" style={{'--x': -.05, '--z': -.04, '--w': 1.7}}><span /></div>
                       <div className="ly sway palm pl" style={{'--x': -.42, '--z': .02, '--w': .3}}><img data-src="/m/hol/palm-fan.webp" alt="" width="663" height="1100" fetchPriority="low" /></div>
                       <div className="ly sway palm pr" style={{'--x': .43, '--z': .02, '--w': .32}}><img data-src="/m/hol/palm-date.webp" alt="" width="709" height="1100" fetchPriority="low" /></div>
-                      <div className="ly hs" id="hsLy" style={{'--x': 0, '--z': 0, '--w': 1.2}}><img data-src="/m/hol/house-v3.png" alt="" width="2728" height="1000" fetchPriority="low" /></div>
+                      <div className="ly hs" id="hsLy" style={{'--x': 0, '--z': 0, '--w': 1.2}}><img data-src="/m/hol/house-v3.png" alt="" width="2728" height="1000" fetchPriority="low" /><span className="hmk" aria-hidden="true"><i data-k="sun" style={{left: '38.5%', top: '5%'}} /><i data-k="air" style={{left: '59.4%', top: '33%'}} /><i data-k="water" style={{left: '55%', top: '95%'}} /><i data-k="green" style={{left: '33%', top: '93%'}} /><i data-k="people" style={{left: '49.1%', top: '76%'}} /></span></div>
                       <div className="ly bed" style={{'--x': -.36, '--z': .08, '--w': .4, '--y': -.008}}><img data-src="/m/hol/grass.webp" alt="" width="1400" height="407" fetchPriority="low" /></div>
                       <div className="ly bed" style={{'--x': .37, '--z': .06, '--w': .4, '--y': -.008}}><img data-src="/m/hol/shrubs.webp" alt="" width="1400" height="419" fetchPriority="low" /></div>
-                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .6, '--y': .485}}>
+                      {/* Phones only: the feature cards in a row above the roof (desktop shows the labelled diagram, #holDiag, instead) */}
+                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .96, '--y': .62}}>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span className="nm">Sun &amp;<br />shade</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg></span><span className="nm">Fresh<br />air</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span className="nm">Cool<br />water</span></div>
@@ -59,6 +60,18 @@ export default function HomeMarkup() {
                   <p className="lbl">Holistic design</p>
                   <h2 className="h2">One house, designed as a <em>living system.</em></h2>
                   <p className="body">We map how a home works with its setting through the day and the year: sun, air, water, planting and the people inside. Every layer is designed together.</p>
+                </div>
+                {/* Holistic design as a diagram: each point is labelled clear of the house and the text, with a leader line to the
+                    part of the house it describes. lib/home-story.js draws the lines to the markers in the house layer (.hmk). */}
+                <div className="hdg" id="holDiag">
+                  <svg className="hdg-lines" aria-hidden="true"><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /></svg>
+                  <ul className="hdg-pts" aria-label="What we design for">
+                    <li className="hdg-pt l" data-k="green"><span className="ic" aria-hidden="true"><svg viewBox="0 0 70 104"><use href="#sprig"/></svg></span><span><b>Living green</b><em>Planting woven into every view</em></span></li>
+                    <li className="hdg-pt l" data-k="sun"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span><b>Sun &amp; shade</b><em>Overhangs and glazing set for the sun</em></span></li>
+                    <li className="hdg-pt l" data-k="people"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="14" cy="13" r="5"/><circle cx="27" cy="15" r="4"/><path d="M5 35c0-7 4-12 9-12s9 5 9 12M20 35c1-6 4-10 7-10s7 4 7 10"/></svg></span><span><b>The people inside</b><em>Rooms shaped around daily life</em></span></li>
+                    <li className="hdg-pt r" data-k="water"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span><b>Cool water</b><em>Water and planting that cool the air</em></span></li>
+                    <li className="hdg-pt r" data-k="air"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg></span><span><b>Fresh air</b><em>Openings placed for cross-breezes</em></span></li>
+                  </ul>
                 </div>
               </div>
               <div className="reelclip" id="reelclip">

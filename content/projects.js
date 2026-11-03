@@ -43,6 +43,7 @@ export const projects = [
       { src: '/m/pf/sculpted-curve.jpg', alt: 'Curved sofa around a travertine table, looking out to a planted courtyard', kind: 'visualisation' },
       { src: '/m/pf/sculpted-dining.jpg', alt: 'Curved cream sofa with rust cushions, with a marble dining table beyond glass doors', kind: 'visualisation' },
       { src: '/m/pf/sculpted-green-chairs.jpg', alt: 'Open-plan living room with green armchairs, a green marble table and timber wall panels', pos: 'center bottom', kind: 'visualisation' },
+      { src: '/m/pf/sculpted-striped-sofa.jpg', alt: 'Living room with a striped curved sofa, bouclé armchairs, a burl wood coffee table and a green-tiled niche', kind: 'visualisation' },
     ],
   },
   {
@@ -121,6 +122,7 @@ export const projects = [
       { src: '/m/pf/skyline-kitchen.jpg', alt: 'Open-plan kitchen island looking across a curved sofa and dining table to the city skyline', kind: 'visualisation' },
       { src: '/m/pf/skyline-open-plan.jpg', alt: 'Open-plan living and dining room with an olive tree and a marble kitchen island', kind: 'visualisation' },
       { src: '/m/pf/skyline-loft.jpg', alt: 'Double-height open-plan living area with a leather sofa, kitchen and marble dining table', kind: 'visualisation' },
+      { src: '/m/pf/skyline-oak-kitchen.jpg', alt: 'Open-plan oak kitchen with a fluted marble island, globe pendants and a round dining table', kind: 'visualisation' },
       { src: '/m/pf/skyline-lounge.jpg', alt: 'Apartment living room with green swivel chairs, a curved sofa and city views', wide: true, kind: 'visualisation' },
     ],
   },

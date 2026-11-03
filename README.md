@@ -55,7 +55,7 @@ each photo's pixel size to `content/images.js`. The page `/portfolio/<slug>` and
 
 ### Real work, visualisations and AI
 - A portfolio image that is a render, AI image or design drawing gets `kind: 'visualisation'` in `content/projects.js`;
-  the site then labels it "Design visualisation". Leave `kind` out only for photographs of completed work.
+  the portfolio does not label these at present, but `kind` keeps the record. Leave `kind` out only for photographs of completed work.
 - Every home page film is listed in `content/media.js` with its `origin` (`ai`, `google-flow`, `pinterest`, `mixed`,
   `unconfirmed`), `source` and `rights`.
 - Do not publish Pinterest downloads without the creator's licence.
@@ -63,7 +63,7 @@ each photo's pixel size to `content/images.js`. The page `/portfolio/<slug>` and
 ### Images, video and caching
 - Photos are served through Next.js image optimisation (`next/image`): AVIF or WebP at the size each screen needs.
 - Films are already web-ready H.264 with no audio track and the index at the front (fast start). The scroll-scrubbed
-  films (`h-walk-*`, `feature-blended*`) have a keyframe every 4 frames so scrubbing stays smooth; keep that if you
+  films (`h-walk-*`, `feature-villa*`) have a keyframe every 4 frames so scrubbing stays smooth; keep that if you
   re-encode them. Each film has a landscape cut and a portrait `-m` cut for phones.
 - Files in `public/m` and `public/v` are cached by browsers for a week, then refreshed in the background, so a file
   replaced under the same name reaches returning visitors within days. For an instant change, use a new file name.

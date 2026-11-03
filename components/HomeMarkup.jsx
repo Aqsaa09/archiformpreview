@@ -144,8 +144,8 @@ export default function HomeMarkup() {
               <p className="disp">It begins with the air you breathe.</p>
             </div>
             <div className="say" id="sayB" aria-hidden="true">
-              <p className="disp">Now turn around.</p>
-              <p className="it">The breeze comes straight through the house.</p>
+              <p className="disp">Then let the garden in.</p>
+              <p className="it">Daylight and greenery, part of every room.</p>
             </div>
 
             <div className="feat" id="feat">

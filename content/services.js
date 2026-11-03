@@ -1,4 +1,5 @@
-/* rail is the short name set down both margins while that service is on screen */
+/* rail is the short name set down both margins while that service is on screen.
+   ratio (optional) shows the image at that shape instead of the 4:3 crop; pos (optional) is the crop's object-position. */
 export const services = [
   {
     name: "Interior Design & Space Planning",
@@ -13,11 +14,10 @@ export const services = [
     rail: 'Renovation',
     tagline: "Giving familiar spaces a meaningful new beginning.",
     text: "We rethink how your home works, preserving what matters while introducing what your lifestyle needs today.",
-    image: '/m/bath-2.jpg',
-    alt: 'Renovated stone bathroom',
-    // Before and after photos of one room, shown side by side in place of the image above once both are set
-    // before: { src: '/m/reno-before.jpg', alt: 'The bathroom before renovation' },
-    // after: { src: '/m/reno-after.jpg', alt: 'The same bathroom after renovation' },
+    image: '/m/reno-before-after.jpg',
+    alt: 'The same apartment living room before and after renovation: a grey, formal room becomes a warm space with timber, planting, a ceiling fan and soft daylight',
+    // One image with the before and after side by side (labels are part of the image), shown uncropped
+    ratio: '3 / 2',
   },
   {
     name: "Bespoke Joinery & Material Selection",
@@ -40,7 +40,9 @@ export const services = [
     rail: 'Project management',
     tagline: "From the first idea to the final detail.",
     text: "We coordinate contractors, suppliers and specialists throughout the renovation, keeping quality, budget and direction on track.",
-    image: '/m/pm.jpg',
-    alt: 'The team reviewing floor plans and material samples',
+    image: '/m/pm-roula.jpg',
+    alt: 'Roula Jbour at the studio table with floor plans, timber and stone samples',
+    // Keeps her face and the studio sign in the 4:3 frame
+    pos: '50% 18%',
   },
 ];

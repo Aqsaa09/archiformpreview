@@ -54,12 +54,14 @@ export default async function ProjectPage({ params }) {
       <div className="pj-imgs">
         {p.images.map((img, i) => {
           const [w, h] = imageSize(img.src);
+          // A half-width image left alone on the last row is centred rather than leaving an empty column beside it
+          const col = p.images.slice(0, i).reduce((c, im) => (im.wide ? 0 : (c + 1) % 2), 0);
+          const solo = !img.wide && col === 0 && i === p.images.length - 1;
           return (
-            <figure key={img.src + i} className={img.wide ? 'w' : undefined}>
-              <Image src={img.src} alt={img.alt} width={w} height={h}
+            <figure key={img.src + i} className={[img.wide && 'w', img.full && 'f', solo && 'solo'].filter(Boolean).join(' ') || undefined}>
+              <Image src={img.src} alt={img.alt} width={w} height={h} style={img.pos ? { objectPosition: img.pos } : undefined}
                 sizes={img.wide ? '(max-width: 820px) 92vw, 88vw' : '(max-width: 820px) 46vw, 44vw'}
                 loading={i < 2 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} />
-              {img.kind === 'visualisation' ? <figcaption className="vis-tag">Design visualisation</figcaption> : null}
             </figure>
           );
         })}

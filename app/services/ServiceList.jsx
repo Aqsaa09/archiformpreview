@@ -28,7 +28,18 @@ export default function ServiceList({ services }) {
           <div className="svc" key={s.name}>
             <h2>{s.name}<span className="it">{s.tagline}</span></h2>
             <p>{s.text}</p>
-            <div className="ph"><Image src={s.image} alt={s.alt} width={imageSize(s.image)[0]} height={imageSize(s.image)[1]} sizes="(max-width: 820px) 92vw, 30vw" /></div>
+            {s.before && s.after ? (
+              <div className="ba">
+                {[['Before', s.before], ['After', s.after]].map(([label, im]) => (
+                  <figure key={label}>
+                    <Image src={im.src} alt={im.alt} width={imageSize(im.src)[0]} height={imageSize(im.src)[1]} sizes="(max-width: 820px) 46vw, 15vw" />
+                    <figcaption>{label}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <div className="ph"><Image src={s.image} alt={s.alt} width={imageSize(s.image)[0]} height={imageSize(s.image)[1]} sizes="(max-width: 820px) 92vw, 30vw" /></div>
+            )}
           </div>
         ))}
       </div>

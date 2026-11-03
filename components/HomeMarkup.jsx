@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { roomFilms, featureFilm } from '@/content/media';
 import { getProject } from '@/content/projects';
 
-const featured = getProject('seaside-villa');
+const featured = getProject('emirates-living-villa');
 // Arched images beside the process steps and the founder teaser share one column: about 80vw on phones, a third of the page on desktop
 const ARCH_SIZES = '(max-width: 820px) 80vw, 34vw';
-const CARD_SIZES = '(max-width: 820px) 66vw, 360px';
+const CARD_SIZES = '(max-width: 820px) 74vw, 360px';
 
 /* Markup for the home page scroll story. Element ids are used by lib/home-story.js. */
 export default function HomeMarkup() {
@@ -18,10 +18,10 @@ export default function HomeMarkup() {
       </div>
       <div id="vp" aria-hidden="true"></div>
       <main id="home">
-        <section className="stage" id="stage" aria-label="Interiors designed around you">
-          <h1 className="sr">Beautiful spaces. Better living. Interior design in Dubai by ARCHIFORM.</h1>
+        <section className="stage" id="stage" aria-label="Designed with intention, built around better living">
+          <h1 className="sr">Designed with intention, built around better living. Interior design in Dubai by ARCHIFORM.</h1>
           <div className="vis" id="heroVis">
-            <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide-v2.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
+            <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide-v6.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
             <div className="view" id="view">
               <div className="scene" id="scene">
                 <img className="skybg" id="skybg" src="/m/sky-dusk.jpg" alt="" width="1200" height="675" />
@@ -37,13 +37,12 @@ export default function HomeMarkup() {
                       </div>
                       <div className="ly haze" style={{'--x': 0, '--z': -.45, '--w': 3.2, '--y': -.02}}><span /></div>
                       <div className="ly glow" style={{'--x': -.05, '--z': -.04, '--w': 1.7}}><span /></div>
-                      <div className="ly sway palm pl" style={{'--x': -.66, '--z': -.18, '--w': .3}}><img data-src="/m/hol/palm-fan.webp" alt="" width="663" height="1100" fetchPriority="low" /></div>
-                      <div className="ly sway palm pr" style={{'--x': .68, '--z': -.12, '--w': .32}}><img data-src="/m/hol/palm-date.webp" alt="" width="709" height="1100" fetchPriority="low" /></div>
-                      <div className="ly hs" id="hsLy" style={{'--x': 0, '--z': 0, '--w': 1.2}}><img data-src="/m/hol/house.webp" alt="" width="1877" height="688" fetchPriority="low" /></div>
-                      <div className="ly bed" style={{'--x': -.5, '--z': .08, '--w': .4, '--y': -.008}}><img data-src="/m/hol/grass.webp" alt="" width="1400" height="407" fetchPriority="low" /></div>
-                      <div className="ly bed" style={{'--x': .5, '--z': .06, '--w': .4, '--y': -.008}}><img data-src="/m/hol/shrubs.webp" alt="" width="1400" height="419" fetchPriority="low" /></div>
-                      <div className="ly bed" style={{'--x': .22, '--z': .12, '--w': .3, '--y': -.004}}><img data-src="/m/hol/agave.webp" alt="" width="1400" height="391" fetchPriority="low" /></div>
-                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .6, '--y': .455}}>
+                      <div className="ly sway palm pl" style={{'--x': -.42, '--z': .02, '--w': .3}}><img data-src="/m/hol/palm-fan.webp" alt="" width="663" height="1100" fetchPriority="low" /></div>
+                      <div className="ly sway palm pr" style={{'--x': .43, '--z': .02, '--w': .32}}><img data-src="/m/hol/palm-date.webp" alt="" width="709" height="1100" fetchPriority="low" /></div>
+                      <div className="ly hs" id="hsLy" style={{'--x': 0, '--z': 0, '--w': 1.2}}><img data-src="/m/hol/house-v3.png" alt="" width="2728" height="1000" fetchPriority="low" /></div>
+                      <div className="ly bed" style={{'--x': -.36, '--z': .08, '--w': .4, '--y': -.008}}><img data-src="/m/hol/grass.webp" alt="" width="1400" height="407" fetchPriority="low" /></div>
+                      <div className="ly bed" style={{'--x': .37, '--z': .06, '--w': .4, '--y': -.008}}><img data-src="/m/hol/shrubs.webp" alt="" width="1400" height="419" fetchPriority="low" /></div>
+                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .6, '--y': .468}}>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span className="nm">Sun &amp;<br />shade</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg></span><span className="nm">Fresh<br />air</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span className="nm">Cool<br />water</span></div>
@@ -75,12 +74,11 @@ export default function HomeMarkup() {
               <div className="doors" id="doors"><div className="glow" id="dglow"></div><div className="leaf l" id="leafL"></div><div className="leaf r" id="leafR"></div></div>
             </div>
 
-            <p className="hh a" id="hhA" aria-hidden="true">Beautiful<br />{' '}<em>spaces.</em></p>
-            <p className="hh b" id="hhB" aria-hidden="true">Better<br />{' '}living.</p>
+            <p className="hh a" id="hhA" aria-hidden="true">Designed with<br />{' '}intention.</p>
+            <p className="hh b" id="hhB" aria-hidden="true"><em>Built around</em><br />{' '}better living.</p>
             <div className="hb" id="hb">
-              <h2>INTERIORS DESIGNED AROUND YOU</h2>
               <hr />
-              <p>A Dubai interior design studio for villas and apartments. We design homes that look beautiful and feel good to live in.</p>
+              <p>A home is a collection of everyday experiences, and we believe each deserves careful thought. From the flow of a room to the feel of its materials, we approach every project with precision, purpose and genuine care — creating environments where functionality and wellbeing exist as naturally as beauty.</p>
             </div>
             <ul className="hv lbl" id="hv" aria-label="What we design for"><li>Thoughtful Interiors.</li><li>Healthy Living.</li><li>Timeless Spaces.</li></ul>
 
@@ -122,14 +120,13 @@ export default function HomeMarkup() {
             <div className="dt-head">
               <p className="lbl rule">The quieter details</p>
               <h2 className="h2" id="dtTitle">What else makes a home <em>healthy.</em></h2>
-              <p className="body">Beyond light, air and plants, these are the elements we check on every project. Most are invisible once the room is finished. You notice them in how you sleep, breathe and feel at the end of the day.</p>
+              <p className="body">Beyond light, air and plants, these are the elements we check in every project. Most are invisible once the room is finished. You notice them in how you sleep, breathe and feel through out the day.</p>
             </div>
             <div className="cards" id="cards">
-              <article className="card"><div className="ph"><Image src="/m/vase.jpg" alt="Olive branches in a stone vase on a travertine table" width={584} height={892} sizes={CARD_SIZES} /></div><h3>Natural materials</h3><p>Finishes you can live close to.</p><ul><li>Low-VOC paints</li><li>Timber, stone, lime plaster</li><li>Linen, cotton, wool</li></ul></article>
-              <article className="card"><div className="ph"><Image src="/m/bath-2.jpg" alt="Stone bathroom with a walk-in shower and oak vanity" width={1600} height={719} sizes={CARD_SIZES} style={{objectPosition: '30% 50%'}} /></div><h3>Clean air &amp; humidity</h3><p>AC runs most of the year here, so the air needs care.</p><ul><li>AC servicing &amp; filters</li><li>Moisture prevention</li><li>Dust-aware detailing</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/marble.jpg" alt="White marble with soft grey veining" width={736} height={1472} sizes={CARD_SIZES} /></div><h3>Natural materials</h3><p>Finishes you can live close to.</p><ul><li>Low-VOC paints</li><li>Timber, stone, lime plaster</li><li>Linen, cotton, wool</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/kitchen.jpg" alt="Kitchen with a ceiling air vent, a curtained window and a dark marble backsplash" width={1086} height={1448} sizes={CARD_SIZES} style={{objectPosition: '50% 30%'}} /></div><h3>Clean air &amp; humidity</h3><p>AC runs most of the year here, so the air needs care.</p><ul><li>AC servicing &amp; filters</li><li>Moisture prevention</li><li>Dust-aware detailing</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/bed-evening.jpg" alt="Bedroom at dusk lit by a soft lamp" width={1066} height={1600} sizes={CARD_SIZES} /></div><h3>Layered light</h3><p>Light that follows the day.</p><ul><li>Bright task light by day</li><li>Warm, low light after sunset</li><li>Lamps &amp; dimmers</li></ul></article>
-              <article className="card"><div className="ph"><Image src="/m/panels.jpg" alt="Upholstered wall panels behind a bed" width={1200} height={1600} sizes={CARD_SIZES} /></div><h3>Acoustic calm</h3><p>Quiet is a comfort too.</p><ul><li>Upholstered panels</li><li>Rugs &amp; full curtains</li><li>Soft-close joinery</li></ul></article>
-              <article className="card"><div className="ph"><Image src="/m/dining.jpg" alt="Dining room with full-height linen curtains" width={1086} height={1448} sizes={CARD_SIZES} /></div><h3>Thermal comfort</h3><p>Cooler rooms with less effort.</p><ul><li>Curtains against afternoon heat</li><li>Shaded outdoor rooms</li><li>Cool stone underfoot</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/acoustic.jpg" alt="Reading corner with a slatted timber wall, felt acoustic pendants and a green velvet armchair" width={1200} height={1600} sizes={CARD_SIZES} style={{objectPosition: '50% 45%'}} /></div><h3>Sound insulated</h3><p>Quiet is a comfort too.</p><ul><li>Rugs &amp; full curtains</li><li>Soft-close joinery</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/vanity.jpg" alt="Design visualisation of a sculpted dressing wall with built-in shelves and a backlit mirror" width={1448} height={1086} sizes={CARD_SIZES} style={{objectPosition: '40% 50%'}} /></div><h3>Considered storage</h3><p>Less clutter, a calmer mind.</p><ul><li>Bespoke joinery</li><li>A place for everything</li><li>Surfaces easy to clean</li></ul></article>
             </div>
           </div>

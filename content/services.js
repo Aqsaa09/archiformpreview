@@ -15,6 +15,9 @@ export const services = [
     text: "We rethink how your home works, preserving what matters while introducing what your lifestyle needs today.",
     image: '/m/bath-2.jpg',
     alt: 'Renovated stone bathroom',
+    // Before and after photos of one room, shown side by side in place of the image above once both are set
+    // before: { src: '/m/reno-before.jpg', alt: 'The bathroom before renovation' },
+    // after: { src: '/m/reno-after.jpg', alt: 'The same bathroom after renovation' },
   },
   {
     name: "Bespoke Joinery & Material Selection",
@@ -36,7 +39,7 @@ export const services = [
     name: "Project Management",
     rail: 'Project management',
     tagline: "From the first idea to the final detail.",
-    text: "We coordinate contractors, suppliers and specialists throughout the renovation, keeping quality and direction on track.",
+    text: "We coordinate contractors, suppliers and specialists throughout the renovation, keeping quality, budget and direction on track.",
     image: '/m/pm.jpg',
     alt: 'The team reviewing floor plans and material samples',
   },

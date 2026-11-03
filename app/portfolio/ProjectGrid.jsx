@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { imageSize } from '@/content/images';
 import { coverImage } from '@/content/projects';
 
-const ORDER = ['Bedrooms', 'Dining & Kitchen', 'Bathrooms', 'Details', 'Outdoor'];
+const ORDER = ['Living Rooms', 'Bedrooms', 'Dining & Kitchen', 'Bathrooms', 'Details', 'Outdoor'];
 // Three columns on desktop, two on tablets, one on phones
 const SIZES = '(max-width: 600px) 92vw, (max-width: 1000px) 45vw, 30vw';
 
@@ -35,7 +35,6 @@ export default function ProjectGrid({ projects }) {
               {/* The first cover is the largest thing on screen on arrival (LCP), so it loads first; the rest load as they near the screen */}
               <Image src={p.cover} alt={cover.alt} width={w} height={h} sizes={SIZES}
                 loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} />
-              {cover.kind === 'visualisation' ? <span className="vis-tag">Design visualisation</span> : null}
             </span>
             <h2>{p.name}</h2>
             <p>{p.sub}</p>

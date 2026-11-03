@@ -9,6 +9,10 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85],
   },
+  // The Emirates Living Villa project was first published as /portfolio/seaside-villa
+  async redirects() {
+    return [{ source: '/portfolio/seaside-villa', destination: '/portfolio/emirates-living-villa', permanent: true }];
+  },
   async headers() {
     return [
       {

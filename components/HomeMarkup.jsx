@@ -21,7 +21,10 @@ export default function HomeMarkup() {
         <section className="stage" id="stage" aria-label="Designed with intention, built around better living">
           <h1 className="sr">Designed with intention, built around better living. Interior design in Dubai by ARCHIFORM.</h1>
           <div className="vis" id="heroVis">
-            <div className="wall" id="wall" aria-hidden="true"><img className="entry" id="entryImg" src="/m/entry-wide-v6.webp" alt="" width="4000" height="1800" fetchPriority="high" /></div>
+            <div className="wall" id="wall" aria-hidden="true">
+              {/* Phones and tablets (the same 1100px break as lib/home-story.js) keep the original, shorter olive trees */}
+              <picture><source media="(max-width: 1100px)" srcSet="/m/entry-wide-v5.webp" /><img className="entry" id="entryImg" src="/m/entry-wide-v6.webp" alt="" width="4000" height="1800" fetchPriority="high" /></picture>
+            </div>
             <div className="view" id="view">
               <div className="scene" id="scene">
                 <img className="skybg" id="skybg" src="/m/sky-dusk.jpg" alt="" width="1200" height="675" />
@@ -42,7 +45,7 @@ export default function HomeMarkup() {
                       <div className="ly hs" id="hsLy" style={{'--x': 0, '--z': 0, '--w': 1.2}}><img data-src="/m/hol/house-v3.png" alt="" width="2728" height="1000" fetchPriority="low" /></div>
                       <div className="ly bed" style={{'--x': -.36, '--z': .08, '--w': .4, '--y': -.008}}><img data-src="/m/hol/grass.webp" alt="" width="1400" height="407" fetchPriority="low" /></div>
                       <div className="ly bed" style={{'--x': .37, '--z': .06, '--w': .4, '--y': -.008}}><img data-src="/m/hol/shrubs.webp" alt="" width="1400" height="419" fetchPriority="low" /></div>
-                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .6, '--y': .468}}>
+                      <div className="ly hc" style={{'--x': 0, '--z': .04, '--w': .6, '--y': .485}}>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span className="nm">Sun &amp;<br />shade</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg></span><span className="nm">Fresh<br />air</span></div>
                         <div className="hcard"><span className="ic"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span className="nm">Cool<br />water</span></div>

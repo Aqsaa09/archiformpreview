@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import PageCta from '@/components/PageCta';
 
-/* About Us: the founder beside her portrait, the approach beside the vase still life, the studio on olive, then the invitation */
+/* About Us: the founder beside her portrait, the approach beside the sunset living room, the studio on olive, then the invitation */
 export default function FounderContent() {
   return (
     <main id="founder">
@@ -23,7 +23,7 @@ export default function FounderContent() {
       </section>
 
       <section className="ab-approach" id="philosophy">
-        <div className="qp"><Image src="/m/vase.jpg" alt="Olive branches in a stone vase" width={584} height={892} sizes="(max-width: 900px) 100vw, 50vw" /><p>“A home should feel like you.”</p></div>
+        <div className="qp"><Image src="/m/approach-skyline.jpg" alt="A warm living room at sunset with a curved sofa, an olive tree and the Dubai skyline beyond the glass" width={941} height={1672} sizes="(max-width: 900px) 100vw, 50vw" style={{objectPosition: '55% 62%'}} /><p>“A home should feel like you.”</p></div>
         <div className="tx">
           <p className="lbl rule">ARCHIFORM Approach</p>
           <h2 className="h2">What if your home could feel as good as it looks?</h2>

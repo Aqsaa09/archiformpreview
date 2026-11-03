@@ -7,7 +7,7 @@ export const metadata = pageMeta({
   title: 'Journal',
   description: 'ARCHIFORM in the press: founder Roula Jbour in conversation with She Means Business, published by Gulf News, on designing healthier homes in Dubai.',
   path: '/journal',
-  image: { url: '/m/she-means-business.jpg', width: 1125, height: 806, alt: 'Interview with Roula Jbour in She Means Business' },
+  image: { url: '/m/she-means-business-p14.jpg', width: 1482, height: 1061, alt: 'Interview with Roula Jbour in She Means Business, Gulf News' },
 });
 
 /* The interview as printed in She Means Business, published by Gulf News, 30 October 2026, page 14 */
@@ -33,7 +33,7 @@ export default function JournalPage() {
 
           <figure className="jr-clip">
             <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer" aria-label="Read the article in She Means Business, Gulf News (opens in a new tab)">
-              <Image src="/m/she-means-business.jpg" alt="Interview with Roula Jbour, founder of ARCHIFORM, in She Means Business, page 14" width={1125} height={806} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" />
+              <Image src="/m/she-means-business-p14.jpg" alt="Page 14 of She Means Business: the interview with Roula Jbour, founder of ARCHIFORM, with her portrait" width={1482} height={1061} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" />
             </a>
             <figcaption className="lbl">She Means Business · Gulf News · Page 14 · Friday, 30 October 2026 <a className="jr-full" href={ARTICLE_URL} target="_blank" rel="noopener noreferrer">Read the article<span className="sr"> (opens in a new tab)</span> <Arrow /></a></figcaption>
           </figure>

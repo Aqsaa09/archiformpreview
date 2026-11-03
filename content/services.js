@@ -40,9 +40,9 @@ export const services = [
     rail: 'Project management',
     tagline: "From the first idea to the final detail.",
     text: "We coordinate contractors, suppliers and specialists throughout the renovation, keeping quality, budget and direction on track.",
-    image: '/m/pm-roula.jpg',
-    alt: 'Roula Jbour at the studio table with floor plans, timber and stone samples',
-    // Keeps her face and the studio sign in the 4:3 frame
-    pos: '50% 18%',
+    image: '/m/pm-materials.jpg',
+    alt: 'A designer checking a floor plan on a laptop beside timber, stone, fabric and colour samples',
+    // Keeps the plan, laptop and samples in the 4:3 frame
+    pos: '50% 58%',
   },
 ];

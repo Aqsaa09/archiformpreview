@@ -25,6 +25,7 @@ const SIZES = {
   '/m/reno-before-after.jpg': [1536, 1024],
   '/m/roula.jpg': [980, 1600],
   '/m/vanity.jpg': [1448, 1086],
+  '/m/vanity-clean.webp': [1447, 1087],
   '/m/wardrobe.jpg': [1024, 1280],
   '/m/workshop.jpg': [1280, 960],
   '/m/wardrobe-corridor.webp': [1122, 1402],

@@ -149,7 +149,7 @@ export default function HomeMarkup() {
               <article className="card"><div className="ph"><Image src="/m/kitchen-marble.jpg" alt="Kitchen with a full marble backsplash and shelf, oak cabinets and an olive branch in a glass vase" width={809} height={1470} sizes={CARD_SIZES} style={{objectPosition: '50% 40%'}} /></div><h3>Clean Air &amp; Humidity Control</h3><p>Fresh air for a healthier home.</p><ul><li>Natural cross-ventilation and fresh airflow.</li><li>Balanced indoor humidity.</li><li>Dust-minimizing layouts.</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/bed-sunlight.jpg" alt="Bedroom with late sun falling across the wall, a palm-print headboard and a small lamp on the bedside table" width={720} height={1280} sizes={CARD_SIZES} style={{objectPosition: '50% 55%'}} /></div><h3>Layered Lighting</h3><p>The right light for every moment.</p><ul><li>Bright light for daily tasks.</li><li>Warm light for evening rest.</li><li>Easy dimming with lamps and switches.</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/acoustic.jpg" alt="Reading corner with a slatted timber wall, felt acoustic pendants and a green velvet armchair" width={1200} height={1600} sizes={CARD_SIZES} style={{objectPosition: '50% 45%'}} /></div><h3>Sound Insulation</h3><p>Acoustic comfort for a quieter home.</p><ul><li>Noise-absorbing rugs and drapes.</li><li>Soft-close doors and drawers.</li><li>Sound-dampening finishes.</li></ul></article>
-              <article className="card"><div className="ph"><Image src="/m/vanity.jpg" alt="Design visualisation of a sculpted dressing wall with built-in shelves and a backlit mirror" width={1448} height={1086} sizes={CARD_SIZES} style={{objectPosition: '40% 50%'}} /></div><h3>Considered Storage</h3><p>Effortless organization for calm spaces.</p><ul><li>Tailored daily storage.</li><li>Seamless built-in cabinets.</li><li>Open, clutter-free layouts.</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/vanity-clean.webp" alt="Design visualisation of a sculpted dressing wall with built-in shelves and a backlit mirror" width={1447} height={1087} sizes={CARD_SIZES} style={{objectPosition: '40% 50%'}} /></div><h3>Considered Storage</h3><p>Effortless organization for calm spaces.</p><ul><li>Tailored daily storage.</li><li>Seamless built-in cabinets.</li><li>Open, clutter-free layouts.</li></ul></article>
             </div>
           </div>
         </section>
@@ -195,7 +195,7 @@ export default function HomeMarkup() {
               <div className="process-visual">
                 <div className="process-frame"><Image src="/m/process-visit.webp" alt="" width={860} height={860} sizes={ARCH_SIZES} /></div>
                 <div className="process-frame"><Image src="/m/process-materials.webp" alt="" width={860} height={860} sizes={ARCH_SIZES} /></div>
-                <div className="process-frame"><Image src="/m/process-joinery.webp" alt="" width={860} height={1012} sizes={ARCH_SIZES} /></div>
+                <div className="process-frame"><Image src="/m/kitchen.jpg" alt="" width={1086} height={1448} sizes={ARCH_SIZES} /></div>
                 <div className="process-frame"><Image src="/m/bed.jpg" alt="" width={852} height={1280} sizes={ARCH_SIZES} /></div>
                 <div className="process-founder"><Image className="process-founder-portrait" src="/m/roula.jpg" alt="" width={980} height={1600} sizes={ARCH_SIZES} /></div>
               </div>

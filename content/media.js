@@ -27,43 +27,46 @@ export const DISCLOSURE = {
 export const roomFilms = [
   {
     id: 'walk',
-    src: '/v/h-walk-v2.mp4', poster: '/v/h-walk-v2.jpg', msrc: '/v/h-walk-m.mp4', mposter: '/v/h-walk-m.jpg',
-    label: 'Walking into a calm open-plan living room with tall windows and plants',
-    origin: 'ai', source: 'pinterest', rights: 'licensed',
-    notes: 'Scrubbed by scroll, so it needs a keyframe every few frames (currently every 4). Source files: videos folder/web-originals/h-walk.mp4.',
+    src: '/v/h-tour-s.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-s-m.mp4', mposter: '/v/h-tour-s-m.jpg',
+    label: 'A slow walk through a warm mid-century home: the arched entry, the living and dining rooms, the stair garden and the bedroom',
+    origin: 'unconfirmed', rights: 'unverified',
+    notes: 'Source: ROULA HERO VIDEO.mp4 (46s, 1080p60, Nov 2026), sped up 1.15x to 40s at 24fps. Follows the scroll like every hero ' +
+      'film; lib/home-story.js gives it its own stretch of the hero timeline (TOUR). Encoded for scrubbing: a keyframe every 8 ' +
+      'frames, no B-frames. Desktop cut 1280x720; phone cut a centre crop at 540x960. No AI watermark in the source.',
   },
-  /* The four chapters below (Natural Light, Comfort & Airflow, Considered Materials, Functional Living) were replaced in
-     Nov 2026 with films supplied by the studio (videos folder/hero videos). They carried the Google AI sparkle mark (and,
-     on the light film, "Veo"), blurred out of the web cuts with ffmpeg delogo: confirm the studio made them and set rights
-     to owned. Landscape only, so phones crop the same file (no msrc). Like the walk-in, these follow the scroll rather than
-     playing on their own, so each is encoded with a keyframe every 8 frames to keep seeking smooth. */
+  /* The four chapters below (Natural Light, Comfort & Airflow, Considered Materials, Functional Living) use the films supplied
+     by the studio (videos folder/hero videos) as sent: same picture, length and direction. The only change is that the Google
+     sparkle mark (air, green, flow; around x1136-1184 y576-624) and the "Veo" mark (light; bottom right) are blurred out with
+     ffmpeg delogo. The web cuts (v5, Nov 2026) are encoded for scroll scrubbing: H.264, a keyframe every 4 frames and no
+     B-frames, so each seek decodes at most a few frames; audio dropped. Landscape only, so phones crop the same file (no msrc).
+     Confirm the studio made them and set rights to owned. */
   {
     id: 'light',
-    src: '/v/h-light-v3.mp4', poster: '/v/h-light-v3.jpg',
+    src: '/v/h-light-v5.mp4', poster: '/v/h-light-v5.jpg',
     label: 'A little girl plays in the sunlight on the floor of a bright living room with tall garden windows',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Girl_playing_with_sunlight_6ce7db00.mp4.',
   },
   {
     id: 'air',
-    src: '/v/h-air-v3.mp4', poster: '/v/h-air-v3.jpg',
+    src: '/v/h-air-v5.mp4', poster: '/v/h-air-v5.jpg',
     label: 'Sheer curtains sway in the breeze at the open windows of a calm living room',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s). Runs forward then backward, so the curtains swing out and settle as the chapter scrolls by.',
+    notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s, forward only, as sent).',
   },
   {
     id: 'green',
-    src: '/v/h-green-v3.mp4', poster: '/v/h-green-v3.jpg',
+    src: '/v/h-green-v6.mp4', poster: '/v/h-green-v6.jpg',
     label: 'A mid-century home of timber, stone and glass among the trees, and its living room opening onto the garden',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a.mp4. Shown for Considered Materials.',
+    notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a_t2-3.4.mp4 followed by _t2-6.9.mp4, joined into one film (2.8s). Shown for Considered Materials.',
   },
   {
     id: 'flow',
-    src: '/v/h-flow-v3.mp4', poster: '/v/h-flow-v3.jpg',
+    src: '/v/h-flow-v6.mp4', poster: '/v/h-flow-v6.jpg',
     label: 'Sheer curtains draw closed at dusk as warm lamps light up a living room',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Curtains_closing_in_living_room_84870621 (1).mp4.',
+    notes: 'Source: hero videos/Curtains_closing_in_living_room_8426ec28_t5.5-10.mp4.',
   },
 ];
 

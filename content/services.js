@@ -24,7 +24,7 @@ export const services = [
     rail: 'Joinery',
     tagline: "Details that make a space distinctly yours.",
     text: 'Custom details, refined materials and tailored solutions that make every space feel distinctly yours.',
-    image: '/m/vanity.jpg',
+    image: '/m/vanity-clean.webp',
     alt: 'Design visualisation of a bespoke dressing wall with built-in shelves and a backlit mirror',
   },
   {

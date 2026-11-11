@@ -63,8 +63,9 @@ each photo's pixel size to `content/images.js`. The page `/portfolio/<slug>` and
 ### Images, video and caching
 - Photos are served through Next.js image optimisation (`next/image`): AVIF or WebP at the size each screen needs.
 - Films are already web-ready H.264 with no audio track and the index at the front (fast start). The scroll-scrubbed
-  films (`h-walk-*`, `feature-villa*`) have a keyframe every 4 frames so scrubbing stays smooth; keep that if you
-  re-encode them. Each film has a landscape cut and a portrait `-m` cut for phones.
+  films (the room films `h-light/air/green/flow-*` and `feature-*`) have a keyframe every 4 frames and no B-frames so
+  scrubbing stays smooth; keep that if you re-encode them. The 40s walk-in tour (`h-tour-s*`) uses a keyframe every 8
+  frames to keep its size down. Films with a portrait `-m` cut use it on phones; the rest crop.
 - Files in `public/m` and `public/v` are cached by browsers for a week, then refreshed in the background, so a file
   replaced under the same name reaches returning visitors within days. For an instant change, use a new file name.
 

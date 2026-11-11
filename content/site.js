@@ -14,7 +14,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.archiform.com', // PLACEHOLDER
   email: 'hello@archiformdesign.me',
   phone: '+971 50 160 5312',
-  whatsapp: '', // PLACEHOLDER digits only, e.g. '971500000000' (hidden while empty)
+  whatsapp: '971501605312', // digits only, same number as the phone
   instagram: '', // PLACEHOLDER e.g. 'archiform.studio' (hidden while empty)
   address: {
     city: 'Dubai',

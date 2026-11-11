@@ -68,7 +68,6 @@ export default function Header() {
     if (isHome) return;
     const root = document.documentElement;
     ['--hfg', '--ll', '--bg', '--fg', '--rule'].forEach((p) => root.style.removeProperty(p));
-    document.getElementById('hdr')?.classList.remove('tuck');
   }, [isHome]);
 
   return (

@@ -32,43 +32,51 @@ export const roomFilms = [
     origin: 'ai', source: 'pinterest', rights: 'licensed',
     notes: 'Scrubbed by scroll, so it needs a keyframe every few frames (currently every 4). Source files: videos folder/web-originals/h-walk.mp4.',
   },
+  /* The four chapters below (Natural Light, Comfort & Airflow, Considered Materials, Functional Living) were replaced in
+     Nov 2026 with films supplied by the studio (videos folder/hero videos). They carried the Google AI sparkle mark (and,
+     on the light film, "Veo"), blurred out of the web cuts with ffmpeg delogo: confirm the studio made them and set rights
+     to owned. Landscape only, so phones crop the same file (no msrc). Like the walk-in, these follow the scroll rather than
+     playing on their own, so each is encoded with a keyframe every 8 frames to keep seeking smooth. */
   {
-    id: 'light', loop: true,
-    src: '/v/h-light-v2.mp4', poster: '/v/h-light-v2.jpg', msrc: '/v/h-light-m.mp4', mposter: '/v/h-light-m.jpg',
-    label: 'A child dancing through squares of sunlight on a wooden floor',
-    origin: 'ai', source: 'pinterest', rights: 'licensed',
+    id: 'light',
+    src: '/v/h-light-v3.mp4', poster: '/v/h-light-v3.jpg',
+    label: 'A little girl plays in the sunlight on the floor of a bright living room with tall garden windows',
+    origin: 'ai', rights: 'unverified',
+    notes: 'Source: hero videos/Girl_playing_with_sunlight_6ce7db00.mp4.',
   },
   {
-    id: 'air', loop: true,
-    src: '/v/h-air-v2.mp4', poster: '/v/h-air-v2.jpg', msrc: '/v/h-air-m.mp4', mposter: '/v/h-air-m.jpg',
-    label: 'Sheer curtains lifting in the breeze at an open balcony door while a child rocks in a chair',
-    origin: 'ai', source: 'pinterest', rights: 'licensed',
+    id: 'air',
+    src: '/v/h-air-v3.mp4', poster: '/v/h-air-v3.jpg',
+    label: 'Sheer curtains sway in the breeze at the open windows of a calm living room',
+    origin: 'ai', rights: 'unverified',
+    notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s). Runs forward then backward, so the curtains swing out and settle as the chapter scrolls by.',
   },
   {
-    id: 'green', loop: true,
-    src: '/v/h-green-v2.mp4', poster: '/v/h-green-v2.jpg', msrc: '/v/h-green-m.mp4', mposter: '/v/h-green-m.jpg',
-    label: 'A breeze moving sheer curtains beside indoor planting in a soft, neutral living room',
-    origin: 'ai', source: 'pinterest', rights: 'licensed',
+    id: 'green',
+    src: '/v/h-green-v3.mp4', poster: '/v/h-green-v3.jpg',
+    label: 'A mid-century home of timber, stone and glass among the trees, and its living room opening onto the garden',
+    origin: 'ai', rights: 'unverified',
+    notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a.mp4. Shown for Considered Materials.',
   },
   {
     id: 'flow',
-    src: '/v/h-flow-v2.mp4', poster: '/v/h-flow-v2.jpg', msrc: '/v/h-flow-m.mp4', mposter: '/v/h-flow-m.jpg',
-    label: 'A living room where the blinds come down and warm evening lights come on around a conversation seating group',
-    origin: 'ai', source: 'pinterest', rights: 'licensed',
+    src: '/v/h-flow-v3.mp4', poster: '/v/h-flow-v3.jpg',
+    label: 'Sheer curtains draw closed at dusk as warm lamps light up a living room',
+    origin: 'ai', rights: 'unverified',
+    notes: 'Source: hero videos/Curtains_closing_in_living_room_84870621 (1).mp4.',
   },
 ];
 
 // The featured-project film: she walks through the villa, pauses at the garden window, then sits on the sofa
 export const featureFilm = {
   id: 'feature',
-  src: '/v/feature-villa-v2.mp4', poster: '/v/feature-villa-v2.jpg', msrc: '/v/feature-villa-v2-m.mp4',
-  label: 'A woman in white walks through a light-filled villa living room, pauses at the garden window, then sits down on the sofa',
+  src: '/v/feature-ocean.mp4', poster: '/v/feature-ocean.jpg', msrc: '/v/feature-ocean-m.mp4',
+  label: 'A woman in white stands at the edge of the sea, which dissolves into a sunlit bedroom where she walks to the bed and sits down',
   origin: 'ai', rights: 'unverified',
   notes:
-    'Source: videos folder/Woman_walking_in_luxury_villa_4a3ee2aa_1080p.mp4 (Nov 2026), replacing "My Movie" (feature-blended). ' +
-    'The source carried a corner sparkle mark suggesting Google AI video (blurred out of the web cuts with ffmpeg delogo); ' +
-    'confirm the studio made it and set rights to owned. ' +
-    'Cuts to the sofa at 5.95s; the home page skips to 6.65s there so her walk is not seen twice. Seated by about 7.1s.',
+    'Source: videos folder/Girl_transforms_ocean_into_bedroom_525e542a.mp4 (Nov 2026), replacing feature-villa-v2. ' +
+    'The source carried the Google AI sparkle mark (blurred out of the web cuts with ffmpeg delogo); confirm the studio made it and set rights to owned. ' +
+    'Sea 0-3s, dissolves into the bedroom by about 4s, she sits on the bed by about 7.3s. Scrubbed by scroll, so a keyframe every 4 frames.',
 };
 
 /** The disclosure for a set of films: one line when they share it, otherwise the most cautious one. */

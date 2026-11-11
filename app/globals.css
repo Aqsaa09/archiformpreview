@@ -78,7 +78,6 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .brand img{width:100%;height:auto}
 .brand .dk{opacity:calc(1 - var(--ll,0));transition:opacity .4s}
 .brand .lt{position:absolute;inset:0;opacity:var(--ll,0);transition:opacity .4s}
-.hdr.tuck{transform:translateY(-110%)}
 .hdr:not(.is-home){background:var(--bg)}
 .menu-btn{display:none;justify-self:end;width:44px;height:44px;align-items:center;justify-content:flex-end;background:none;border:0;color:inherit;cursor:pointer;padding:0}
 @media (max-width:820px){
@@ -100,6 +99,9 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .loader .meta span:last-child{font-variant-numeric:tabular-nums}
 .loader .word{position:absolute;top:70%;left:0;right:0;text-align:center;font-family:var(--display);font-size:clamp(22px,2.4vw,30px);letter-spacing:.42em;margin-right:-.42em;font-weight:400}
 .loader.done{pointer-events:none}
+/* While the logo loader is up only the logo shows: the header stays hidden from the first paint (also while the page fades in
+   from another page) until lib/home-story.js fades it in at the end of the intro; its inline styles then take over */
+body:has(#loader:not(.gone)) #hdr{visibility:hidden;opacity:0}
 .loader .ld-logo{width:clamp(170px,17vw,250px);height:auto;will-change:transform,opacity,filter}
 
 /* ---------- HOME: the stage (opening, sea, turn, villa) ---------- */
@@ -121,7 +123,7 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .view video{position:absolute;object-fit:cover}
 .reelclip{position:absolute;inset:0;opacity:0;will-change:transform}
 .reel{position:absolute;overflow:hidden}
-.reel video{inset:0;width:100%;height:100%;opacity:0;will-change:opacity;backface-visibility:hidden}
+.reel video{inset:0;width:100%;height:100%;opacity:0;will-change:opacity,transform;backface-visibility:hidden}
 .reel video[data-clip="1"]{opacity:1}
 /* Softens the top edge of the room film as the camera tilts up into the sunset */
 /* Sky beyond the gate, the villa and how it works */
@@ -140,7 +142,15 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .land .sway img{animation:breeze 7s ease-in-out infinite alternate}
 .land .palm img{animation-duration:5.5s}
 .land .pr img{animation-delay:-2.4s}
+/* The old olive's trunk is too heavy to sway like a palm, so it only stirs */
+.land .olive img{animation-name:stir;animation-duration:9s;animation-delay:-4s}
+/* Mirrored on a wrapper, as GSAP reads a negative CSS scale on the image itself as a vertical flip */
+.land .olive.l span{display:block;transform:scaleX(-1)}
+.land .olive.l img{animation-delay:-7s}
 @keyframes breeze{from{rotate:-.7deg}to{rotate:.9deg}}
+@keyframes stir{from{rotate:-.25deg}to{rotate:.3deg}}
+/* Grounds the potted olives against the planting and the pilasters behind them */
+@media (pointer:fine){.land .pot img{filter:drop-shadow(0 calc(var(--u) * .003) calc(var(--u) * .004) rgba(52,36,20,.4))}}
 .land .haze span{display:block;height:calc(var(--u) * .22);background:linear-gradient(180deg,rgba(244,226,218,0),rgba(244,226,218,.88) 62%,rgba(236,214,196,0))}
 .land .glow span{opacity:.55;display:block;aspect-ratio:2.2;background:radial-gradient(closest-side,rgba(255,206,140,.55),rgba(255,206,140,.18) 55%,rgba(255,206,140,0));transform:translateY(18%)}
 /* The podium: a disc lying in the floor plane (garden ground with a paved terrace in front of the house), stacked discs beneath for a solid stone rim */
@@ -453,8 +463,6 @@ html:not(.story) .track{flex-wrap:wrap}
 .pj-imgs .w img{aspect-ratio:16/9}
 .pj-imgs .f img{aspect-ratio:auto;height:auto}
 .pj-imgs .solo{grid-column:1/-1;justify-self:center;width:calc(50% - clamp(12px,1.6vw,24px) / 2)}
-.pj-imgs figure:first-child img{border-radius:999px 999px 0 0}
-.pj-imgs figure.w:first-child img{border-radius:0}
 /* Marks renders and AI images (kind: 'visualisation' in content/projects.js) so they are not read as finished rooms */
 .pf-grid .ph{position:relative}
 .pj-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-block:36px;margin-top:clamp(40px,5vw,72px);border-block:1px solid var(--rule)}
@@ -483,6 +491,8 @@ html:not(.story) .track{flex-wrap:wrap}
 .ct .info{display:flex;flex-direction:column;gap:28px;margin-top:clamp(16px,2vw,28px);padding-top:clamp(28px,3vw,40px);border-top:1px solid var(--rule)}
 .ct .info div{display:flex;flex-direction:column;gap:6px;font-family:var(--label);font-weight:300;font-size:17px;line-height:1.5}
 .ct .info .lbl{font-weight:500;margin-bottom:4px}
+.ct .info .ct-wa{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;color:inherit}
+.ct-wa svg{flex:none;color:var(--olive)}
 .ct .l{grid-column:1/span 4;display:flex;flex-direction:column;gap:18px;max-width:28em}
 .ct .r{grid-column:6/span 7}
 form{display:flex;flex-direction:column;gap:26px}
@@ -515,7 +525,8 @@ form{display:flex;flex-direction:column;gap:26px}
   .story .dt-in{padding-block:88px 32px;gap:40px}
   .story .dt-head .h2{font-size:clamp(40px,3.4vw,48px)}
   .story .card{gap:12px}
-  .story .card .ph{height:31svh}
+  /* the section is pinned, so anything below the screen edge can't be reached: the image gives way to keep every tag in view */
+  .story .card .ph{height:min(31svh,max(25svh,calc(100svh - 580px)))}
 }
 @media (max-width:820px){
   /* Quieter details on phones: one pinned screen, the cards slide sideways */
@@ -525,17 +536,25 @@ form{display:flex;flex-direction:column;gap:26px}
   .story .dt-head .body{font-size:15px;line-height:1.5}
   .story .cards{gap:14px}
   .story .card{width:74vw;gap:10px}
-  .story .card .ph{aspect-ratio:auto;height:min(74vw,35svh)}
-  @media (max-height:700px){.story .card .ph{height:min(66vw,30svh)}}
+  /* the section is pinned, so anything below the screen edge can't be reached: the image takes the height left after the text and tags,
+     and on the shortest screens the intro paragraph makes way too */
+  .story .card .ph{aspect-ratio:auto;height:clamp(130px,calc(100svh - 600px),min(74vw,35svh))}
+  @media (max-height:740px){
+    .story .dt-head .body{display:none}
+    .story .card .ph{height:clamp(130px,calc(100svh - 500px),min(66vw,30svh))}
+  }
   .story .card h3{font-size:26px}
   .story .card p{font-size:16px}
   .story .card li{font-size:10px;padding:6px 9px}
 }
-/* Page transition (app/template.js): a quiet fade, in keeping with the site's slow, calm motion */
-.pg-in{animation:pg-in .7s cubic-bezier(.25,.6,.3,1) both}
-@keyframes pg-in{from{opacity:0}to{opacity:1}}
+/* Page transition (app/template.js): the old page fades out quickly, the new one settles in a beat later with a soft blur,
+   in keeping with the site's slow, calm motion */
+::view-transition-old(.page-out){animation:380ms cubic-bezier(.4,0,.6,1) both pg-out}
+::view-transition-new(.page-in){animation:650ms cubic-bezier(.25,.6,.3,1) 200ms both pg-in}
+@keyframes pg-out{to{opacity:0;filter:blur(4px)}}
+@keyframes pg-in{from{opacity:0;filter:blur(6px)}}
 @media (prefers-reduced-motion:reduce){
-  .pg-in{animation:none}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
   .grain,.shadow-sprig,.scroll-cue i::after,.land .sway img,.vrail span{animation:none}
   .card img,.pf-grid img,.go svg,.btn svg{transition:none}
   .card:hover img,.pf-grid a:hover img{transform:none}
@@ -605,11 +624,6 @@ form{display:flex;flex-direction:column;gap:26px}
 .jr-qa:first-of-type .jr-a:first-of-type::first-letter{float:left;font-size:4.4em;line-height:.8;padding:.06em .1em 0 0;color:var(--olive)}
 .jr-pull{margin:clamp(40px,5vw,64px) calc(-1 * clamp(0px,8vw,140px)) 0;padding-block:clamp(28px,3vw,44px);border-block:1px solid var(--rule);font-style:italic;font-weight:300;font-size:clamp(28px,3vw,44px);line-height:1.2;text-align:center}
 .jr-end{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px;border-top:1px solid var(--rule)}
-.jr-thoughts{display:flex;flex-direction:column;gap:16px;margin-top:clamp(56px,7vw,110px)}
-.jr-thoughts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:36px 32px;margin-top:32px}
-.jr-thoughts-grid article{display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--rule);padding-top:24px}
-.jr-thoughts-grid .lbl{color:var(--olive)}
-.jr-thoughts-grid .h2{font-size:clamp(26px,2.3vw,34px);line-height:1.15}
 .jr-clip figcaption .jr-full{display:inline-flex;align-items:center;gap:12px;padding:0;background:none;box-shadow:none;text-decoration:none;cursor:pointer}
 /* Phones: show the complete article; the full-size link supports a closer read. */
 @media (max-width:820px){

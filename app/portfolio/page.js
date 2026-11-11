@@ -5,7 +5,7 @@ import { pageMeta } from '@/lib/seo';
 
 export const metadata = pageMeta({
   title: 'Interior Design Portfolio',
-  description: 'Villa and apartment interiors, renovations and bespoke joinery by ARCHIFORM in Dubai: living rooms, bedrooms, bathrooms, kitchens, dining rooms and outdoor spaces.',
+  description: 'Villa and apartment interiors, renovations and bespoke joinery by ARCHIFORM in Dubai: bedrooms, bathrooms, kitchens, dining rooms and outdoor spaces.',
   path: '/portfolio',
 });
 

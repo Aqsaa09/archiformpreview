@@ -1,340 +1,259 @@
-# Baldwa website: performance, stability and speed pass
+# ARCHIFORM website: performance, reliability and mobile optimisation
 
-You are working on the Baldwa architecture website (Next.js 16 App Router + TypeScript, React 19, React Three Fiber 9 + drei, three.js 0.186, GSAP 3 with ScrollTrigger and @gsap/react). Read `AGENTS.md` and `README.md` first and follow their rules.
+You are working on the ARCHIFORM Design Studio website, a Dubai interior design studio site. The home page is one long scroll-driven animation: a sticky full-screen stage whose elements (hero videos and images, the logo arch, the chair scene, Featured projects, Process, Founder, Services arches) are positioned from scroll progress. The other pages are About, Services, Portfolio and Contact.
 
-## The problem
+Your job is to make the site fast, smooth and reliable on desktop and mobile **without changing how it looks or what it does**. Every layout, colour, font, image, piece of copy and animation sequence must look the same when you finish. You are changing *how* things are built and loaded, not *what* the visitor sees.
 
-- The **hero section has videos that sometimes lag and sometimes play fine**. Sometimes they load slowly, stutter, show a black frame, or do not start.
-- The site has **general lag and visual glitches**, especially while scrolling and during animations.
-
-## Goal
-
-1. Hero videos load **every time**, start quickly, and play smoothly on desktop and mobile (including iPhone Safari).
-2. Find and fix every cause of lag, jank and glitches across the whole site.
-3. Make the site as fast as possible without changing the design.
-
-## Ground rules
-
-- **Do not change the visual design, layout, copy, colours or fonts.** Performance and correctness only. If a fix would visibly change something, choose the closest-looking cheaper option and note it in the report.
-- Work on a new git branch `perf/optimisation`. Commit after each phase with a clear message, so each phase can be reverted on its own.
-- **Never delete or overwrite the original video files.** Move originals to `/media-originals/` (create it, add it to `.gitignore` if the files are large) and write optimised versions to `public/videos/`.
-- Do not upgrade three.js, R3F, drei, GSAP or Next.js major versions.
-- **Measure performance on a production build** (`npm run build && npm start`), never on `npm run dev`. Dev mode is much slower and runs every effect twice in React Strict Mode.
-- `npm run build` must pass with zero TypeScript errors at the end of every phase.
-- Do not stop to ask me questions unless you are truly blocked. Make the sensible call, note it, and keep going.
+Work in four phases: audit, report, fix, verify. Do not skip the audit.
 
 ---
 
-## Phase 0: Audit first (no code changes yet)
+## 0. Ground rules
 
-1. Find every video and how it is used:
-   - `grep -rn "<video\|\.mp4\|\.webm\|\.mov\|\.m3u8" src`
-   - `find public -type f \( -iname "*.mp4" -o -iname "*.webm" -o -iname "*.mov" -o -iname "*.m4v" \) -exec ls -lh {} \;`
-2. For each video file, record with `ffprobe` (install with `brew install ffmpeg` if missing):
-   - codec, resolution, frame rate, bitrate, duration, file size, whether it has an audio track
-   - **whether it is "fast start"** (the `moov` atom comes before `mdat`):
-     `ffprobe -v trace -i FILE 2>&1 | grep -oE "type:'(moov|mdat)'" | head -2`
-     If `mdat` comes first, the browser must download most of the file before it can play. This is a classic cause of "sometimes it loads, sometimes it lags".
-3. Record what else runs while the hero is visible:
-   - Is the R3F `HeroScene` canvas still mounted under or alongside the videos?
-   - When does `renderStills` (in `ProjectImagesProvider`) run? It creates a second WebGL renderer and renders six scenes with 2048px shadow maps about 300 ms after load. That is exactly when the hero video is trying to start.
-   - Which elements over the video use `backdrop-filter`, `filter`, large `box-shadow`, `clip-path` or `mix-blend-mode`?
-4. Take a baseline on the production build:
-   - Lighthouse, mobile and desktop: `npx lighthouse http://localhost:3000 --preset=desktop --output=json --output-path=./perf/before-desktop.json` and the same without `--preset` for mobile (`perf/before-mobile.json`).
-   - Record LCP, CLS, TBT and Speed Index, plus total JS shipped and the page weight.
-   - Chrome DevTools Performance recording: load the page, let the intro finish, scroll top to bottom. Use 4× CPU slowdown and "Fast 4G". Note long tasks, dropped frames and what causes them.
-5. Write the findings to `perf/AUDIT.md`: a numbered list of every problem, its file and line, and its likely impact. Then fix them in the phases below.
+- Do not redesign, restyle, reorder sections, rename copy or remove animations. If a fix would visibly change something, stop and list it under "Needs approval" in your report instead of doing it.
+- Keep the existing palette, fonts, timings and scroll choreography. Timings can be retuned only to remove stutter, never to change the story.
+- Make small, reviewable changes. After each group of fixes, re-run the checks in section 6.
+- If something is unclear (for example, which video belongs to which hero slot), read the code and the assets before asking.
+- Keep a running changelog: what you changed, why, and the before/after measurement.
 
 ---
 
-## Phase 1: Hero videos (top priority)
+## 1. Audit first
 
-### 1a. Likely root causes to check and fix
+Before changing anything:
 
-- **Missing fast start** (see Phase 0). Re-encode every video with `-movflags +faststart`.
-- **Files too large or too high resolution.** Cap desktop at 1920px wide and mobile at 1280px wide (720p). Remove audio tracks.
-- **Autoplay silently blocked.** Browsers only autoplay muted, inline video. React can leave the `muted` attribute out of the server-rendered HTML, so autoplay fails on some loads. **Always set `video.muted = true` (and `defaultMuted`, `playsInline`) as properties in an effect before calling `play()`.**
-- **Unhandled `play()` promise.** `play()` can reject (Low Power Mode, data saver, a race with `pause()`). Catch it, keep the poster visible, and retry on `canplay`, on `visibilitychange` and on the first user tap.
-- **Play/pause races.** Strict Mode double effects, GSAP callbacks or carousel logic calling `play()` and `pause()` in quick succession cause "The play() request was interrupted" errors and stutter. Keep a single owner of play state per video and clean up every listener.
-- **Black or blank first frame.** Show a poster image identical to frame 1, and fade the video in only after its first frame is painted (`requestVideoFrameCallback`, falling back to the `playing` event).
-- **Too many videos decoding at once.** If the hero cycles through several videos:
-  - Only the **current** video plays. Only the **next** one preloads (`preload="auto"`). All others use `preload="none"` and stay paused.
-  - Prefer two `<video>` elements that swap sources (A/B crossfade) over N elements that all autoplay.
-  - Crossfade only after the incoming video fires `playing`, or its first frame callback runs. Never on a timer alone.
-  - Use `opacity` to hide inactive videos, not `display: none` (that throws away decoded frames and causes a flash when shown again). Do not call `load()` repeatedly.
-- **GPU contention.** A live R3F canvas, a second WebGL renderer (`renderStills`), GSAP intro animations and video decoding all compete during the first seconds:
-  - If videos replace the 3D hero, **unmount `HeroScene` completely** (and remove its dynamic import from the hero).
-  - If both must stay, render only one at a time, and pause the canvas (`frameloop="never"`) while video plays.
-- **Expensive layers on top of the video.** `backdrop-filter: blur()` on the fixed header (`.top`) forces the browser to re-blur on every video frame. Replace it with a solid or semi-opaque background while over the hero (for example `rgba(255,255,255,.94)`), or apply the blur only after the hero has scrolled out of view. Do the same check for `filter`, `mix-blend-mode` and large shadows over the video.
-- **Off-screen and background playback.** Pause the video when the hero is out of view (IntersectionObserver) and when the tab is hidden (`visibilitychange`). Resume when it returns.
-- **Intro overlap.** The logo intro covers the hero for about 3 seconds. Start **loading** the video immediately, but start **playback** when the intro finishes (pass an `active` prop), so decoding does not compete with the intro animation.
-- **Loop hitch.** Encode with a keyframe at the start and a short GOP (`-g` equal to 2 × fps) so the `loop` point does not stutter.
-- **Mobile viewport jumps.** If the hero uses `100vh`, the iOS address bar resizing causes relayouts and jitter. Use `100svh` (with a `100vh` fallback first).
+1. Run the site locally and in a production build. Note the stack (static HTML, framework, bundler) and where it's hosted (currently Netlify).
+2. Open the browser console on every page. Record every error, warning, 404 and failed request.
+3. Record a Chrome DevTools Performance trace while scrolling the whole home page at normal speed, once with no throttling and once with 4x CPU throttling. Note dropped frames, long tasks over 50 ms, forced reflows ("Layout" inside scroll or rAF handlers), large paints and decode times.
+4. Run Lighthouse (mobile and desktop) on every page. Record LCP, CLS, INP/TBT, total transfer size and the largest requests.
+5. List every media file the site loads: path, format, resolution, file size, duration (videos) and where it's used.
+6. Test on a real iPhone (Safari) and a mid-range Android phone (Chrome) if available. Otherwise use device emulation plus throttling ("Fast 4G", 4x CPU).
 
-### 1b. Encode the videos
+---
 
-Create `scripts/encode-videos.sh`, a re-runnable script that reads every file in `/media-originals/` and outputs these renditions to `public/videos/`. Put a short content hash or version in the file names (e.g. `hero-1-v2-1080.mp4`) so they can be cached forever.
+## 2. Hero videos: load every time, play smoothly
+
+The hero videos sometimes lag and sometimes work. Treat that as several separate problems and check each one.
+
+### 2.1 Fix the files themselves (most common cause)
+
+Re-encode every hero video. Keep the originals; write optimised copies.
+
+**Quality comes first. The re-encoded videos must look the same as the originals.** File size is the second priority. If a size target below can only be met by visible softening, banding, blockiness or smearing in motion, ignore the size target and keep the quality. Specifically:
+
+- Never upscale, and never drop below the source resolution for the desktop version unless the source is larger than 2560 px wide. If the source is wider than 1920 px, also make a 2560 px version for large and retina screens.
+- Start the desktop encode at CRF 20. Only raise it (up to 23) if a side-by-side comparison shows no visible difference.
+- Keep the source frame rate if it's 30 fps or lower. Don't reduce it.
+- Before replacing any video, compare original and new copy full-screen on a large display, paused on detailed frames (fabric, plants, wood grain, gradients on walls) and while playing. Also check the VMAF score if `ffmpeg` has libvmaf (`ffmpeg -i new.mp4 -i original.mp4 -lavfi libvmaf -f null -`): aim for 95 or higher. If the new version looks worse anywhere, lower the CRF and encode again.
+- The mobile version is intentionally smaller in resolution, because a phone screen doesn't need more. It must still look sharp on a phone at full width; check it on a real phone.
+
+- **Fast start:** the `moov` atom must be at the front, or the browser has to download most of the file before it can play. Without this you get exactly the "sometimes fine, sometimes stuck" behaviour.
+- **No audio track** (the videos are muted anyway): saves bytes and lets autoplay work.
+- **Sensible size:** 1920 px wide for desktop (plus 2560 px if the source allows), and a separate 960–1080 px version for mobile. Short loops often land around 3–6 MB on desktop and 1–2 MB on mobile, but these are rough guides, not limits: quality wins over size.
+- **Regular keyframes** (every 1–2 s) so seeking and looping don't stall.
+
+Reference commands:
 
 ```bash
-# Desktop 1080p H.264 MP4: plays everywhere, fast start, no audio
-ffmpeg -y -i IN -an -vf "scale='min(1920,iw)':-2,fps=30" \
-  -c:v libx264 -preset slow -crf 23 -profile:v high -pix_fmt yuv420p \
-  -g 60 -keyint_min 60 -sc_threshold 0 -movflags +faststart OUT-1080.mp4
+# Desktop H.264 (plays everywhere). Keeps the source frame rate; scales down only if wider than 1920.
+ffmpeg -i in.mov -vf "scale='min(1920,iw)':-2:flags=lanczos" -c:v libx264 -profile:v high -preset slow \
+  -crf 20 -tune film -pix_fmt yuv420p -g 48 -keyint_min 48 -sc_threshold 0 -movflags +faststart -an hero-1.mp4
 
-# Desktop 1080p VP9 WebM: smaller, for Chrome/Firefox/Edge
-ffmpeg -y -i IN -an -vf "scale='min(1920,iw)':-2,fps=30" \
-  -c:v libvpx-vp9 -crf 33 -b:v 0 -row-mt 1 -deadline good -cpu-used 2 \
-  -g 60 OUT-1080.webm
+# Large-screen version, only if the source is wider than 1920
+ffmpeg -i in.mov -vf "scale='min(2560,iw)':-2:flags=lanczos" -c:v libx264 -profile:v high -preset slow \
+  -crf 20 -tune film -pix_fmt yuv420p -g 48 -keyint_min 48 -sc_threshold 0 -movflags +faststart -an hero-1-2560.mp4
 
-# Mobile 720p versions: same commands with scale='min(1280,iw)':-2 and CRF +2
+# Mobile H.264
+ffmpeg -i in.mov -vf "scale='min(1080,iw)':-2:flags=lanczos" -c:v libx264 -profile:v high -preset slow \
+  -crf 22 -tune film -pix_fmt yuv420p -g 48 -keyint_min 48 -sc_threshold 0 -movflags +faststart -an hero-1-mobile.mp4
 
-# Poster: the exact first frame, as WebP (and JPG fallback)
-ffmpeg -y -i OUT-1080.mp4 -frames:v 1 -q:v 2 OUT-poster.jpg
-ffmpeg -y -i OUT-poster.jpg -c:v libwebp -quality 80 OUT-poster.webp
+# Optional VP9/WebM for Chrome/Firefox/Android, listed before the MP4. Same quality, usually smaller.
+ffmpeg -i in.mov -vf "scale='min(1920,iw)':-2:flags=lanczos" -c:v libvpx-vp9 -b:v 0 -crf 28 -row-mt 1 -an hero-1.webm
+
+# Poster frame for each clip (first frame, WebP)
+ffmpeg -i hero-1.mp4 -frames:v 1 -vf "scale='min(1920,iw)':-2" hero-1-poster.webp
 ```
 
-The `-preset slow` encode is a one-time cost and gives smaller files. Use `-preset veryfast` while testing.
+Check with `ffprobe` that each output has no audio stream and that `moov` comes before `mdat` (`ffprobe -v trace hero-1.mp4 2>&1 | grep -m2 -E "type:'(moov|mdat)'"`).
 
-**Budgets** (per video, for a 10–15 s loop): desktop ≤ 5 MB, mobile ≤ 2.5 MB, poster ≤ 150 KB. If a video cannot meet the budget, shorten it or raise the CRF slightly, and check that it still looks good. If the videos are long (over about 20 s) or there are many of them, note in the report that a streaming host with HLS (Mux, Cloudflare Stream, Bunny Stream) would be the next step. Do not implement it unless budgets cannot be met.
+If any video is **scrubbed by scroll** (its `currentTime` is set from scroll position), normal encoding will always stutter, because the browser has to decode from the previous keyframe on every seek. Either encode that clip all-intra (`-g 1`, larger file) or replace scrubbing with an image sequence drawn to a `<canvas>`. Don't scrub a normally encoded video.
 
-Verify each output: `ffprobe` shows `moov` before `mdat`, there is no audio stream, and the size is within budget.
+### 2.2 Fix the markup
 
-### 1c. Build one robust video component
+Every hero video should look like this (adapt names):
 
-Create `src/components/HeroVideo.tsx` (client component) and use it for every hero video. Use this reference implementation and adapt it to how the hero currently works (single video, or a sequence). It has already been type-checked against this project.
-
-```tsx
-'use client';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-
-export type VideoSource = { src: string; type: string };
-
-type Props = {
-  desktop: VideoSource[]; // define as module-level constants, best format first (webm, then mp4)
-  mobile: VideoSource[];
-  poster: string;         // exact first frame of the video, so the swap is invisible
-  active?: boolean;       // false while the intro covers the hero or the hero is off screen
-};
-
-type NetInfo = { saveData?: boolean; effectiveType?: string };
-
-export default function HeroVideo({ desktop, mobile, poster, active = true }: Props) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [sources, setSources] = useState<VideoSource[] | null>(null);
-  const [ready, setReady] = useState(false);
-
-  // Pick one rendition on the client, once. No video at all for reduced motion / data saver.
-  useEffect(() => {
-    const conn = (navigator as Navigator & { connection?: NetInfo }).connection;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced || conn?.saveData || conn?.effectiveType === '2g' || conn?.effectiveType === 'slow-2g') return;
-    setSources(window.matchMedia('(max-width: 768px)').matches ? mobile : desktop);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Play / pause. Muted must be set as a property: React may leave the attribute out of the
-  // server HTML, and browsers block unmuted autoplay.
-  useEffect(() => {
-    const v = ref.current;
-    if (!v || !sources) return;
-    v.muted = true;
-    v.defaultMuted = true;
-    v.playsInline = true;
-    if (!active) { v.pause(); return; }
-
-    let cancelled = false;
-    const resume = () => { v.play().catch(() => {}); };
-    const tryPlay = () => {
-      if (cancelled || document.hidden) return;
-      // Blocked (iOS Low Power Mode, data saver): keep the poster, retry on first tap.
-      v.play().catch(() => window.addEventListener('pointerdown', resume, { once: true }));
-    };
-    const onVisibility = () => (document.hidden ? v.pause() : tryPlay());
-
-    if (v.readyState >= 3) tryPlay(); else v.addEventListener('canplay', tryPlay, { once: true });
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => {
-      cancelled = true;
-      v.removeEventListener('canplay', tryPlay);
-      document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('pointerdown', resume);
-      v.pause();
-    };
-  }, [sources, active]);
-
-  // Fade the video in only once a real frame is on screen (no black flash).
-  useEffect(() => {
-    const v = ref.current;
-    if (!v || !sources) return;
-    const show = () => setReady(true);
-    if (typeof v.requestVideoFrameCallback === 'function') {
-      const id = v.requestVideoFrameCallback(show);
-      return () => v.cancelVideoFrameCallback(id);
-    }
-    v.addEventListener('playing', show, { once: true });
-    return () => v.removeEventListener('playing', show);
-  }, [sources]);
-
-  return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-      <Image src={poster} alt="" fill priority sizes="100vw" style={{ objectFit: 'cover' }} />
-      {sources && (
-        <video
-          ref={ref}
-          muted
-          playsInline
-          loop
-          preload="auto"
-          poster={poster}
-          aria-hidden="true"
-          tabIndex={-1}
-          disablePictureInPicture
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: ready ? 1 : 0, transition: 'opacity .6s ease' }}
-        >
-          {sources.map((s) => <source key={s.src} src={s.src} type={s.type} />)}
-        </video>
-      )}
-    </div>
-  );
-}
+```html
+<video class="hero-video" muted playsinline loop preload="metadata"
+       poster="/media/hero-1-poster.webp" disablepictureinpicture
+       data-src-desktop="/media/hero-1.mp4" data-src-mobile="/media/hero-1-mobile.mp4"
+       aria-hidden="true"></video>
 ```
 
-Wire it up in `Hero.tsx`:
+- `muted` and `playsinline` are mandatory for autoplay on iOS. Also set `video.muted = true` in JS, because some browsers ignore the attribute when it's added dynamically.
+- Always have a `poster` that looks the same as the first frame. The visitor should never see a black or empty box.
+- Pick the mobile or desktop source in JS, based on viewport width and `navigator.connection.saveData`. Don't rely on `<source media>` alone. Set `src` once; never swap it on resize mid-play.
+- Only the first video in the sequence gets `preload="auto"` and `fetchpriority="high"` on its poster. The others start as `preload="none"`.
 
-- `active` = intro finished **and** hero visible (reuse the hero's IntersectionObserver). Expose "intro finished" from `Intro.tsx`, for example with a small `introDone` event on `window` or a tiny React context. Do not poll.
-- For a sequence of videos, extend this into an A/B player following the rules in 1a (current plays, next preloads, crossfade on first frame, the rest `preload="none"`). Advance with the video's `ended` event (remove `loop` for sequences) rather than a fixed timer, so a slow load never cuts a clip short.
-- The poster is the LCP element. It must use `next/image` with `priority` and the correct `sizes`.
+### 2.3 Fix the loading and playback logic
 
-### 1d. Serve and cache the videos properly
+Write one small video controller and use it for every hero video:
 
-In `next.config.ts`, add long-lived cache headers for versioned media:
+- **Load ahead, one at a time.** Load the first video immediately. When video N is on screen, start loading video N+1 (`video.preload = 'auto'; video.load()`). Never let all videos download at once on mobile.
+- **Reveal only when ready.** Don't show a video (or start its slide-in transition) until it has fired `canplay`/`canplaythrough` or `readyState >= 3`. Until then show the poster. This removes the frozen-first-frame glitch.
+- **Handle the play promise.** `video.play()` returns a promise. Catch rejections (autoplay blocked, iOS Low Power Mode, Data Saver) and keep the poster visible instead of a broken player. Never leave an uncaught rejection in the console.
+- **Play only what is visible.** Use an `IntersectionObserver` (or the scroll timeline's own state) to `play()` the video in view and `pause()` the rest. Playing several videos at once is a major cause of jank, especially on phones.
+- **Pause when the tab is hidden** (`visibilitychange`) and resume when it comes back.
+- **Recover from stalls.** Listen for `stalled`, `waiting` and `error`. On `error`, retry once with a fresh `load()` (optionally with a cache-busting query). If it fails again, fall back to the poster permanently for that session. Log it in development only.
+- **Respect `prefers-reduced-motion` and Save-Data:** show posters instead of autoplaying video.
+- **Don't recreate video elements** on route changes or re-renders. Create them once and reuse them.
 
-```ts
-async headers() {
-  return [
-    { source: '/videos/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
-  ];
-},
+### 2.4 Keep the compositor happy
+
+- Animate video containers with `transform` and `opacity` only. Don't animate `left/top/width/height`, `border-radius` or `filter` on an element that contains a playing video.
+- Don't put `filter`, `backdrop-filter`, `mix-blend-mode` or animated `clip-path` on top of or around a playing video. If a darkening effect is needed, use a separate overlay `<div>` with an animated `opacity`.
+- Put `will-change: transform` only on the one or two layers currently animating, and remove it when they are idle. Lots of permanent `will-change` layers use up GPU memory and cause the stutter you're trying to fix.
+
+### 2.5 Hosting
+
+- Serve videos with long cache headers (see section 4) and make sure Netlify returns `Accept-Ranges: bytes` and `206 Partial Content` for them (check the Network tab).
+- If videos are still slow for visitors far from the CDN edge, propose (don't implement without approval) moving them to a video CDN with adaptive streaming (for example Mux, Cloudflare Stream or Bunny Stream, using HLS with `hls.js` and native HLS on Safari).
+
+---
+
+## 3. Lag and glitches across the site
+
+Search the code for these patterns and fix any you find. Each one is a known cause of scroll jank.
+
+### 3.1 Scroll loop
+
+- **One scroll listener**, marked `{ passive: true }`, that only stores `scrollY` and schedules a single `requestAnimationFrame`. All visual updates happen in that one rAF. Stop the rAF loop when nothing is moving.
+- **No layout reads inside the loop.** `getBoundingClientRect()`, `offsetWidth/Height`, `offsetTop`, `scrollWidth`, `clientHeight` and `getComputedStyle()` inside the scroll/rAF handler cause forced reflow every frame. Measure once on load and on real resizes, cache the numbers, and compute positions from scroll progress plus the cache.
+- **Batch writes.** Read everything first, then write. Never interleave reads and writes on different elements.
+- **No layout-triggering writes per frame.** Elements that grow or move every frame (the logo arch opening into the hero, rooms closing into the arch, the Featured project opening to full screen) must use `transform: translate/scale` plus `clip-path: inset(... round ...)`, not changing `left/top/width/height/border-radius` each frame. Pre-size each element to its largest size and scale it down.
+- **Don't change `background-position` on large elements every frame** (for example the marble texture). Use a transformed inner layer instead.
+- **Skip work for off-screen pieces.** If an element's opacity is 0 or it's outside its time window, set `visibility: hidden` (or `content-visibility`) and don't update its styles at all that frame.
+- **Smoothing (lerp) on scroll:** if the code eases toward the target scroll position, make sure it stops when it's close, snaps on jumps (anchor links, route changes), and is **turned off or much lighter on touch devices**, where it fights the phone's own momentum scrolling and feels laggy.
+- Use `toFixed()` sparingly. Avoid creating strings and objects in the hot loop where a cached value works.
+
+### 3.2 Rendering cost
+
+- Find fixed full-screen overlays with `mix-blend-mode`, `filter: blur()` or big semi-transparent images (for example a leaf-shadow layer or blurred plant cut-outs on the hero). These repaint over everything while scrolling. Keep them only while visible: set `display: none` when their opacity reaches 0, not just `opacity: 0`.
+- Remove or limit `backdrop-filter`. It's very expensive on mobile.
+- Large `box-shadow` on many moving cards is costly. Prefer a pre-blurred shadow image or a single shadow layer.
+- Check for layers being promoted unnecessarily (DevTools > Rendering > Layer borders) and GPU memory warnings.
+- SVG with filters (feTurbulence etc.) used as textures should be rasterised to a small image once, not recomputed.
+
+### 3.3 Visual glitches to look for
+
+- Flashes of unstyled text or layout shift when web fonts load.
+- Sections that are briefly blank or show the wrong frame when scrolling fast or jumping with the scroll bar.
+- Elements visible at the edges when they should be off-screen (thin slivers of a panel).
+- Header showing or hiding at the wrong moment, or flickering between states.
+- Z-index fights: decorative elements (branches, plants) covering text or links.
+- Content jumping when the mobile address bar shows or hides.
+- Back/forward and hash routing: the page should open at the top of the new route, with scroll animations in the correct state, and no leftover animation from the previous page.
+- Horizontal scroll on any page at 320, 375, 390, 414, 768, 1024, 1280, 1440 and 1920 px widths.
+- Anything that breaks when you resize the window during the animation.
+- Every link and button works. The contact and newsletter forms validate and give clear messages.
+
+---
+
+## 4. Speed
+
+### 4.1 Images
+
+- Convert every raster image to AVIF with WebP fallback (or at least WebP) at quality around 80–88. Compare each converted image with the original at full size; if you can see any difference, raise the quality.
+- Generate responsive sizes (for example 480, 768, 1080, 1600, 2000 w) and use `srcset` + `sizes`. Phones must not download desktop-size images.
+- Always set `width` and `height` (or `aspect-ratio`) so nothing shifts while loading.
+- `loading="lazy"` and `decoding="async"` for everything not visible on first paint. **Never** lazy-load the first hero image or poster. Give that one `fetchpriority="high"` and a `<link rel="preload" as="image">`.
+- For images used deep in the scroll animation, start loading them a screen or two ahead of when they appear, so they don't pop in late.
+- Some client photos are small (about 460–660 px wide). Don't upscale them in code. Flag them in your report so the client can supply larger originals.
+- Optimise PNGs with transparency (logo, branch, letters) or convert them to WebP with alpha. Use SVG for anything that is really line art.
+
+### 4.2 Fonts
+
+- `preconnect` to the font host, or self-host the fonts (preferred).
+- Load only the weights and styles actually used, subset to Latin, use `font-display: swap`, and preload the one or two files used above the fold.
+- Add metric-compatible fallbacks (`size-adjust`, `ascent-override`) to remove layout shift when fonts swap.
+
+### 4.3 CSS and JavaScript
+
+- Inline the critical CSS for the first screen. Load the rest without blocking render.
+- Minify CSS, JS and HTML in the production build. Remove dead CSS and JS left from removed sections (for example an old materials section, timber louvres, unused plant and curtain code, unused images).
+- `defer` all scripts. No third-party script should block rendering. Load analytics after the page is interactive.
+- Split code per page if there's a bundler, so About, Services, Portfolio and Contact don't run the home page's animation engine.
+
+### 4.4 Caching and hosting (Netlify)
+
+Add a `_headers` file (or `netlify.toml` headers):
+
+```
+/media/*
+  Cache-Control: public, max-age=31536000, immutable
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/
+  Cache-Control: public, max-age=0, must-revalidate
 ```
 
-Only do this because file names are versioned (1b). Confirm range requests work on the production server: `curl -sI -H "Range: bytes=0-1023" http://localhost:3000/videos/FILE.mp4` must return `206 Partial Content`. Safari will not play video without it.
+Only use `immutable` for files with a content hash or versioned name. If file names aren't hashed, add hashing in the build or use a version query string, so updates still reach visitors. Confirm Brotli/gzip compression is applied to HTML, CSS, JS and SVG.
 
 ---
 
-## Phase 2: WebGL / React Three Fiber
+## 5. Mobile optimisation
 
-- **Remove runtime still rendering.** `renderStills` (`src/lib/three/renderStills.ts`) builds six full scenes on the main thread during page load. Replace it with **static images generated once**:
-  - Write a small script (Playwright is fine) that renders each project scene and saves `public/images/<project>.webp` at 1600px wide (quality about 80).
-  - Set `image:` for each project in `src/data/projects.ts`.
-  - Remove the runtime render path from `ProjectImagesProvider` (keep the provider or replace it with direct `next/image` use).
-  - Real photos will drop in the same way later.
-- **Project images** in `Projects.tsx` and the menu: use `next/image` with correct `sizes`. Before fading a new carousel slide in, preload and `decode()` the next image, so slide changes never flash blank. Preload the next and previous slide images when idle.
-- **Villa canvas (`VillaScene.tsx`) renders forever** once mounted, even after it scrolls away. Fix:
-  - Pause it when off screen (IntersectionObserver → `frameloop="never"`).
-  - Ideally switch to `frameloop="demand"` and call `invalidate()` only while the camera, zoom, spin or floor animation is still easing, or a hover state changes. Stop invalidating once values have converged (difference < 0.0005).
-- **Static shadows.** The lights and geometry do not move (only the camera does), so set `gl.shadowMap.autoUpdate = false` and set `gl.shadowMap.needsUpdate = true` only when something changes (floor switch, view change, during the floor-drop animation). Use a 1024 shadow map on mobile.
-- **Draw calls.** `villaModel.ts` and `scenes.ts` create hundreds of separate box meshes, each with its own geometry. Reduce draw calls without changing the look:
-  - Share one unit `BoxGeometry` and scale meshes, or better, merge static meshes per material with `mergeGeometries` from `three/examples/jsm/utils/BufferGeometryUtils.js`. Keep room slabs separate because they need hover and click.
-  - Log `gl.info.render.calls` before and after, and put both numbers in the report.
-- **Adaptive quality.** Wrap canvases with drei `<PerformanceMonitor>` to lower `dpr` (minimum 1) when FPS drops, and cap `dpr` at 1.5 on mobile.
-- **Panels over the canvas.** `.panel` uses `backdrop-filter: blur(14px)` on top of a canvas that redraws every frame. That is very expensive. Replace it with a near-opaque solid background (for example `rgba(17,17,15,.94)`) that looks almost the same.
-- Make sure every geometry, material and renderer is disposed on unmount (check `disposeObject` covers everything, and the hero canvas if it stays).
-- Make sure no more than one WebGL context is alive at a time where possible. Report how many exist at peak (`document.querySelectorAll('canvas').length` plus any off-screen renderers).
+- **Viewport units:** use `svh`/`lvh`/`dvh` deliberately. Pinned stages should use `100svh` (or `100lvh`) so they don't jump when the address bar moves. Don't re-measure or rebuild the timeline on resize events where only the height changed by about the address-bar amount.
+- **Shorter scroll on phones:** the home timeline is very long. Shorten the pinned scroll distance on small screens so it doesn't feel endless, while keeping every scene.
+- **Lighter effects on phones:** fewer simultaneous layers, no blur filters, no blend modes, smaller shadows, fewer decorative elements, mobile-sized videos and images. Use `(hover: none) and (pointer: coarse)` and screen width together to decide.
+- **Touch:** no scroll-jacking. Native momentum scrolling must stay intact. Turn off scroll smoothing on touch, or keep it very light.
+- **Tap targets** at least 44 × 44 px with enough spacing. The header links must stay readable and tappable at 320 px wide. Nothing important may depend on hover.
+- **Safe areas:** respect `env(safe-area-inset-*)` for notched phones, especially the header and any fixed elements.
+- **iOS specifics:** `playsinline` on all videos. Expect autoplay to fail in Low Power Mode and show the poster. Avoid `background-attachment: fixed`. Check that `position: sticky` works inside the containers used.
+- **Text:** body text at least 16 px. No text clipped or overlapping in any scene at 320–430 px widths.
+- **Forms:** correct `type`, `inputmode` and `autocomplete` attributes. Inputs at least 16 px so iOS doesn't zoom.
+- **Memory:** low-end phones crash or reload with too many big decoded images and videos. Release (unload) videos and very large images that are far behind the current scroll position.
+- Test portrait and landscape.
 
 ---
 
-## Phase 3: GSAP, scrolling and React effects
+## 6. Verify
 
-- **Remove `scroll-behavior: smooth` from CSS** (`base.css`). The site already smooth-scrolls in JS, and CSS smooth scrolling is known to make ScrollTrigger jumpy and miscalculate on refresh.
-- Call `ScrollTrigger.refresh()` once after fonts load (`document.fonts.ready`), after the intro unlocks scrolling, and after any lazily mounted section changes page height. Set `ScrollTrigger.config({ ignoreMobileResize: true })`.
-- **Listener leaks.**
-  - `Why.tsx` adds `pointermove` and `pointerleave` listeners inside `useGSAP` without removing them. Return a cleanup function.
-  - Audit every `addEventListener`, `IntersectionObserver`, `ResizeObserver`, `setTimeout` and `requestAnimationFrame` in `src/` for a matching cleanup.
-  - Check under Strict Mode in dev that nothing is registered twice.
-- **Carousel race conditions** (`Projects.tsx`). Make rapid clicking on arrows and floating cards safe: no stuck `busy` flag, no half-finished timelines, no state set after unmount. Kill the in-flight timeline before starting a new one.
-- **Philosophy section.** The `onUpdate` toggles classes on every word on every scroll tick. Only touch words whose lit state actually changed.
-- **Scroll reveal** (`ScrollReveal.tsx`). Make sure elements already in the viewport on load are not visibly pushed down and then animated up (no jump on load). Elements above the fold should start in place.
-- **Intro safety.** If JavaScript loads slowly, the page must never stay locked or hidden. Check the 6-second fallback in `layout.tsx` works together with `Intro.tsx`, and that the header logo never ends up invisible.
-- Animate only `transform` and `opacity`. Check that nothing animates `width`, `height`, `top`, `left`, `filter`, `clip-path` or `box-shadow` during scroll. If the hero `clip-path` intro transition is costly with a playing video, replace it with a `transform: scale()` reveal that looks the same.
-- Use `will-change` only on elements that are actively animating, and remove it afterwards. Do not leave it on permanently.
-- Scroll and pointer handlers must be `passive` where possible and must not cause React re-renders on every event.
+After the fixes, repeat the audit and show before/after numbers.
 
----
+Targets (mobile Lighthouse, throttled):
 
-## Phase 4: CSS paint and layout cost
+| Metric | Target |
+|---|---|
+| LCP | under 2.5 s |
+| CLS | under 0.1 |
+| INP / TBT | INP under 200 ms, TBT under 200 ms |
+| Home page transfer before first scroll | under about 1.5 MB on mobile |
+| Scrolling the home page | steady 60 fps on desktop; no long tasks over 50 ms during scroll on a mid-range phone |
 
-- List every `backdrop-filter`, `filter`, large `box-shadow` (blur ≥ 40px), `mix-blend-mode` and `position: fixed` layer. For each one over moving content (video, canvas, animated elements), replace it with a cheaper equivalent that looks the same, or limit it to when it is static.
-- Floating project cards use `filter: brightness()` with a transition and heavy shadows while moving with parallax. Replace the filter with an overlay `::after` whose `opacity` changes (same look, much cheaper).
-- Check with DevTools → Rendering → **Paint flashing** and **Layer borders** while scrolling and while the hero video plays. Nothing large should repaint every frame except the video and the active canvas.
-- Fix any layout shift (CLS): reserve space for images, video, canvases and fonts. Target CLS < 0.05.
+Also confirm:
 
----
-
-## Phase 5: Assets, fonts, JavaScript and caching
-
-- **Fonts.**
-  - Only load the weights actually used.
-  - Make sure `font-display: swap` is in effect.
-  - Preload the two most important fonts: the headline serif and the body font.
-  - Check there is no visible layout jump when fonts swap. Use fallback metric overrides (`size-adjust`) if needed.
-- **JavaScript.**
-  - Run Next's bundle analyzer for this Next version (check the Next 16 docs for the correct command) and record the largest chunks.
-  - `three`, `@react-three/fiber` and `drei` must load **only** in the chunks for the 3D components (`next/dynamic` with `ssr: false`), never in the initial page bundle.
-  - Delete unused code and dependencies (for example `renderStills` once Phase 2 removes it).
-  - Load GSAP plugins only where used.
-- **Images.** Everything goes through `next/image` with explicit `sizes`. Only the hero poster has `priority`. Everything else is lazy.
-- **Lazy sections.** The villa scene already mounts near the viewport. Make sure its JS chunk also loads only then (start the dynamic import about 600px before it enters view).
-- **Caching headers** for `/videos/*`, `/images/*` and fonts (immutable for versioned files).
-- **Third parties.** Make sure nothing loads from external domains at runtime (fonts are self-hosted).
+- Hard-reload the home page 10 times on desktop and 10 times on a phone (including with "Disable cache" on and "Fast 4G" throttling). Every hero video must show its poster immediately and start playing without freezing, every time.
+- Scroll the home page fast, slow, with the scroll bar, with keyboard (Space, Page Down, Home, End) and by touch. There must be no blank frames, no stuck elements and no flicker.
+- Navigate between all pages and back with browser back/forward. Each page opens at the top with the correct state.
+- `prefers-reduced-motion: reduce` shows the static version with posters, and nothing is broken.
+- No console errors or warnings on any page.
+- No horizontal scrolling at any width listed above.
+- Visually compare screenshots of each scene before and after at 1440 px and 390 px. They must match.
 
 ---
 
-## Phase 6: Bug and glitch sweep
+## 7. Report back
 
-Go through the site carefully on the production build and fix everything you find:
+Finish with a short report:
 
-- [ ] Zero errors and zero warnings in the browser console, apart from the known R3F `THREE.Clock` deprecation notice, which comes from the library.
-- [ ] No React hydration warnings. Check `Footer.tsx`'s `new Date().getFullYear()` and anything else that differs between server and client.
-- [ ] Menu: opens and closes cleanly, closes with Escape, nav links scroll to the right place, and rapid open/close does not break it.
-- [ ] Carousel: rapid clicking works, images never flash blank, and the counter is always right.
-- [ ] Villa: views, floors, rotate, zoom, hover and click selection all work. The specifications list and the 3D model stay in sync. Touch drag works on mobile without blocking page scroll.
-- [ ] Process steps, Why cards, Philosophy sun and word lighting all behave correctly, including when you scroll fast or jump straight to a section from the menu.
-- [ ] Contact form validation works.
-- [ ] `prefers-reduced-motion`: no video autoplay (poster only), no parallax or tilt, everything still readable and usable.
-- [ ] No horizontal scrolling at 390px width, and no layout jumps on iPhone Safari when the address bar shows or hides.
-- [ ] Browser back/forward and reloading on a `#section` URL land in the right place without the intro breaking it.
-- [ ] Leaving the tab and returning: videos resume, canvases resume, no burst of queued animations.
-
----
-
-## Phase 7: Verify and report
-
-Test on the production build in Chrome, Safari and Firefox on desktop, and on an iPhone (or Safari's responsive mode plus a real device if available) and an Android phone.
-
-**Video test, which must pass every time:** do 10 hard reloads (Cmd+Shift+R) on desktop and 10 on mobile, with cache disabled and "Fast 4G" throttling. The hero video must start every time:
-- within about 1.5 s after the intro ends on desktop
-- with the poster visible instantly
-- with no black frame and no stutter at the loop point
-- also when coming back to the tab after 5 minutes in the background
-
-**Targets** (Lighthouse on the production build):
-
-| Metric | Mobile | Desktop |
-|---|---|---|
-| Performance score | ≥ 85 | ≥ 95 |
-| LCP | < 2.5 s | < 1.5 s |
-| CLS | < 0.05 | < 0.05 |
-| TBT | < 200 ms | < 100 ms |
-| Initial JS (gzipped) | as small as possible; 3D libraries not in the initial bundle | |
-
-Smooth scrolling at 60 fps on a mid-range laptop with no long tasks over 50 ms during scroll (DevTools Performance, no throttling), and no sustained drops below 50 fps with 4× CPU slowdown.
-
-**Write `perf/REPORT.md`** with:
-
-1. A before/after table for every metric above, plus page weight, video sizes, draw calls and the number of WebGL contexts.
-2. Every problem found (from `perf/AUDIT.md`), the fix applied and the file(s) changed.
-3. Anything you could not fix or meet, why, and the recommended next step.
-4. Anything that changed visually, however small.
-
-Then run `npm run build` one final time, make sure it passes, and commit.
+1. Problems found, grouped by severity (breaks / visible jank / slow loading / minor).
+2. What you fixed, file by file, in plain language.
+3. Before/after measurements.
+4. Anything you did not fix and why.
+5. "Needs approval": changes that would alter how the site looks or behaves, or that need new services or assets (for example a video CDN or larger client photos).

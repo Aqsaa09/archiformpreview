@@ -38,35 +38,36 @@ export const roomFilms = [
      by the studio (videos folder/hero videos) as sent: same picture, length and direction. The only change is that the Google
      sparkle mark (air, green, flow; around x1136-1184 y576-624) and the "Veo" mark (light; bottom right) are blurred out with
      ffmpeg delogo. The web cuts (v5, Nov 2026) are encoded for scroll scrubbing: H.264, a keyframe every 4 frames and no
-     B-frames, so each seek decodes at most a few frames; audio dropped. Landscape only, so phones crop the same file (no msrc).
+     B-frames, so each seek decodes at most a few frames; audio dropped. Phones and portrait tablets get the studio's portrait cuts
+     (msrc, from videos folder/hero videos mobile, 720x1280, Nov 2026), re-encoded the same way at 24fps (the scrub assumes 24fps).
      Confirm the studio made them and set rights to owned. */
   {
     id: 'light',
-    src: '/v/h-light-v5.mp4', poster: '/v/h-light-v5.jpg',
+    src: '/v/h-light-v5.mp4', poster: '/v/h-light-v5.jpg', msrc: '/v/h-light-m6.mp4', mposter: '/v/h-light-m6.jpg',
     label: 'A little girl plays in the sunlight on the floor of a bright living room with tall garden windows',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Girl_playing_with_sunlight_6ce7db00.mp4.',
+    notes: 'Source: hero videos/Girl_playing_with_sunlight_6ce7db00.mp4; phone cut hero videos mobile/girl_sunlight_mobile.mp4.',
   },
   {
     id: 'air',
-    src: '/v/h-air-v5.mp4', poster: '/v/h-air-v5.jpg',
+    src: '/v/h-air-v5.mp4', poster: '/v/h-air-v5.jpg', msrc: '/v/h-air-m6.mp4', mposter: '/v/h-air-m6.jpg',
     label: 'Sheer curtains sway in the breeze at the open windows of a calm living room',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s, forward only, as sent).',
+    notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s, forward only, as sent); phone cut hero videos mobile/breeze_curtains_mobile.mp4.',
   },
   {
     id: 'green',
-    src: '/v/h-green-v6.mp4', poster: '/v/h-green-v6.jpg',
-    label: 'A mid-century home of timber, stone and glass among the trees, and its living room opening onto the garden',
+    src: '/v/h-green-v7.mp4', poster: '/v/h-green-v7.jpg', msrc: '/v/h-green-m7.mp4', mposter: '/v/h-green-m7.jpg',
+    label: 'The living room of a mid-century home, its tall windows opening onto a green garden',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a_t2-3.4.mp4 followed by _t2-6.9.mp4, joined into one film (2.8s). Shown for Considered Materials.',
+    notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a_t2-6.9.mp4 only (the studio\'s cropped cut, 1.4s, the living room onto the garden). Shown for Considered Materials. Phone cut hero videos mobile/midcentury_greenery_alt_mobile.mp4 (the same shot; the _short_ file is the older timber-and-stone shot).',
   },
   {
     id: 'flow',
-    src: '/v/h-flow-v6.mp4', poster: '/v/h-flow-v6.jpg',
+    src: '/v/h-flow-v6.mp4', poster: '/v/h-flow-v6.jpg', msrc: '/v/h-flow-m6.mp4', mposter: '/v/h-flow-m6.jpg',
     label: 'Sheer curtains draw closed at dusk as warm lamps light up a living room',
     origin: 'ai', rights: 'unverified',
-    notes: 'Source: hero videos/Curtains_closing_in_living_room_8426ec28_t5.5-10.mp4.',
+    notes: 'Source: hero videos/Curtains_closing_in_living_room_8426ec28_t5.5-10.mp4; phone cut hero videos mobile/curtains_closing_mobile.mp4.',
   },
 ];
 

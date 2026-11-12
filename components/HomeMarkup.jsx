@@ -6,7 +6,7 @@ import { getProject } from '@/content/projects';
 const featured = getProject('emirates-living-villa');
 // Arched images beside the process steps and the founder teaser share one column: about 80vw on phones, a third of the page on desktop
 const ARCH_SIZES = '(max-width: 820px) 80vw, 34vw';
-const CARD_SIZES = '(max-width: 820px) 74vw, 360px';
+const CARD_SIZES = '(max-width: 820px) min(66vw, 360px), 330px';
 
 /* Markup for the home page scroll story. Element ids are used by lib/home-story.js. */
 export default function HomeMarkup() {

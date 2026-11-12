@@ -73,7 +73,9 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .hdr nav a:hover::after,.hdr nav a[aria-current="page"]::after{transform:scaleX(1)}
 .brand{position:relative;display:block;justify-self:center;width:clamp(96px,8.4vw,128px);line-height:0;text-decoration:none}
 .brand img{width:100%;height:auto}
-.brand .dk{opacity:calc(1 - var(--ll,0));transition:opacity .4s}
+.brand .dk{opacity:calc(1 - var(--ll,0));transition:opacity .4s,filter .4s}
+/* Over the featured film the dark logo can fall on her hair: a soft light glow keeps it legible, and vanishes on the pale sky */
+.on-film .brand .dk{filter:drop-shadow(0 0 6px rgba(244,238,234,.9)) drop-shadow(0 0 2px rgba(244,238,234,.75))}
 .brand .lt{position:absolute;inset:0;opacity:var(--ll,0);transition:opacity .4s}
 .hdr:not(.is-home){background:var(--bg)}
 .menu-btn{display:none;justify-self:end;width:44px;height:44px;align-items:center;justify-content:flex-end;background:none;border:0;color:inherit;cursor:pointer;padding:0}
@@ -133,6 +135,10 @@ body:has(#loader:not(.gone)) #hdr{visibility:hidden;opacity:0}
 .land .ly{position:absolute;left:calc(50% + var(--x) * var(--u));bottom:calc(100% - var(--gy) + var(--y,0) * var(--u));width:calc(var(--w) * var(--u));transform:translateX(-50%) translateZ(calc(var(--z) * var(--u)));transform-origin:50% 100%}
 .land .ly img{display:block;width:100%;height:auto;max-width:none;transform-origin:50% 100%;user-select:none}
 .land .hs img{scale:1.45 1.3}
+/* Dims the house as it rises at dusk (a house-shaped dark layer whose opacity fades: black at .3 is brightness .7). An animated
+   CSS filter on the house redrew it every frame inside the 3D scene, which left blocks of the sky undrawn on some graphics cards.
+   lib/home-story.js sets the mask image when the garden images load */
+.land .hsh{position:absolute;inset:0;scale:1.45 1.3;transform-origin:50% 100%;background:#000;opacity:0;pointer-events:none;-webkit-mask:center/100% 100% no-repeat;mask:center/100% 100% no-repeat}
 .land .sway img{animation:breeze 7s ease-in-out infinite alternate}
 .land .palm img{animation-duration:5.5s}
 .land .pr img{animation-delay:-2.4s}

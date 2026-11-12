@@ -30,6 +30,7 @@ const SIZES = {
   '/m/workshop.jpg': [1280, 960],
   '/m/wardrobe-corridor.webp': [1122, 1402],
   '/m/dresser-studio.webp': [1448, 1086],
+  '/m/panelled-bedroom.jpg': [1086, 1448],
   // Portfolio images (Nov 2026)
   '/m/pf/courtyard-bistro.jpg': [1024, 1536],
   '/m/pf/courtyard-lounge.jpg': [1086, 1448],

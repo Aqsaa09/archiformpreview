@@ -67,7 +67,7 @@ export const projects = [
     sub: 'Residential Renovation & Interior Styling',
     type: 'Villa renovation',
     location: 'Dubai, UAE',
-    did: 'Interior Design, Project Management, Joinery Design, Styling',
+    did: 'Interior Design, Project Management, Custom Cabinetry, and Styling',
     cover: '/m/bed.jpg',
     intro: 'A serene retreat shaped by warmth, comfort and quiet elegance.',
     text: 'For this private villa, our vision was to create interiors that feel effortlessly connected, combining soft neutral tones, natural textures and timeless details. From bespoke joinery to carefully considered furnishing and styling, the design brings together sophistication and everyday comfort, creating a home that feels calm, personal and beautifully lived in.',
@@ -93,7 +93,7 @@ export const projects = [
       { src: '/m/vanity-clean.webp', alt: 'Sculpted dressing wall with a curved wardrobe, backlit round mirror and floating shelves', wide: true, kind: 'visualisation' },
       { src: '/m/dresser.jpg', alt: 'Scalloped six-drawer chest in soft lilac grey', wide: true, kind: 'visualisation' },
       { src: '/m/wardrobe-corridor.webp', alt: 'Dressing corridor lined with full-height wardrobes, smoked-glass doors facing a pair in warm taupe', kind: 'visualisation' },
-      { src: '/m/dresser-studio.webp', alt: 'Six-drawer chest in soft grey with a scalloped apron and polished nickel knobs', wide: true, kind: 'visualisation' },
+      { src: '/m/panelled-bedroom.jpg', alt: 'Bedroom wall of soft beige upholstered panels behind an upholstered bed, with a glass globe pendant hanging beside it' },
     ],
   },
   {

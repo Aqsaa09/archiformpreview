@@ -69,8 +69,8 @@ export default function HomeMarkup() {
                 </div>
                 <div className="hol" id="holText">
                   <p className="lbl">Holistic design</p>
-                  <h2 className="h2">One house, designed as a <em>living system.</em></h2>
-                  <p className="body">We map how a home works with its setting through the day and the year: sun, air, water, planting and the people inside. Every layer is designed together.</p>
+                  <h2 className="h2">A Home Designed to Work <em>as One.</em></h2>
+                  <p className="body">We design homes that work with their surroundings throughout the day and year. We consider sunlight, fresh air, water, plants, and the people who live there. Every detail is planned together.</p>
                 </div>
                 {/* Holistic design as a diagram: each point is labelled clear of the house and the text, with a leader line to the
                     part of the house it describes. lib/home-story.js draws the lines to the markers in the house layer (.hmk). */}
@@ -78,9 +78,9 @@ export default function HomeMarkup() {
                   <svg className="hdg-lines" aria-hidden="true"><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /><line pathLength="1" /><circle r="3.5" /></svg>
                   <ul className="hdg-pts" aria-label="What we design for">
                     <li className="hdg-pt l" data-k="green"><span className="ic" aria-hidden="true"><svg viewBox="0 0 70 104"><use href="#sprig"/></svg></span><span><b>Living green</b><em>Planting woven into every view</em></span></li>
-                    <li className="hdg-pt l" data-k="sun"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span><b>Sun &amp; shade</b><em>Overhangs and glazing set for the sun</em></span></li>
+                    <li className="hdg-pt l" data-k="sun"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg></span><span><b>Sun &amp; shade</b><em>Windows and shading designed to control sunlight</em></span></li>
                     <li className="hdg-pt l" data-k="people"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="14" cy="13" r="5"/><circle cx="27" cy="15" r="4"/><path d="M5 35c0-7 4-12 9-12s9 5 9 12M20 35c1-6 4-10 7-10s7 4 7 10"/></svg></span><span><b>The people inside</b><em>Rooms shaped around daily life</em></span></li>
-                    <li className="hdg-pt r" data-k="water"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span><b>Cool water</b><em>Water and planting that cool the air</em></span></li>
+                    <li className="hdg-pt r" data-k="water"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5c6 8.5 10 14 10 20a10 10 0 0 1-20 0c0-6 4-11.5 10-20z"/><path d="M15 26a5 5 0 0 0 5 5"/></svg></span><span><b>Cool water</b><em>Water features and plants that help cool the surrounding air</em></span></li>
                     <li className="hdg-pt r" data-k="air"><span className="ic" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg></span><span><b>Fresh air</b><em>Openings placed for cross-breezes</em></span></li>
                   </ul>
                 </div>
@@ -105,38 +105,38 @@ export default function HomeMarkup() {
             <p className="hh b" id="hhB" aria-hidden="true"><em>Built around</em><br />{' '}better living.</p>
             <div className="hb" id="hb">
               <hr />
-              <p>A home is a collection of everyday experiences, and we believe each deserves careful thought. From the flow of a room to the feel of its materials, we approach every project with precision, purpose and genuine care — creating environments where functionality and wellbeing exist.</p>
+              <p>A home is made up of everyday experiences, and we believe each one deserves careful thought. From the layout of a room to the materials we choose, we design every project with care and purpose. We create beautiful spaces that are comfortable, practical, and support your well-being.</p>
             </div>
             <ul className="hv lbl" id="hv" aria-label="What we design for"><li>Thoughtful Interiors.</li><li>Healthy Living.</li><li>Timeless Spaces.</li></ul>
 
             <div className="scroll-cue" id="cue" aria-hidden="true"><span>Scroll to enter</span><i /></div>
 
             <div className="say" id="sayH">
-              <p className="lbl">Healthy living, by design</p>
-              <p className="disp">What you feel the moment you walk in.</p>
-              <p className="it">Designed for the way you live. Considered for the way you feel.</p>
+              <p className="lbl">Healthy Living by Design</p>
+              <p className="disp">How You Feel the Moment You Walk In.</p>
+              <p className="it">Designed for the way you live and how you feel.</p>
             </div>
           </div>
           <div className="hl-panels" id="hlPanels">
               <div className="pane">
                 <svg className="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" aria-hidden="true"><circle cx="20" cy="20" r="7"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8 32 32M8 32l4.2-4.2M27.8 12.2 32 8"/></svg>
                 <h3>Natural Light</h3>
-                <p className="it">Thoughtful lighting that helps create bright, inviting and comfortable interiors.</p>
+                <p className="it">Thoughtful use of natural light to create bright, welcoming, and comfortable interiors.</p>
               </div>
               <div className="pane">
                 <svg className="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" aria-hidden="true"><path d="M4 14h20a5 5 0 1 0-5-5M4 21h28a5 5 0 1 1-5 5M4 28h12"/></svg>
                 <h3>Comfort &amp; Airflow</h3>
-                <p className="it">Consideration for ventilation, cooling and everyday indoor comfort.</p>
+                <p className="it">Designed for good ventilation, comfortable temperatures, and fresh indoor air.</p>
               </div>
               <div className="pane">
                 <svg className="ic" viewBox="0 0 70 104" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><use href="#sprig"/></svg>
                 <h3>Considered Materials</h3>
-                <p className="it">Finishes and materials selected with beauty, suitability and indoor wellbeing in mind.</p>
+                <p className="it">Beautiful, practical materials chosen for comfort and healthier living.</p>
               </div>
               <div className="pane">
                 <svg className="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" aria-hidden="true"><path d="M5 5h30v30H5zM5 18h11M24 18h11M18 35V24"/><path d="M10 30c4-6 10-3 13-9s7-6 9-8" strokeDasharray="2 3"/></svg>
                 <h3>Functional Living</h3>
-                <p className="it">Intuitive spaces designed around real routines, personal needs and lasting comfort.</p>
+                <p className="it">Practical spaces designed around your daily routine, personal needs, and long-term comfort.</p>
               </div>
           </div>
           <ol className="hl-index" id="hlIndex" aria-hidden="true"><li className="on">Natural Light</li><li>Comfort &amp; Airflow</li><li>Considered Materials</li><li>Functional Living</li></ol>
@@ -146,8 +146,8 @@ export default function HomeMarkup() {
           <div className="dt-in">
             <div className="dt-head">
               <p className="lbl rule">The Quieter Details</p>
-              <h2 className="h2" id="dtTitle">What else makes a home <em>healthy.</em></h2>
-              <p className="body">Beyond light, air and plants, these are the elements we check in every project. Most are invisible once the room is finished. You notice them in how you sleep, breathe and feel through out the day.</p>
+              <h2 className="h2" id="dtTitle">What Else Makes a Home <em>Healthy?</em></h2>
+              <p className="body">Beyond natural light, fresh air, and greenery, we consider the small details that make a home healthier. Many of these details are hidden once the home is complete. You experience their benefits in how you sleep, breathe, and feel throughout the day.</p>
             </div>
             <div className="cards" id="cards">
               <article className="card"><div className="ph"><Image src="/m/materials-board.jpg" alt="Material samples laid out on oak: violet-veined marble, travertine, walnut, bouclé and linen swatches beside kitchen drawings" width={1200} height={1493} sizes={CARD_SIZES} /></div><h3>Natural Materials</h3><p>Organic elements for everyday comfort.</p><ul><li>Clean-air, low-VOC paints.</li><li>Solid wood, stone, and lime plaster.</li><li>Breathable linen, cotton, and wool.</li></ul></article>
@@ -179,7 +179,7 @@ export default function HomeMarkup() {
               <p className="lbl rule">Featured project</p>
               <h2>{featured.name}</h2>
               <p className="sub">Interior renovation &amp; styling</p>
-              <p className="body">A complete renovation of a private villa where warm neutrals, natural textures and timeless design come together. Rooms open to light and fresh air, with bespoke joinery, refined finishes and a calm, layered feel for everyday living.</p>
+              <p className="body">A complete villa renovation combining warm neutral colours, natural materials, and timeless design. Rooms open to light and fresh air, with bespoke joinery, refined finishes and a calm, layered feel for everyday living.</p>
               <dl>
                 <div><dt>Location</dt><dd>{featured.location}</dd></div>
                 <div><dt>Type</dt><dd>{featured.type}</dd></div>
@@ -207,14 +207,14 @@ export default function HomeMarkup() {
             </div>
             <div className="process-copy">
               <div className="process-heading">
-                <h2 className="h2" id="processTitle">From first visit to final finish.</h2>
+                <h2 className="h2" id="processTitle">From the First Visit to the Final Touch.</h2>
               </div>
               <div className="process-window">
                 <ol className="process-steps">
                   <li><span className="lbl">01</span><h3 className="h2">Consultation</h3><p className="body">We visit and listen.</p></li>
                   <li><span className="lbl">02</span><h3 className="h2">Concept and materials</h3><p className="body">Light and airflow first, then finishes.</p></li>
                   <li><span className="lbl">03</span><h3 className="h2">Joinery and finishes</h3><p className="body">Thoughtful details, carefully coordinated.</p></li>
-                  <li><span className="lbl">04</span><h3 className="h2">Furnishing and styling</h3><p className="body">The finishing touches that make it yours.</p></li>
+                  <li><span className="lbl">04</span><h3 className="h2">Furnishing and Styling</h3><p className="body">The finishing touches that make it yours.</p></li>
                 </ol>
               </div>
             </div>
@@ -224,10 +224,10 @@ export default function HomeMarkup() {
         <section className="fd" id="fdTeaser" aria-labelledby="fdName">
           <div className="ph"><Image src="/m/roula.jpg" alt="Roula Jbour, founder of ARCHIFORM, leaning against a white wall" width={980} height={1600} sizes={ARCH_SIZES} /></div>
           <div className="tx">
-            <p className="lbl rule">THE PERSON BEHIND THE PERSPECTIVE</p>
+            <p className="lbl rule">THE PERSON BEHIND THE DESIGN</p>
             <h2 className="disp" id="fdName">Meet Roula.</h2>
-            <p className="body">With a background in healthcare and training in interior design, Roula Jbour brings together two passions: caring for people and creating beautiful spaces.</p>
-            <p className="it">“I believe the true beauty of a space is not only in what you see, but in how comfortably and naturally you can live within it.”</p>
+            <p className="body">With a background in healthcare and interior design, Roula Jbour combines her passion for helping people with her love for creating beautiful spaces.</p>
+            <p className="it">“I believe a beautiful space is not just about how it looks, but also about how comfortable and natural it feels to live in.”</p>
             <p className="lbl">ROULA JBOUR — FOUNDER, ARCHIFORM</p>
             <Link className="go" href="/founder" style={{alignSelf: 'flex-start'}}>MEET THE FOUNDER <svg width="26" height="10" aria-hidden="true"><use href="#arrow"/></svg></Link>
           </div>

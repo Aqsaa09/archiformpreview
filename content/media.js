@@ -27,13 +27,13 @@ export const DISCLOSURE = {
 export const roomFilms = [
   {
     id: 'walk',
-    src: '/v/h-tour-s.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-m2.mp4', mposter: '/v/h-tour-m2.jpg',
+    src: '/v/h-tour-d3.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-m3.mp4', mposter: '/v/h-tour-m2.jpg',
     label: 'A slow walk through a warm mid-century home: the arched entry, the living and dining rooms, the stair garden and the bedroom',
     origin: 'unconfirmed', rights: 'unverified',
-    notes: 'Source: ROULA HERO VIDEO.mp4 (46s, 1080p60, Nov 2026), sped up 1.15x to 40s at 24fps. Follows the scroll like every hero ' +
-      'film; lib/home-story.js gives it its own stretch of the hero timeline (TOUR). Encoded for scrubbing: a keyframe every 8 ' +
-      'frames, no B-frames. Desktop cut 1280x720. Phone cut (Nov 2026): the studio\'s own portrait version, ROULA VIDEO mobile.mp4 ' +
-      '(1080x1920, 60fps, 43s), encoded at 720x1280, 24fps, CRF 25 (VMAF 89.6, 16MB). No AI watermark in the source.',
+    notes: 'Source: ROULA HERO VIDEO.mp4 (46s, 1080p60, Nov 2026), sped up 1.15x to 40s at 24fps; phone cut from the studio\'s ' +
+      'portrait version, ROULA VIDEO mobile.mp4 (1080x1920, 60fps, 43s). Follows the scroll like every hero film; lib/home-story.js ' +
+      'gives it its own stretch of the hero timeline (TOUR). Encoded for scrubbing: a keyframe every 8 frames, no B-frames. ' +
+      'Lighter cuts (Nov 2026): desktop 1280x720 CRF 30 (11MB, VMAF 82), phone 540x960 CRF 27 (8MB). No AI watermark in the source.',
   },
   /* The four chapters below (Natural Light, Comfort & Airflow, Considered Materials, Functional Living) use the films supplied
      by the studio (videos folder/hero videos) as sent: same picture, length and direction. The only change is that the Google

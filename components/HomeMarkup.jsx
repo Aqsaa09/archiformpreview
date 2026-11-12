@@ -12,8 +12,13 @@ const CARD_SIZES = '(max-width: 820px) min(66vw, 360px), 330px';
 export default function HomeMarkup() {
   return (
     <>
+      {/* The walk-in film's poster is the largest thing on the first screen, but lib/home-story.js only attaches it once the
+          scripts run (phones and portrait tablets get the portrait cut). These hints (React moves them into <head>) let the
+          browser fetch the right one with the HTML; the media queries match the script's choice. */}
+      <link rel="preload" as="image" href={roomFilms[0].mposter} media="(orientation: portrait) and (max-width: 1100px)" fetchPriority="high" />
+      <link rel="preload" as="image" href={roomFilms[0].poster} media="not all and (orientation: portrait) and (max-width: 1100px)" fetchPriority="high" />
       <div className="loader" id="loader" aria-hidden="true">
-        <img className="ld-logo" id="ldLogo" src="/m/logo-dark.webp" alt="" width="520" height="352" />
+        <img className="ld-logo" id="ldLogo" src="/m/logo-dark.webp" alt="" width="520" height="352" fetchPriority="high" />
         <div className="meta"><span>Dubai · 25.20° N, 55.27° E</span><span id="ldPct">000</span></div>
       </div>
       <div id="vp" aria-hidden="true"></div>
@@ -84,7 +89,7 @@ export default function HomeMarkup() {
                 <div className="reel" id="reel">
                 <video data-clip="0" muted playsInline preload="none" aria-hidden="true"></video>
                 {roomFilms.map((f, i) => (
-                  <video key={f.id} data-clip={i + 1} data-src={f.src} data-msrc={f.msrc} data-poster={f.poster} data-mposter={f.mposter} muted loop={f.loop} playsInline preload={i ? 'none' : 'auto'} aria-label={f.label}></video>
+                  <video key={f.id} data-clip={i + 1} data-src={f.src} data-msrc={f.msrc} data-poster={f.poster} data-mposter={f.mposter} data-mfps={f.mfps} muted loop={f.loop} playsInline preload={i ? 'none' : 'auto'} aria-label={f.label}></video>
                 ))}
                 </div>
               </div>
@@ -146,7 +151,7 @@ export default function HomeMarkup() {
             </div>
             <div className="cards" id="cards">
               <article className="card"><div className="ph"><Image src="/m/materials-board.jpg" alt="Material samples laid out on oak: violet-veined marble, travertine, walnut, bouclé and linen swatches beside kitchen drawings" width={1200} height={1493} sizes={CARD_SIZES} /></div><h3>Natural Materials</h3><p>Organic elements for everyday comfort.</p><ul><li>Clean-air, low-VOC paints.</li><li>Solid wood, stone, and lime plaster.</li><li>Breathable linen, cotton, and wool.</li></ul></article>
-              <article className="card"><div className="ph"><Image src="/m/kitchen-marble.jpg" alt="Kitchen with a full marble backsplash and shelf, oak cabinets and an olive branch in a glass vase" width={809} height={1470} sizes={CARD_SIZES} style={{objectPosition: '50% 40%'}} /></div><h3>Clean Air &amp; Humidity Control</h3><p>Fresh air for a healthier home.</p><ul><li>Natural cross-ventilation and fresh airflow.</li><li>Balanced indoor humidity.</li><li>Dust-minimizing layouts.</li></ul></article>
+              <article className="card"><div className="ph"><Image src="/m/kitchen-marble.jpg" alt="Kitchen with a full marble backsplash and shelf, oak cabinets and an olive branch in a glass vase" width={809} height={1470} sizes={CARD_SIZES} style={{objectPosition: '50% 40%'}} /></div><h3>Humidity Control</h3><p>Fresh air for a healthier home.</p><ul><li>Natural cross-ventilation and fresh airflow.</li><li>Balanced indoor humidity.</li><li>Dust-minimizing layouts.</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/bed-sunlight.jpg" alt="Bedroom with late sun falling across the wall, a palm-print headboard and a small lamp on the bedside table" width={720} height={1280} sizes={CARD_SIZES} style={{objectPosition: '50% 55%'}} /></div><h3>Layered Lighting</h3><p>The right light for every moment.</p><ul><li>Bright light for daily tasks.</li><li>Warm light for evening rest.</li><li>Easy dimming with lamps and switches.</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/acoustic.jpg" alt="Reading corner with a slatted timber wall, felt acoustic pendants and a green velvet armchair" width={1200} height={1600} sizes={CARD_SIZES} style={{objectPosition: '50% 45%'}} /></div><h3>Sound Insulation</h3><p>Acoustic comfort for a quieter home.</p><ul><li>Noise-absorbing rugs and drapes.</li><li>Soft-close doors and drawers.</li><li>Sound-dampening finishes.</li></ul></article>
               <article className="card"><div className="ph"><Image src="/m/vanity-clean.webp" alt="Design visualisation of a sculpted dressing wall with built-in shelves and a backlit mirror" width={1447} height={1087} sizes={CARD_SIZES} style={{objectPosition: '40% 50%'}} /></div><h3>Considered Storage</h3><p>Effortless organization for calm spaces.</p><ul><li>Tailored daily storage.</li><li>Seamless built-in cabinets.</li><li>Open, clutter-free layouts.</li></ul></article>

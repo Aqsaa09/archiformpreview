@@ -33,7 +33,7 @@ export default function JournalPage() {
 
           <figure className="jr-clip">
             <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer" aria-label="Read the article in She Means Business, Gulf News (opens in a new tab)">
-              <Image src="/m/she-means-business-p14.jpg" alt="Page 14 of She Means Business: the interview with Roula Jbour, founder of ARCHIFORM, with her portrait" width={1482} height={1061} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" />
+              <Image src="/m/she-means-business-p14.jpg" alt="Page 14 of She Means Business: the interview with Roula Jbour, founder of ARCHIFORM, with her portrait" width={1482} height={1061} sizes="(max-width: 820px) 100vw, 88vw" loading="eager" fetchPriority="high" />
             </a>
             <figcaption className="lbl">She Means Business · Gulf News · Page 14 · Friday, 30 October 2026 <a className="jr-full" href={ARTICLE_URL} target="_blank" rel="noopener noreferrer">Read the article<span className="sr"> (opens in a new tab)</span> <Arrow /></a></figcaption>
           </figure>

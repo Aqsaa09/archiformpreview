@@ -27,44 +27,47 @@ export const DISCLOSURE = {
 export const roomFilms = [
   {
     id: 'walk',
-    src: '/v/h-tour-s.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-s-m.mp4', mposter: '/v/h-tour-s-m.jpg',
+    src: '/v/h-tour-s.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-m2.mp4', mposter: '/v/h-tour-m2.jpg',
     label: 'A slow walk through a warm mid-century home: the arched entry, the living and dining rooms, the stair garden and the bedroom',
     origin: 'unconfirmed', rights: 'unverified',
     notes: 'Source: ROULA HERO VIDEO.mp4 (46s, 1080p60, Nov 2026), sped up 1.15x to 40s at 24fps. Follows the scroll like every hero ' +
       'film; lib/home-story.js gives it its own stretch of the hero timeline (TOUR). Encoded for scrubbing: a keyframe every 8 ' +
-      'frames, no B-frames. Desktop cut 1280x720; phone cut a centre crop at 540x960. No AI watermark in the source.',
+      'frames, no B-frames. Desktop cut 1280x720. Phone cut (Nov 2026): the studio\'s own portrait version, ROULA VIDEO mobile.mp4 ' +
+      '(1080x1920, 60fps, 43s), encoded at 720x1280, 24fps, CRF 25 (VMAF 89.6, 16MB). No AI watermark in the source.',
   },
   /* The four chapters below (Natural Light, Comfort & Airflow, Considered Materials, Functional Living) use the films supplied
      by the studio (videos folder/hero videos) as sent: same picture, length and direction. The only change is that the Google
      sparkle mark (air, green, flow; around x1136-1184 y576-624) and the "Veo" mark (light; bottom right) are blurred out with
      ffmpeg delogo. The web cuts (v5, Nov 2026) are encoded for scroll scrubbing: H.264, a keyframe every 4 frames and no
      B-frames, so each seek decodes at most a few frames; audio dropped. Phones and portrait tablets get the studio's portrait cuts
-     (msrc, from videos folder/hero videos mobile, 720x1280, Nov 2026), re-encoded the same way at 24fps (the scrub assumes 24fps).
+     (msrc, from videos folder/hero videos mobile, 720x1280, Nov 2026), encoded the same way at their own 30fps (mfps tells the
+     scrub). Every cut scores VMAF 95+ against its source (Nov 2026: CRF 20, or 24 for the long light phone cut); the earlier
+     v5/v6 and m6 cuts scored 88-93 and are replaced.
      Confirm the studio made them and set rights to owned. */
   {
     id: 'light',
-    src: '/v/h-light-v5.mp4', poster: '/v/h-light-v5.jpg', msrc: '/v/h-light-m6.mp4', mposter: '/v/h-light-m6.jpg',
+    src: '/v/h-light-v5.mp4', poster: '/v/h-light-v5.jpg', msrc: '/v/h-light-m7.mp4', mposter: '/v/h-light-m6.jpg', mfps: 30,
     label: 'A little girl plays in the sunlight on the floor of a bright living room with tall garden windows',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Girl_playing_with_sunlight_6ce7db00.mp4; phone cut hero videos mobile/girl_sunlight_mobile.mp4.',
   },
   {
     id: 'air',
-    src: '/v/h-air-v5.mp4', poster: '/v/h-air-v5.jpg', msrc: '/v/h-air-m6.mp4', mposter: '/v/h-air-m6.jpg',
+    src: '/v/h-air-v7.mp4', poster: '/v/h-air-v5.jpg', msrc: '/v/h-air-m7.mp4', mposter: '/v/h-air-m6.jpg', mfps: 30,
     label: 'Sheer curtains sway in the breeze at the open windows of a calm living room',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s, forward only, as sent); phone cut hero videos mobile/breeze_curtains_mobile.mp4.',
   },
   {
     id: 'green',
-    src: '/v/h-green-v7.mp4', poster: '/v/h-green-v7.jpg', msrc: '/v/h-green-m7.mp4', mposter: '/v/h-green-m7.jpg',
+    src: '/v/h-green-v7.mp4', poster: '/v/h-green-v7.jpg', msrc: '/v/h-green-m8.mp4', mposter: '/v/h-green-m7.jpg', mfps: 30,
     label: 'The living room of a mid-century home, its tall windows opening onto a green garden',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Mid-century_modern_home_in_greenery_6bffda6a_t2-6.9.mp4 only (the studio\'s cropped cut, 1.4s, the living room onto the garden). Shown for Considered Materials. Phone cut hero videos mobile/midcentury_greenery_alt_mobile.mp4 (the same shot; the _short_ file is the older timber-and-stone shot).',
   },
   {
     id: 'flow',
-    src: '/v/h-flow-v6.mp4', poster: '/v/h-flow-v6.jpg', msrc: '/v/h-flow-m6.mp4', mposter: '/v/h-flow-m6.jpg',
+    src: '/v/h-flow-v7.mp4', poster: '/v/h-flow-v6.jpg', msrc: '/v/h-flow-m7.mp4', mposter: '/v/h-flow-m6.jpg', mfps: 30,
     label: 'Sheer curtains draw closed at dusk as warm lamps light up a living room',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Curtains_closing_in_living_room_8426ec28_t5.5-10.mp4; phone cut hero videos mobile/curtains_closing_mobile.mp4.',
@@ -74,13 +77,14 @@ export const roomFilms = [
 // The featured-project film: she walks through the villa, pauses at the garden window, then sits on the sofa
 export const featureFilm = {
   id: 'feature',
-  src: '/v/feature-ocean.mp4', poster: '/v/feature-ocean.jpg', msrc: '/v/feature-ocean-m.mp4',
+  src: '/v/feature-ocean-v2.mp4', poster: '/v/feature-ocean.jpg', msrc: '/v/feature-ocean-v2-m.mp4',
   label: 'A woman in white stands at the edge of the sea, which dissolves into a sunlit bedroom where she walks to the bed and sits down',
   origin: 'ai', rights: 'unverified',
   notes:
     'Source: videos folder/Girl_transforms_ocean_into_bedroom_525e542a.mp4 (Nov 2026), replacing feature-villa-v2. ' +
     'The source carried the Google AI sparkle mark (blurred out of the web cuts with ffmpeg delogo); confirm the studio made it and set rights to owned. ' +
-    'Sea 0-3s, dissolves into the bedroom by about 4s, she sits on the bed by about 7.3s. Scrubbed by scroll, so a keyframe every 4 frames.',
+    'Sea 0-3s, dissolves into the bedroom by about 4s, she sits on the bed by about 7.3s. Scrubbed by scroll, so a keyframe every 4 frames. ' +
+    'v2 (Nov 2026): re-encoded from the source at CRF 20 (phone cut 1024x576, CRF 22) with no B-frames; VMAF 96 / 93, where the first cut scored 93 / 88.',
 };
 
 /** The disclosure for a set of films: one line when they share it, otherwise the most cautious one. */

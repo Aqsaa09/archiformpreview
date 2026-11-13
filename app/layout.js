@@ -54,7 +54,7 @@ const jsonLd = {
   image: `${site.url}${ogImage.url}`,
   email: site.email,
   ...(site.phone ? { telephone: site.phone } : {}),
-  ...(site.instagram ? { sameAs: [`https://instagram.com/${site.instagram}`] } : {}),
+  ...(site.instagram ? { sameAs: [`https://www.instagram.com/${site.instagram}/`] } : {}),
   founder: { '@type': 'Person', name: site.founder },
   address: {
     '@type': 'PostalAddress',

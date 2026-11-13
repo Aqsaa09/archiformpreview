@@ -78,6 +78,9 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .on-film .brand .dk{filter:drop-shadow(0 0 6px rgba(244,238,234,.9)) drop-shadow(0 0 2px rgba(244,238,234,.75))}
 .brand .lt{position:absolute;inset:0;opacity:var(--ll,0);transition:opacity .4s}
 .hdr:not(.is-home){background:var(--bg)}
+/* on the home page the header has no background and slides up out of view while scrolling down */
+.hdr.is-hid{transform:translateY(-110%);pointer-events:none}
+.hdr.is-hid:focus-within{transform:none;pointer-events:auto}
 .menu-btn{display:none;justify-self:end;width:44px;height:44px;align-items:center;justify-content:flex-end;background:none;border:0;color:inherit;cursor:pointer;padding:0}
 @media (max-width:820px){
   .hdr nav{display:none}
@@ -89,6 +92,7 @@ html:not(:has(#home)){scroll-padding-top:140px}
 .menu a{font-family:var(--display);font-size:40px;font-weight:300;text-decoration:none;line-height:1}
 .menu .x{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));right:var(--gutr);width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer}
 .menu a.lbl{margin-top:24px;font-family:var(--label);font-size:11px;font-weight:400;line-height:1.7;opacity:.9;padding-block:10px}
+.menu a.lbl + a.lbl{margin-top:-24px}
 
 /* ---------- Loader ---------- */
 .loader{position:fixed;inset:0;z-index:100;background:#EFE7DC;display:grid;place-items:center;color:var(--walnut)}
@@ -599,12 +603,21 @@ form{display:flex;flex-direction:column;gap:26px}
 .jr-body{max-width:40em;margin-inline:auto}
 .jr-lede{font-style:italic;font-weight:400;font-size:clamp(22px,2vw,28px);line-height:1.45;color:var(--olive);margin-bottom:clamp(40px,5vw,64px)}
 .jr-clip figcaption .jr-full{display:inline-flex;align-items:center;gap:12px;padding:0;background:none;box-shadow:none;text-decoration:none;cursor:pointer}
+/* Below the article: the video and photo on the left, in the same 3:3.8 frame as the Quieter Details cards, the text to the right */
+.jr-body{max-width:none;display:grid;grid-template-columns:auto minmax(0,40em);gap:clamp(32px,4vw,72px);align-items:center;margin-bottom:clamp(40px,5vw,64px)}
+/* the text: one centred paragraph in a narrow column, with room between the lines */
+.jr-body .jr-lede{margin:0 auto;max-width:22em;text-align:center;font-size:clamp(20px,1.7vw,25px);line-height:1.6}
+/* the video in the same 3:4 arch as the Process section; the text sits level with its middle */
+.jr-vid{margin:0 0 0 clamp(24px,4vw,64px);width:clamp(300px,32vw,500px);aspect-ratio:3/4;overflow:hidden;border-radius:999px 999px 0 0;background:var(--stone)}
+.jr-vid video{display:block;width:100%;height:100%;object-fit:cover}
 /* Phones: show the complete article; the full-size link supports a closer read. */
 @media (max-width:820px){
   .jr-clip{margin-left:calc(-1 * max(var(--side),var(--gut)));margin-right:calc(-1 * max(var(--side),var(--gutr)))}
   .jr-clip a{box-shadow:none}
   .jr-clip img{width:100%;max-width:100%;height:auto}
   .jr-clip figcaption{padding-inline:max(var(--side),var(--gut)) max(var(--side),var(--gutr))}
+  .jr-body{grid-template-columns:minmax(0,1fr);justify-items:center}
+  .jr-vid{margin:0;width:min(86vw,400px)}
 }
 
 /* ---------- Closing invitation (About Us, Services, Portfolio): a compact walnut band that runs into the footer ---------- */

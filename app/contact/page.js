@@ -33,7 +33,7 @@ export default function ContactPage() {
               </div>
             ) : null}
             {site.instagram ? (
-              <div><span className="lbl">Instagram</span><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>@{site.instagram}</a></div>
+              <div><span className="lbl">Instagram</span><a href={`https://www.instagram.com/${site.instagram}/`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>@{site.instagram}</a></div>
             ) : null}
             <div>
               <span className="lbl">Studio</span>

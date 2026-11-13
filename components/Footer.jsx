@@ -14,8 +14,8 @@ export default function Footer() {
       </span>
       <span>
         {site.instagram ? (
-          <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer" style={{ marginRight: 20, textDecoration: 'none' }}>
-            Instagram
+          <a href={`https://www.instagram.com/${site.instagram}/`} target="_blank" rel="noopener noreferrer" style={{ marginRight: 20, textDecoration: 'none' }}>
+            Instagram<span className="sr"> (opens in a new tab)</span>
           </a>
         ) : null}
         <a className="sel" href={`mailto:${site.email}`} style={{ textDecoration: 'none' }}>

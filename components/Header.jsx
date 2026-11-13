@@ -63,7 +63,30 @@ export default function Header() {
     };
   }, [open]);
 
-  // Off the home page the header always uses the dark logo on the linen background.
+  // Home page: the header slides away while scrolling down, and comes back as soon as the scroll stops or turns back up
+  // (and always at the very top). Lenis drives the window scroll, so its eased glide fires scroll events until it settles.
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    if (!isHome || open) { setHidden(false); return undefined; }
+    let lastY = window.scrollY;
+    let idle;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y <= 80) setHidden(false);
+      else if (y > lastY + 2) setHidden(true);
+      else if (y < lastY - 2) setHidden(false);
+      lastY = y;
+      clearTimeout(idle);
+      idle = setTimeout(() => setHidden(false), 220);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(idle);
+    };
+  }, [isHome, open]);
+
+  // Off the home page the header always uses the dark logo.
   useEffect(() => {
     if (isHome) return;
     const root = document.documentElement;
@@ -72,7 +95,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={'hdr' + (isHome ? ' is-home' : '')} id="hdr">
+      <header className={'hdr' + (isHome ? ' is-home' : '') + (hidden ? ' is-hid' : '')} id="hdr">
         <div className="hdr-in">
           <nav aria-label="Primary">
             {LEFT.map((l) => (
@@ -115,6 +138,11 @@ export default function Header() {
           <NavLink key={l.href} {...l} pathname={pathname} />
         ))}
         <a className="lbl" href={`mailto:${site.email}`}>{site.email}</a>
+        {site.instagram ? (
+          <a className="lbl" href={`https://www.instagram.com/${site.instagram}/`} target="_blank" rel="noopener noreferrer">
+            Instagram @{site.instagram}<span className="sr"> (opens in a new tab)</span>
+          </a>
+        ) : null}
       </div>
     </>
   );

@@ -15,7 +15,7 @@ export const site = {
   email: 'hello@archiformdesign.me',
   phone: '+971 50 160 5312',
   whatsapp: '971501605312', // digits only, same number as the phone
-  instagram: '', // PLACEHOLDER e.g. 'archiform.studio' (hidden while empty)
+  instagram: 'archiform_design_studio', // handle only; links are built as https://www.instagram.com/<handle>/
   address: {
     city: 'Dubai',
     country: 'United Arab Emirates',

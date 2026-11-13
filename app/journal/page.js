@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Arrow from '@/components/Arrow';
 import PageCta from '@/components/PageCta';
+import PressClip from './PressClip';
 import { pageMeta } from '@/lib/seo';
 
 export const metadata = pageMeta({
@@ -39,6 +40,7 @@ export default function JournalPage() {
           </figure>
 
           <div className="jr-body">
+            <figure className="jr-vid"><PressClip /></figure>
             <p className="jr-lede">In conversation with She Means Business, published by Gulf News, ARCHIFORM founder Roula Jbour talks about the healthcare background that shaped her approach, how wellbeing is changing the way we renovate our homes, and her advice for women building design businesses.</p>
           </div>
         </article>

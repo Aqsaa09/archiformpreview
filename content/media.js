@@ -27,7 +27,7 @@ export const DISCLOSURE = {
 export const roomFilms = [
   {
     id: 'walk',
-    src: '/v/h-tour-d3.mp4', poster: '/v/h-tour-s.jpg', msrc: '/v/h-tour-m3.mp4', mposter: '/v/h-tour-m2.jpg',
+    src: '/v/h-tour-d4.mp4', poster: '/v/h-tour-s2.jpg', msrc: '/v/h-tour-m4.mp4', mposter: '/v/h-tour-m5.jpg',
     label: 'A slow walk through a warm mid-century home: the arched entry, the living and dining rooms, the stair garden and the bedroom',
     origin: 'unconfirmed', rights: 'unverified',
     notes: 'Source: ROULA HERO VIDEO.mp4 (46s, 1080p60, Nov 2026), sped up 1.15x to 40s at 24fps; phone cut from the studio\'s ' +
@@ -53,7 +53,7 @@ export const roomFilms = [
   },
   {
     id: 'air',
-    src: '/v/h-air-v7.mp4', poster: '/v/h-air-v5.jpg', msrc: '/v/h-air-m7.mp4', mposter: '/v/h-air-m6.jpg', mfps: 30,
+    src: '/v/h-air-v8.mp4', poster: '/v/h-air-v8.jpg', msrc: '/v/h-air-m8.mp4', mposter: '/v/h-air-m8.jpg',
     label: 'Sheer curtains sway in the breeze at the open windows of a calm living room',
     origin: 'ai', rights: 'unverified',
     notes: 'Source: hero videos/Breeze_swaying_curtains_in_livin…_2a518aff.mp4 (2.5s, forward only, as sent); phone cut hero videos mobile/breeze_curtains_mobile.mp4.',
